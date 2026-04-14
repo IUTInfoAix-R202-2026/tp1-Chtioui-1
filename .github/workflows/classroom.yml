@@ -35,12 +35,78 @@ jobs:
           setup-command: ""
           command: ./mvnw -B -q compile
           timeout: 5
-          max-score: 100
+          max-score: 10
+
+      - name: "Exercice : exercice1"
+        id: exercice1
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "Exercice : exercice1"
+          setup-command: ""
+          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice1.*' -DfailIfNoTests=false
+          timeout: 5
+          max-score: 15
+
+      - name: "Exercice : exercice2"
+        id: exercice2
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "Exercice : exercice2"
+          setup-command: ""
+          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice2.*' -DfailIfNoTests=false
+          timeout: 5
+          max-score: 15
+
+      - name: "Exercice : exercice3"
+        id: exercice3
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "Exercice : exercice3"
+          setup-command: ""
+          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice3.*' -DfailIfNoTests=false
+          timeout: 5
+          max-score: 15
+
+      - name: "Exercice : exercice4"
+        id: exercice4
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "Exercice : exercice4"
+          setup-command: ""
+          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice4.*' -DfailIfNoTests=false
+          timeout: 5
+          max-score: 15
+
+      - name: "Exercice : exercice5"
+        id: exercice5
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "Exercice : exercice5"
+          setup-command: ""
+          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice5.*' -DfailIfNoTests=false
+          timeout: 5
+          max-score: 15
+
+      - name: "Exercice : exercice6"
+        id: exercice6
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "Exercice : exercice6"
+          setup-command: ""
+          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice6.*' -DfailIfNoTests=false
+          timeout: 5
+          max-score: 15
 
       - name: Autograding Reporter
         uses: classroom-resources/autograding-grading-reporter@v1
         env:
           COMPILATION_RESULTS: "${{ steps.compilation.outputs.result }}"
+          EXERCICE1_RESULTS: "${{ steps.exercice1.outputs.result }}"
+          EXERCICE2_RESULTS: "${{ steps.exercice2.outputs.result }}"
+          EXERCICE3_RESULTS: "${{ steps.exercice3.outputs.result }}"
+          EXERCICE4_RESULTS: "${{ steps.exercice4.outputs.result }}"
+          EXERCICE5_RESULTS: "${{ steps.exercice5.outputs.result }}"
+          EXERCICE6_RESULTS: "${{ steps.exercice6.outputs.result }}"
         with:
-          runners: compilation
+          runners: compilation,exercice1,exercice2,exercice3,exercice4,exercice5,exercice6
       #@@@AUTOGRADING-END@@@
