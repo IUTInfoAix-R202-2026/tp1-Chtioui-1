@@ -1,0 +1,14 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "files.exclude": {
+        "**/target": true,
+        "**/.idea": true,
+        "**/*.iml": true
+    },
+    "github.copilot.enable": {
+        "*": false
+    }
+}

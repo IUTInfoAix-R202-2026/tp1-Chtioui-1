@@ -1,0 +1,29 @@
+#!/bin/bash
+# Pre-commit hook : formate automatiquement les fichiers Java stagés
+# avec Spotless (Google Java Format).
+#
+# Installé automatiquement par git-build-hook-maven-plugin au premier
+# ./mvnw exécuté dans le repo (qui configure core.hooksPath=.githooks).
+#
+# Comportement :
+# - Skip si aucun fichier .java n'est stagé
+# - Lance ./mvnw spotless:apply silencieusement
+# - Re-stage uniquement les fichiers qui étaient déjà stagés (ne
+#   touche pas aux autres changements du working tree, respecte un
+#   éventuel `git add -p` partiel)
+# - Si Spotless échoue, le commit passe quand même (on ne veut pas
+#   bloquer l'étudiant pour une question de format)
+
+set -e
+
+# Liste des fichiers Java staged (Added / Copied / Modified)
+STAGED_JAVA=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.java$' || true)
+[ -z "$STAGED_JAVA" ] && exit 0
+
+# Formate silencieusement
+./mvnw -q spotless:apply >/dev/null 2>&1 || exit 0
+
+# Re-stage uniquement les fichiers qui étaient déjà stagés
+echo "$STAGED_JAVA" | xargs git add
+
+exit 0
