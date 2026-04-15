@@ -29,7 +29,7 @@ jobs:
       #@@@AUTOGRADING-BEGIN@@@ (généré par update-autograding.sh, ne pas éditer à la main)
       - name: Compilation
         id: compilation
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: Compilation
           setup-command: ""
@@ -39,7 +39,7 @@ jobs:
 
       - name: "exercice1 : laFenetreEstVisible"
         id: exercice1_laFenetreEstVisible
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice1 : laFenetreEstVisible"
           setup-command: ""
@@ -49,7 +49,7 @@ jobs:
 
       - name: "exercice2 : leTitreEstDefini"
         id: exercice2_leTitreEstDefini
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice2 : leTitreEstDefini"
           setup-command: ""
@@ -59,7 +59,7 @@ jobs:
 
       - name: "exercice2 : lesDimensionsSontDefinies"
         id: exercice2_lesDimensionsSontDefinies
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice2 : lesDimensionsSontDefinies"
           setup-command: ""
@@ -69,7 +69,7 @@ jobs:
 
       - name: "exercice2 : laFenetreNestPasRedimensionnable"
         id: exercice2_laFenetreNestPasRedimensionnable
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice2 : laFenetreNestPasRedimensionnable"
           setup-command: ""
@@ -79,7 +79,7 @@ jobs:
 
       - name: "exercice2 : leStyleEstUndecorated"
         id: exercice2_leStyleEstUndecorated
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice2 : leStyleEstUndecorated"
           setup-command: ""
@@ -89,7 +89,7 @@ jobs:
 
       - name: "exercice3 : laSceneExiste"
         id: exercice3_laSceneExiste
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice3 : laSceneExiste"
           setup-command: ""
@@ -99,7 +99,7 @@ jobs:
 
       - name: "exercice3 : leLabelEstAffiche"
         id: exercice3_leLabelEstAffiche
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice3 : leLabelEstAffiche"
           setup-command: ""
@@ -109,7 +109,7 @@ jobs:
 
       - name: "exercice3 : leLabelEstAuCentreDuBorderPane"
         id: exercice3_leLabelEstAuCentreDuBorderPane
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice3 : leLabelEstAuCentreDuBorderPane"
           setup-command: ""
@@ -119,7 +119,7 @@ jobs:
 
       - name: "exercice4 : leRootEstUnBorderPane"
         id: exercice4_leRootEstUnBorderPane
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice4 : leRootEstUnBorderPane"
           setup-command: ""
@@ -129,7 +129,7 @@ jobs:
 
       - name: "exercice4 : leMenuBarEstEnHaut"
         id: exercice4_leMenuBarEstEnHaut
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice4 : leMenuBarEstEnHaut"
           setup-command: ""
@@ -139,7 +139,7 @@ jobs:
 
       - name: "exercice4 : lesDeuxChampsDeSaisieExistent"
         id: exercice4_lesDeuxChampsDeSaisieExistent
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice4 : lesDeuxChampsDeSaisieExistent"
           setup-command: ""
@@ -149,7 +149,7 @@ jobs:
 
       - name: "exercice4 : lesBoutonsValiderEtAnnulerExistent"
         id: exercice4_lesBoutonsValiderEtAnnulerExistent
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice4 : lesBoutonsValiderEtAnnulerExistent"
           setup-command: ""
@@ -159,7 +159,7 @@ jobs:
 
       - name: "exercice5 : handleIncrementeLeCompteur"
         id: exercice5_handleIncrementeLeCompteur
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice5 : handleIncrementeLeCompteur"
           setup-command: ""
@@ -169,7 +169,7 @@ jobs:
 
       - name: "exercice5 : troisClicsAffichent3Clics"
         id: exercice5_troisClicsAffichent3Clics
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice5 : troisClicsAffichent3Clics"
           setup-command: ""
@@ -179,7 +179,7 @@ jobs:
 
       - name: "exercice6 : lesTroisBoutonsExistent"
         id: exercice6_lesTroisBoutonsExistent
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice6 : lesTroisBoutonsExistent"
           setup-command: ""
@@ -189,7 +189,7 @@ jobs:
 
       - name: "exercice6 : cliquerRougeMetLaZoneEnRouge"
         id: exercice6_cliquerRougeMetLaZoneEnRouge
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice6 : cliquerRougeMetLaZoneEnRouge"
           setup-command: ""
@@ -199,7 +199,7 @@ jobs:
 
       - name: "exercice6 : cliquerIncremenceLeCompteurCorrespondant"
         id: exercice6_cliquerIncremenceLeCompteurCorrespondant
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice6 : cliquerIncremenceLeCompteurCorrespondant"
           setup-command: ""
@@ -209,7 +209,7 @@ jobs:
 
       - name: "exercice6 : lesCompteursSontIndependants"
         id: exercice6_lesCompteursSontIndependants
-        uses: classroom-resources/autograding-command-grader@v1
+        uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
           test-name: "exercice6 : lesCompteursSontIndependants"
           setup-command: ""
@@ -218,7 +218,7 @@ jobs:
           max-score: 6
 
       - name: Autograding Reporter
-        uses: classroom-resources/autograding-grading-reporter@v1
+        uses: IUTInfoAix-R202/autograding-grading-reporter@main
         continue-on-error: true
         env:
           COMPILATION_RESULTS: "${{ steps.compilation.outputs.result }}"

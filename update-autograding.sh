@@ -4,8 +4,8 @@
 # en scannant les paquets d'exercices dans src/test/java/fr/univ_amu/iut/
 #
 # Utilise les actions GitHub Classroom modernes :
-#   - classroom-resources/autograding-command-grader@v1
-#   - classroom-resources/autograding-grading-reporter@v1
+#   - IUTInfoAix-R202/autograding-command-grader@main
+#   - IUTInfoAix-R202/autograding-grading-reporter@main
 #
 # Granularité : un step de grading PAR MÉTHODE de test (et non par
 # exercice). Cela permet une vraie note proportionnelle :
@@ -83,7 +83,7 @@ trap 'rm -f "$block"' EXIT
     echo "      ${START_MARKER} (généré par update-autograding.sh, ne pas éditer à la main)"
     echo "      - name: Compilation"
     echo "        id: compilation"
-    echo "        uses: classroom-resources/autograding-command-grader@v1"
+    echo "        uses: IUTInfoAix-R202/autograding-command-grader@main"
     echo "        with:"
     echo "          test-name: Compilation"
     echo "          setup-command: \"\""
@@ -143,7 +143,7 @@ trap 'rm -f "$block"' EXIT
             echo ""
             echo "      - name: \"${ex_name} : ${method}\""
             echo "        id: ${step_id}"
-            echo "        uses: classroom-resources/autograding-command-grader@v1"
+            echo "        uses: IUTInfoAix-R202/autograding-command-grader@main"
             echo "        with:"
             echo "          test-name: \"${ex_name} : ${method}\""
             echo "          setup-command: \"\""
@@ -158,7 +158,7 @@ trap 'rm -f "$block"' EXIT
 
     echo ""
     echo "      - name: Autograding Reporter"
-    echo "        uses: classroom-resources/autograding-grading-reporter@v1"
+    echo "        uses: IUTInfoAix-R202/autograding-grading-reporter@main"
     # continue-on-error absorbe l'exit != 0 du reporter quand le score est
     # partiel. Le score reste publié (annotation + check runs), mais le
     # workflow global reste vert : un TP en cours ne donne plus un "CI
