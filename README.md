@@ -1,11 +1,26 @@
-# TP1 - Bases JavaFX
+# <img src="https://raw.githubusercontent.com/IUTInfoAix-R510/Syllabus/main/assets/logo.png" alt="class logo" class="logo"/> R2.02 - Développement d'applications avec IHM
 
-## R2.02 - Développement d'applications avec IHM
+### IUT d’Aix-Marseille – Département Informatique Aix-en-Provence
 
-* **Auteur:** [Sébastien NEDJAR](mailto:sebastien.nedjar@univ-amu.fr)
+* **Ressource:** [R2.02](https://cache.media.enseignementsup-recherche.gouv.fr/file/SPE4-MESRI-17-6-2021/35/5/Annexe_17_INFO_BUT_annee_1_1411355.pdf)
+
+* **Responsables:**
+
+  * [Sébastien Nedjar](mailto:sebastien.nedjar@univ-amu.fr)
+
+* **Enseignants :**
+
+  * [Frédéric Flouvat](mailto:frederic.flouvat@univ-amu.fr)
+  * [Sophie Nabitz](mailto:sophie.nabitz@univ-avignon.fr)
+  * [Samir Chtioui](mailto:samir.chtioui@gmail.com)
+
+
 * **Besoin d'aide ?**
     * Consulter et/ou créer des [issues](https://github.com/IUTInfoAix-R202/tp1/issues)
     * [Email](mailto:sebastien.nedjar@univ-amu.fr) pour toute question
+
+
+## TP1 - Bases JavaFX
 
 ## Aperçu et objectifs d'apprentissage
 
