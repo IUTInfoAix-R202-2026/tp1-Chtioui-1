@@ -32,7 +32,7 @@
         <git.build.hook.plugin.version>3.6.0</git.build.hook.plugin.version>
 
         <!-- Test dependencies versions -->
-        <junit.jupiter.version>5.11.4</junit.jupiter.version>
+        <junit.jupiter.version>6.0.3</junit.jupiter.version>
         <assertj.version>3.27.7</assertj.version>
         <testfx.version>4.0.18</testfx.version>
         <mockito.version>5.14.2</mockito.version>
