@@ -7,13 +7,21 @@
 #   - classroom-resources/autograding-command-grader@v1
 #   - classroom-resources/autograding-grading-reporter@v1
 #
+# Granularité : un step de grading PAR MÉTHODE de test (et non par
+# exercice). Cela permet une vraie note proportionnelle :
+# si 1 test sur 3 d'un exercice passe, l'élève reçoit 1/3 des points
+# de cet exercice.
+#
+# La commande de grading appelle le wrapper ./grade-test.sh qui
+# exige que le test ait RÉELLEMENT tourné (pas @Disabled) ET passé.
+# Sans ce wrapper, un TP vide aurait 100/100 car ./mvnw test sur un
+# test @Disabled exit 0 (Skipped, pas Failed).
+#
 # Convention : un sous-paquet `exerciceN` = un exercice.
 # Répartition : 10 pts compilation + 90 pts équirépartis entre
-# les exercices détectés (le dernier absorbe le reste).
-# Si aucun exercice n'est détecté, la compilation prend 100 pts.
-#
-# L'action command-grader considère exit code 0 = test réussi, donc
-# pas besoin d'expected-output : `./mvnw test` (ou compile) suffit.
+# les exercices détectés. À l'intérieur d'un exercice, les points
+# sont répartis entre ses méthodes de test (la dernière absorbe le
+# remainder).
 #
 # Usage: ./update-autograding.sh
 # ============================================================
@@ -38,6 +46,15 @@ if [ ! -f "$CLASSROOM_YML" ]; then
     exit 1
 fi
 
+# Helper : extrait les noms de méthodes @Test d'un fichier de test
+# (toute déclaration "void XXX(" sauf "void start" qui est @Start).
+extract_test_methods() {
+    local file=$1
+    grep -oE 'void [a-zA-Z_][a-zA-Z0-9_]*' "$file" 2>/dev/null \
+        | awk '{print $2}' \
+        | grep -v '^start$' || true
+}
+
 # --- Découverte des exercices ---
 exercises=()
 if [ -d "$TEST_ROOT" ]; then
@@ -46,17 +63,16 @@ if [ -d "$TEST_ROOT" ]; then
     done < <(find "$TEST_ROOT" -mindepth 1 -maxdepth 1 -type d -name 'exercice*' | sort -V)
 fi
 
-num=${#exercises[@]}
-echo "Exercices détectés : $num"
-for e in "${exercises[@]}"; do echo "  - $e"; done
+num_ex=${#exercises[@]}
+echo "Exercices détectés : $num_ex"
 
-# --- Calcul des points ---
-if [ "$num" -eq 0 ]; then
+# --- Répartition des points entre exercices ---
+if [ "$num_ex" -eq 0 ]; then
     compile_points=100
 else
     compile_points=$COMPILE_POINTS
-    base=$(( TOTAL_EXERCISE_POINTS / num ))
-    remainder=$(( TOTAL_EXERCISE_POINTS - base * num ))
+    ex_base=$(( TOTAL_EXERCISE_POINTS / num_ex ))
+    ex_remainder=$(( TOTAL_EXERCISE_POINTS - ex_base * num_ex ))
 fi
 
 # --- Génération du bloc YAML ---
@@ -79,28 +95,65 @@ trap 'rm -f "$block"' EXIT
     env_block="          COMPILATION_RESULTS: \"\${{ steps.compilation.outputs.result }}\""
 
     for i in "${!exercises[@]}"; do
-        name="${exercises[$i]}"
-        pts=$base
-        [ "$i" -eq $(( num - 1 )) ] && pts=$(( base + remainder ))
-        # Sanitize step id : alphanumériques + underscore + tiret seulement
-        id_name=$(echo "$name" | tr -c 'a-zA-Z0-9_-' '_' | sed 's/_*$//')
-        env_var_name=$(echo "$id_name" | tr '[:lower:]-' '[:upper:]_')
+        ex_name="${exercises[$i]}"
+        # Points de cet exercice (le dernier absorbe le remainder global)
+        ex_points=$ex_base
+        [ "$i" -eq $(( num_ex - 1 )) ] && ex_points=$(( ex_base + ex_remainder ))
 
-        cmd="xvfb-run --auto-servernum ./mvnw -B test -Dtest='${TEST_PACKAGE_PREFIX}.${name}.*' -Dsurefire.failIfNoSpecifiedTests=false"
+        # Découverte des méthodes de test de cet exercice
+        ex_dir="$TEST_ROOT/$ex_name"
+        method_count=0
+        # Tableaux locaux à cet exercice : (FQCN classe, nom méthode)
+        unset ex_classes ex_methods
+        ex_classes=()
+        ex_methods=()
 
-        echo ""
-        echo "      - name: \"Exercice : ${name}\""
-        echo "        id: ${id_name}"
-        echo "        uses: classroom-resources/autograding-command-grader@v1"
-        echo "        with:"
-        echo "          test-name: \"Exercice : ${name}\""
-        echo "          setup-command: \"\""
-        echo "          command: ${cmd}"
-        echo "          timeout: ${TIMEOUT_MINUTES}"
-        echo "          max-score: ${pts}"
+        while IFS= read -r f; do
+            class_name=$(basename "$f" .java)
+            while IFS= read -r m; do
+                [ -z "$m" ] && continue
+                ex_classes+=("${TEST_PACKAGE_PREFIX}.${ex_name}.${class_name}")
+                ex_methods+=("$m")
+                method_count=$((method_count + 1))
+            done < <(extract_test_methods "$f")
+        done < <(find "$ex_dir" -type f -name '*.java' 2>/dev/null | sort)
 
-        runners="${runners},${id_name}"
-        env_block="${env_block}"$'\n'"          ${env_var_name}_RESULTS: \"\${{ steps.${id_name}.outputs.result }}\""
+        if [ "$method_count" -eq 0 ]; then
+            echo "  - $ex_name : aucune méthode @Test trouvée, ignoré (${ex_points} pts perdus)" >&2
+            continue
+        fi
+
+        echo "  - $ex_name : $method_count méthode(s) ($ex_points pts)" >&2
+
+        # Répartition des points entre méthodes (dernier absorbe le remainder)
+        m_base=$(( ex_points / method_count ))
+        m_remainder=$(( ex_points - m_base * method_count ))
+
+        for j in "${!ex_methods[@]}"; do
+            method="${ex_methods[$j]}"
+            fqcn="${ex_classes[$j]}"
+            m_points=$m_base
+            [ "$j" -eq $(( method_count - 1 )) ] && m_points=$(( m_base + m_remainder ))
+
+            step_id="${ex_name}_${method}"
+            env_var_name=$(echo "$step_id" | tr '[:lower:]-' '[:upper:]_')
+
+            cmd="./grade-test.sh ${fqcn} ${method}"
+
+            echo ""
+            echo "      - name: \"${ex_name} : ${method}\""
+            echo "        id: ${step_id}"
+            echo "        uses: classroom-resources/autograding-command-grader@v1"
+            echo "        with:"
+            echo "          test-name: \"${ex_name} : ${method}\""
+            echo "          setup-command: \"\""
+            echo "          command: ${cmd}"
+            echo "          timeout: ${TIMEOUT_MINUTES}"
+            echo "          max-score: ${m_points}"
+
+            runners="${runners},${step_id}"
+            env_block="${env_block}"$'\n'"          ${env_var_name}_RESULTS: \"\${{ steps.${step_id}.outputs.result }}\""
+        done
     done
 
     echo ""

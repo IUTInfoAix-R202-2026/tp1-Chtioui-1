@@ -37,76 +37,208 @@ jobs:
           timeout: 5
           max-score: 10
 
-      - name: "Exercice : exercice1"
-        id: exercice1
+      - name: "exercice1 : laFenetreEstVisible"
+        id: exercice1_laFenetreEstVisible
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: "Exercice : exercice1"
+          test-name: "exercice1 : laFenetreEstVisible"
           setup-command: ""
-          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice1.*' -Dsurefire.failIfNoSpecifiedTests=false
+          command: ./grade-test.sh fr.univ_amu.iut.exercice1.PremiereFenetreTest laFenetreEstVisible
           timeout: 5
           max-score: 15
 
-      - name: "Exercice : exercice2"
-        id: exercice2
+      - name: "exercice2 : leTitreEstDefini"
+        id: exercice2_leTitreEstDefini
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: "Exercice : exercice2"
+          test-name: "exercice2 : leTitreEstDefini"
           setup-command: ""
-          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice2.*' -Dsurefire.failIfNoSpecifiedTests=false
+          command: ./grade-test.sh fr.univ_amu.iut.exercice2.StagePersonnaliseTest leTitreEstDefini
           timeout: 5
-          max-score: 15
+          max-score: 3
 
-      - name: "Exercice : exercice3"
-        id: exercice3
+      - name: "exercice2 : lesDimensionsSontDefinies"
+        id: exercice2_lesDimensionsSontDefinies
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: "Exercice : exercice3"
+          test-name: "exercice2 : lesDimensionsSontDefinies"
           setup-command: ""
-          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice3.*' -Dsurefire.failIfNoSpecifiedTests=false
+          command: ./grade-test.sh fr.univ_amu.iut.exercice2.StagePersonnaliseTest lesDimensionsSontDefinies
           timeout: 5
-          max-score: 15
+          max-score: 3
 
-      - name: "Exercice : exercice4"
-        id: exercice4
+      - name: "exercice2 : laFenetreNestPasRedimensionnable"
+        id: exercice2_laFenetreNestPasRedimensionnable
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: "Exercice : exercice4"
+          test-name: "exercice2 : laFenetreNestPasRedimensionnable"
           setup-command: ""
-          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice4.*' -Dsurefire.failIfNoSpecifiedTests=false
+          command: ./grade-test.sh fr.univ_amu.iut.exercice2.StagePersonnaliseTest laFenetreNestPasRedimensionnable
           timeout: 5
-          max-score: 15
+          max-score: 3
 
-      - name: "Exercice : exercice5"
-        id: exercice5
+      - name: "exercice2 : leStyleEstUndecorated"
+        id: exercice2_leStyleEstUndecorated
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: "Exercice : exercice5"
+          test-name: "exercice2 : leStyleEstUndecorated"
           setup-command: ""
-          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice5.*' -Dsurefire.failIfNoSpecifiedTests=false
+          command: ./grade-test.sh fr.univ_amu.iut.exercice2.StagePersonnaliseTest leStyleEstUndecorated
           timeout: 5
-          max-score: 15
+          max-score: 6
 
-      - name: "Exercice : exercice6"
-        id: exercice6
+      - name: "exercice3 : laSceneExiste"
+        id: exercice3_laSceneExiste
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: "Exercice : exercice6"
+          test-name: "exercice3 : laSceneExiste"
           setup-command: ""
-          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice6.*' -Dsurefire.failIfNoSpecifiedTests=false
+          command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest laSceneExiste
           timeout: 5
-          max-score: 15
+          max-score: 5
+
+      - name: "exercice3 : leLabelEstAffiche"
+        id: exercice3_leLabelEstAffiche
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "exercice3 : leLabelEstAffiche"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest leLabelEstAffiche
+          timeout: 5
+          max-score: 5
+
+      - name: "exercice3 : leLabelEstAuCentreDuBorderPane"
+        id: exercice3_leLabelEstAuCentreDuBorderPane
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "exercice3 : leLabelEstAuCentreDuBorderPane"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest leLabelEstAuCentreDuBorderPane
+          timeout: 5
+          max-score: 5
+
+      - name: "exercice4 : leRootEstUnBorderPane"
+        id: exercice4_leRootEstUnBorderPane
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "exercice4 : leRootEstUnBorderPane"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest leRootEstUnBorderPane
+          timeout: 5
+          max-score: 3
+
+      - name: "exercice4 : leMenuBarEstEnHaut"
+        id: exercice4_leMenuBarEstEnHaut
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "exercice4 : leMenuBarEstEnHaut"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest leMenuBarEstEnHaut
+          timeout: 5
+          max-score: 3
+
+      - name: "exercice4 : lesDeuxChampsDeSaisieExistent"
+        id: exercice4_lesDeuxChampsDeSaisieExistent
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "exercice4 : lesDeuxChampsDeSaisieExistent"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest lesDeuxChampsDeSaisieExistent
+          timeout: 5
+          max-score: 3
+
+      - name: "exercice4 : lesBoutonsValiderEtAnnulerExistent"
+        id: exercice4_lesBoutonsValiderEtAnnulerExistent
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "exercice4 : lesBoutonsValiderEtAnnulerExistent"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest lesBoutonsValiderEtAnnulerExistent
+          timeout: 5
+          max-score: 6
+
+      - name: "exercice5 : handleIncrementeLeCompteur"
+        id: exercice5_handleIncrementeLeCompteur
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "exercice5 : handleIncrementeLeCompteur"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice5.EcouteurClasseNommeeTest handleIncrementeLeCompteur
+          timeout: 5
+          max-score: 7
+
+      - name: "exercice5 : troisClicsAffichent3Clics"
+        id: exercice5_troisClicsAffichent3Clics
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "exercice5 : troisClicsAffichent3Clics"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice5.EvenementsBoutonTest troisClicsAffichent3Clics
+          timeout: 5
+          max-score: 8
+
+      - name: "exercice6 : lesTroisBoutonsExistent"
+        id: exercice6_lesTroisBoutonsExistent
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "exercice6 : lesTroisBoutonsExistent"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest lesTroisBoutonsExistent
+          timeout: 5
+          max-score: 3
+
+      - name: "exercice6 : cliquerRougeMetLaZoneEnRouge"
+        id: exercice6_cliquerRougeMetLaZoneEnRouge
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "exercice6 : cliquerRougeMetLaZoneEnRouge"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest cliquerRougeMetLaZoneEnRouge
+          timeout: 5
+          max-score: 3
+
+      - name: "exercice6 : cliquerIncremenceLeCompteurCorrespondant"
+        id: exercice6_cliquerIncremenceLeCompteurCorrespondant
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "exercice6 : cliquerIncremenceLeCompteurCorrespondant"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest cliquerIncremenceLeCompteurCorrespondant
+          timeout: 5
+          max-score: 3
+
+      - name: "exercice6 : lesCompteursSontIndependants"
+        id: exercice6_lesCompteursSontIndependants
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "exercice6 : lesCompteursSontIndependants"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest lesCompteursSontIndependants
+          timeout: 5
+          max-score: 6
 
       - name: Autograding Reporter
         uses: classroom-resources/autograding-grading-reporter@v1
         env:
           COMPILATION_RESULTS: "${{ steps.compilation.outputs.result }}"
-          EXERCICE1_RESULTS: "${{ steps.exercice1.outputs.result }}"
-          EXERCICE2_RESULTS: "${{ steps.exercice2.outputs.result }}"
-          EXERCICE3_RESULTS: "${{ steps.exercice3.outputs.result }}"
-          EXERCICE4_RESULTS: "${{ steps.exercice4.outputs.result }}"
-          EXERCICE5_RESULTS: "${{ steps.exercice5.outputs.result }}"
-          EXERCICE6_RESULTS: "${{ steps.exercice6.outputs.result }}"
+          EXERCICE1_LAFENETREESTVISIBLE_RESULTS: "${{ steps.exercice1_laFenetreEstVisible.outputs.result }}"
+          EXERCICE2_LETITREESTDEFINI_RESULTS: "${{ steps.exercice2_leTitreEstDefini.outputs.result }}"
+          EXERCICE2_LESDIMENSIONSSONTDEFINIES_RESULTS: "${{ steps.exercice2_lesDimensionsSontDefinies.outputs.result }}"
+          EXERCICE2_LAFENETRENESTPASREDIMENSIONNABLE_RESULTS: "${{ steps.exercice2_laFenetreNestPasRedimensionnable.outputs.result }}"
+          EXERCICE2_LESTYLEESTUNDECORATED_RESULTS: "${{ steps.exercice2_leStyleEstUndecorated.outputs.result }}"
+          EXERCICE3_LASCENEEXISTE_RESULTS: "${{ steps.exercice3_laSceneExiste.outputs.result }}"
+          EXERCICE3_LELABELESTAFFICHE_RESULTS: "${{ steps.exercice3_leLabelEstAffiche.outputs.result }}"
+          EXERCICE3_LELABELESTAUCENTREDUBORDERPANE_RESULTS: "${{ steps.exercice3_leLabelEstAuCentreDuBorderPane.outputs.result }}"
+          EXERCICE4_LEROOTESTUNBORDERPANE_RESULTS: "${{ steps.exercice4_leRootEstUnBorderPane.outputs.result }}"
+          EXERCICE4_LEMENUBARESTENHAUT_RESULTS: "${{ steps.exercice4_leMenuBarEstEnHaut.outputs.result }}"
+          EXERCICE4_LESDEUXCHAMPSDESAISIEEXISTENT_RESULTS: "${{ steps.exercice4_lesDeuxChampsDeSaisieExistent.outputs.result }}"
+          EXERCICE4_LESBOUTONSVALIDERETANNULEREXISTENT_RESULTS: "${{ steps.exercice4_lesBoutonsValiderEtAnnulerExistent.outputs.result }}"
+          EXERCICE5_HANDLEINCREMENTELECOMPTEUR_RESULTS: "${{ steps.exercice5_handleIncrementeLeCompteur.outputs.result }}"
+          EXERCICE5_TROISCLICSAFFICHENT3CLICS_RESULTS: "${{ steps.exercice5_troisClicsAffichent3Clics.outputs.result }}"
+          EXERCICE6_LESTROISBOUTONSEXISTENT_RESULTS: "${{ steps.exercice6_lesTroisBoutonsExistent.outputs.result }}"
+          EXERCICE6_CLIQUERROUGEMETLAZONEENROUGE_RESULTS: "${{ steps.exercice6_cliquerRougeMetLaZoneEnRouge.outputs.result }}"
+          EXERCICE6_CLIQUERINCREMENCELECOMPTEURCORRESPONDANT_RESULTS: "${{ steps.exercice6_cliquerIncremenceLeCompteurCorrespondant.outputs.result }}"
+          EXERCICE6_LESCOMPTEURSSONTINDEPENDANTS_RESULTS: "${{ steps.exercice6_lesCompteursSontIndependants.outputs.result }}"
         with:
-          runners: compilation,exercice1,exercice2,exercice3,exercice4,exercice5,exercice6
+          runners: compilation,exercice1_laFenetreEstVisible,exercice2_leTitreEstDefini,exercice2_lesDimensionsSontDefinies,exercice2_laFenetreNestPasRedimensionnable,exercice2_leStyleEstUndecorated,exercice3_laSceneExiste,exercice3_leLabelEstAffiche,exercice3_leLabelEstAuCentreDuBorderPane,exercice4_leRootEstUnBorderPane,exercice4_leMenuBarEstEnHaut,exercice4_lesDeuxChampsDeSaisieExistent,exercice4_lesBoutonsValiderEtAnnulerExistent,exercice5_handleIncrementeLeCompteur,exercice5_troisClicsAffichent3Clics,exercice6_lesTroisBoutonsExistent,exercice6_cliquerRougeMetLaZoneEnRouge,exercice6_cliquerIncremenceLeCompteurCorrespondant,exercice6_lesCompteursSontIndependants
       #@@@AUTOGRADING-END@@@
