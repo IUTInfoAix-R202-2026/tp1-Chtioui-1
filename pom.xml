@@ -144,6 +144,9 @@
                     <jlinkImageName>app</jlinkImageName>
                     <launcher>launcher</launcher>
                     <mainClass>tp1.javafx/fr.univ_amu.iut.App</mainClass>
+                    <options>
+                        <option>--enable-native-access=javafx.graphics</option>
+                    </options>
                 </configuration>
             </plugin>
 
@@ -170,6 +173,7 @@
                     <useModulePath>false</useModulePath>
                     <argLine>
                         --enable-native-access=ALL-UNNAMED
+                        --enable-native-access=javafx.graphics
                         --add-reads javafx.graphics=ALL-UNNAMED
                         --add-opens javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
                         --add-opens javafx.base/com.sun.javafx.runtime=ALL-UNNAMED
