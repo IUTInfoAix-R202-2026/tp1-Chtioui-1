@@ -159,6 +159,12 @@ trap 'rm -f "$block"' EXIT
     echo ""
     echo "      - name: Autograding Reporter"
     echo "        uses: classroom-resources/autograding-grading-reporter@v1"
+    # continue-on-error absorbe l'exit != 0 du reporter quand le score est
+    # partiel. Le score reste publié (annotation + check runs), mais le
+    # workflow global reste vert : un TP en cours ne donne plus un "CI
+    # cassé". Les vrais problèmes techniques (compilation, tests individuels)
+    # restent rouges car leurs steps n'ont PAS continue-on-error.
+    echo "        continue-on-error: true"
     echo "        env:"
     echo "${env_block}"
     echo "        with:"

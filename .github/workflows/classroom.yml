@@ -219,6 +219,7 @@ jobs:
 
       - name: Autograding Reporter
         uses: classroom-resources/autograding-grading-reporter@v1
+        continue-on-error: true
         env:
           COMPILATION_RESULTS: "${{ steps.compilation.outputs.result }}"
           EXERCICE1_LAFENETREESTVISIBLE_RESULTS: "${{ steps.exercice1_laFenetreEstVisible.outputs.result }}"
