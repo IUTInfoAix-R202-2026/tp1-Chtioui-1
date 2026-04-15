@@ -43,7 +43,7 @@ jobs:
         with:
           test-name: "Exercice : exercice1"
           setup-command: ""
-          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice1.*' -DfailIfNoTests=false
+          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice1.*' -Dsurefire.failIfNoSpecifiedTests=false
           timeout: 5
           max-score: 15
 
@@ -53,7 +53,7 @@ jobs:
         with:
           test-name: "Exercice : exercice2"
           setup-command: ""
-          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice2.*' -DfailIfNoTests=false
+          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice2.*' -Dsurefire.failIfNoSpecifiedTests=false
           timeout: 5
           max-score: 15
 
@@ -63,7 +63,7 @@ jobs:
         with:
           test-name: "Exercice : exercice3"
           setup-command: ""
-          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice3.*' -DfailIfNoTests=false
+          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice3.*' -Dsurefire.failIfNoSpecifiedTests=false
           timeout: 5
           max-score: 15
 
@@ -73,7 +73,7 @@ jobs:
         with:
           test-name: "Exercice : exercice4"
           setup-command: ""
-          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice4.*' -DfailIfNoTests=false
+          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice4.*' -Dsurefire.failIfNoSpecifiedTests=false
           timeout: 5
           max-score: 15
 
@@ -83,7 +83,7 @@ jobs:
         with:
           test-name: "Exercice : exercice5"
           setup-command: ""
-          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice5.*' -DfailIfNoTests=false
+          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice5.*' -Dsurefire.failIfNoSpecifiedTests=false
           timeout: 5
           max-score: 15
 
@@ -93,7 +93,7 @@ jobs:
         with:
           test-name: "Exercice : exercice6"
           setup-command: ""
-          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice6.*' -DfailIfNoTests=false
+          command: xvfb-run --auto-servernum ./mvnw -B test -Dtest='fr.univ_amu.iut.exercice6.*' -Dsurefire.failIfNoSpecifiedTests=false
           timeout: 5
           max-score: 15
 

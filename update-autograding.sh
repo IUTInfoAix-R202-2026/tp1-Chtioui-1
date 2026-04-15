@@ -86,7 +86,7 @@ trap 'rm -f "$block"' EXIT
         id_name=$(echo "$name" | tr -c 'a-zA-Z0-9_-' '_' | sed 's/_*$//')
         env_var_name=$(echo "$id_name" | tr '[:lower:]-' '[:upper:]_')
 
-        cmd="xvfb-run --auto-servernum ./mvnw -B test -Dtest='${TEST_PACKAGE_PREFIX}.${name}.*' -DfailIfNoTests=false"
+        cmd="xvfb-run --auto-servernum ./mvnw -B test -Dtest='${TEST_PACKAGE_PREFIX}.${name}.*' -Dsurefire.failIfNoSpecifiedTests=false"
 
         echo ""
         echo "      - name: \"Exercice : ${name}\""
