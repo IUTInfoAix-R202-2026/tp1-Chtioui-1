@@ -41,6 +41,7 @@
             },
             "extensions": [
                 "vscjava.vscode-java-pack",
+                "redhat.java",
                 "redhat.vscode-xml",
                 "eamodio.gitlens"
             ]
