@@ -3,9 +3,10 @@
     "configurations": [
         {
             "type": "java",
-            "name": "JavaFX : lancer l'application",
+            "name": "JavaFX : debug l'application",
             "request": "launch",
             "mainClass": "fr.univ_amu.iut.App",
+            "preLaunchTask": "Build complet",
             "vmArgs": [
                 "--enable-native-access=ALL-UNNAMED",
                 "--add-reads", "javafx.graphics=ALL-UNNAMED",
