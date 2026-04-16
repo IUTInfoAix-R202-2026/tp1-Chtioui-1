@@ -133,17 +133,17 @@ Si tous les tests passent, propose le workflow Git de fin d'exercice :
 > ```
 > Ou via l'interface GitHub : tu verras un bandeau "Compare & pull request" sur la page du dépôt.
 
-Demande à l'étudiant de vérifier que la PR est créée :
+Après la création, dis à l'étudiant d'ouvrir la PR dans le navigateur pour voir le résultat :
 
-> Vérifie que la PR est bien créée :
+> Ta PR est créée ! Ouvre-la dans le navigateur pour voir tes changements :
 > ```bash
-> gh pr list
+> gh pr view --web
 > ```
-> Tu devrais voir ta PR dans la liste.
+> Tu peux y voir le diff de ton code, les checks CI, et le score autograding.
 
 Puis guide-le pour **merger la PR** et revenir sur `main` :
 
-> Maintenant, merge ta PR et nettoie la branche :
+> Quand tu as vérifié ta PR, merge-la et nettoie la branche :
 > ```bash
 > gh pr merge --merge --delete-branch
 > ```
