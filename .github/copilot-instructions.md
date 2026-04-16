@@ -100,16 +100,27 @@ Si tous les tests passent, propose le workflow Git de fin d'exercice :
 > gh pr create --title "Exercice N terminé" --body "Tous les tests passent."
 > ```
 > Ou via l'interface GitHub : tu verras un bandeau "Compare & pull request" sur la page du dépôt.
->
-> Après la review (ou directement si pas de review configurée), merge la PR et passe à l'exercice suivant.
 
-Demande à l'étudiant de vérifier :
+Demande à l'étudiant de vérifier que la PR est créée :
 
 > Vérifie que la PR est bien créée :
 > ```bash
 > gh pr list
 > ```
 > Tu devrais voir ta PR dans la liste.
+
+Puis guide-le pour **merger la PR** et revenir sur `main` :
+
+> Maintenant, merge ta PR et nettoie la branche :
+> ```bash
+> gh pr merge --merge --delete-branch
+> ```
+> Puis reviens sur `main` avec la version mergée :
+> ```bash
+> git checkout main
+> git pull
+> ```
+> ✅ L'exercice N est terminé et mergé dans `main`. Tu peux passer à l'exercice suivant.
 
 ## Escalade progressive de l'aide
 
