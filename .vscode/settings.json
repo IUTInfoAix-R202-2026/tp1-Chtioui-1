@@ -12,13 +12,6 @@
         "*": false
     },
     "chat.tools.terminal.outputLocation": "terminal",
-    "chat.tools.tasks.autoApprove": [
-        "JavaFX : lancer (via Maven)",
-        "Tests : tous",
-        "Build complet",
-        "Clean",
-        "Formater le code (Spotless)"
-    ],
     "chat.tools.terminal.autoApprove": {
         "./mvnw": true,
         "./sync-upstream.sh": true,
