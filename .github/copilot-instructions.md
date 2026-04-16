@@ -99,21 +99,16 @@ Si tous les tests passent, propose le workflow Git de fin d'exercice :
 > ```bash
 > gh pr create --title "Exercice N terminé" --body "Tous les tests passent."
 > ```
-> Et demande une review automatique à Copilot :
-> ```bash
-> gh pr edit --add-reviewer copilot
-> ```
-
 Après la création, dis à l'étudiant d'ouvrir la PR dans le navigateur :
 
-> Ta PR est créée et une review Copilot a été demandée ! Ouvre-la dans le navigateur :
+> Ta PR est créée ! Ouvre-la dans le navigateur :
 > ```bash
 > gh pr view --web
 > ```
-> Tu peux y voir :
-> - Le **diff** de ton code (ce que tu as changé)
-> - Les **checks CI** (compilation + tests)
-> - La **review Copilot** (suggestions et commentaires automatiques sur ton code)
+> Sur la page de la PR, tu peux :
+> - Voir le **diff** de ton code (ce que tu as changé)
+> - Voir les **checks CI** (compilation + tests + score autograding)
+> - **Demander une review Copilot** : dans la sidebar à droite, clique sur "Reviewers" et sélectionne "Copilot". Il analysera ton code et laissera des commentaires et suggestions.
 >
 > Prends le temps de lire les commentaires de Copilot — c'est un retour gratuit sur la qualité de ton code.
 
