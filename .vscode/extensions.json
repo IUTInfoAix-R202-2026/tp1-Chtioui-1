@@ -3,6 +3,7 @@
         "vscjava.vscode-java-pack",
         "redhat.java",
         "redhat.vscode-xml",
-        "eamodio.gitlens"
+        "eamodio.gitlens",
+        "GitHub.copilot-chat"
     ]
 }
