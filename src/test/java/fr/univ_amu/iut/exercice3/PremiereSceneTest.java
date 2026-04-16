@@ -26,6 +26,14 @@ class PremiereSceneTest {
 
   @Disabled("Retire cette annotation pour activer le test")
   @Test
+  void laFenetreEstVisible(FxRobot robot) {
+    assertThat(stage.isShowing())
+        .as("le Stage doit être affiché — appelle show() à la fin de start()")
+        .isTrue();
+  }
+
+  @Disabled("Retire cette annotation pour activer le test")
+  @Test
   void laSceneExiste(FxRobot robot) {
     assertThat(stage.getScene())
         .as("le Stage doit avoir une Scene attachée via setScene()")

@@ -47,6 +47,16 @@ jobs:
           timeout: 5
           max-score: 15
 
+      - name: "exercice2 : laFenetreEstVisible"
+        id: exercice2_laFenetreEstVisible
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice2 : laFenetreEstVisible"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice2.StagePersonnaliseTest laFenetreEstVisible
+          timeout: 5
+          max-score: 3
+
       - name: "exercice2 : leTitreEstDefini"
         id: exercice2_leTitreEstDefini
         uses: IUTInfoAix-R202/autograding-command-grader@main
@@ -85,7 +95,17 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice2.StagePersonnaliseTest leStyleEstUndecorated
           timeout: 5
-          max-score: 6
+          max-score: 3
+
+      - name: "exercice3 : laFenetreEstVisible"
+        id: exercice3_laFenetreEstVisible
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice3 : laFenetreEstVisible"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest laFenetreEstVisible
+          timeout: 5
+          max-score: 3
 
       - name: "exercice3 : laSceneExiste"
         id: exercice3_laSceneExiste
@@ -95,7 +115,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest laSceneExiste
           timeout: 5
-          max-score: 5
+          max-score: 3
 
       - name: "exercice3 : leLabelEstAffiche"
         id: exercice3_leLabelEstAffiche
@@ -105,7 +125,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest leLabelEstAffiche
           timeout: 5
-          max-score: 5
+          max-score: 3
 
       - name: "exercice3 : leLabelEstAuCentreDuBorderPane"
         id: exercice3_leLabelEstAuCentreDuBorderPane
@@ -115,7 +135,17 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest leLabelEstAuCentreDuBorderPane
           timeout: 5
-          max-score: 5
+          max-score: 6
+
+      - name: "exercice4 : laFenetreEstVisible"
+        id: exercice4_laFenetreEstVisible
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice4 : laFenetreEstVisible"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest laFenetreEstVisible
+          timeout: 5
+          max-score: 3
 
       - name: "exercice4 : leRootEstUnBorderPane"
         id: exercice4_leRootEstUnBorderPane
@@ -155,7 +185,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest lesBoutonsValiderEtAnnulerExistent
           timeout: 5
-          max-score: 6
+          max-score: 3
 
       - name: "exercice5 : handleIncrementeLeCompteur"
         id: exercice5_handleIncrementeLeCompteur
@@ -223,13 +253,16 @@ jobs:
         env:
           COMPILATION_RESULTS: "${{ steps.compilation.outputs.result }}"
           EXERCICE1_LAFENETREESTVISIBLE_RESULTS: "${{ steps.exercice1_laFenetreEstVisible.outputs.result }}"
+          EXERCICE2_LAFENETREESTVISIBLE_RESULTS: "${{ steps.exercice2_laFenetreEstVisible.outputs.result }}"
           EXERCICE2_LETITREESTDEFINI_RESULTS: "${{ steps.exercice2_leTitreEstDefini.outputs.result }}"
           EXERCICE2_LESDIMENSIONSSONTDEFINIES_RESULTS: "${{ steps.exercice2_lesDimensionsSontDefinies.outputs.result }}"
           EXERCICE2_LAFENETRENESTPASREDIMENSIONNABLE_RESULTS: "${{ steps.exercice2_laFenetreNestPasRedimensionnable.outputs.result }}"
           EXERCICE2_LESTYLEESTUNDECORATED_RESULTS: "${{ steps.exercice2_leStyleEstUndecorated.outputs.result }}"
+          EXERCICE3_LAFENETREESTVISIBLE_RESULTS: "${{ steps.exercice3_laFenetreEstVisible.outputs.result }}"
           EXERCICE3_LASCENEEXISTE_RESULTS: "${{ steps.exercice3_laSceneExiste.outputs.result }}"
           EXERCICE3_LELABELESTAFFICHE_RESULTS: "${{ steps.exercice3_leLabelEstAffiche.outputs.result }}"
           EXERCICE3_LELABELESTAUCENTREDUBORDERPANE_RESULTS: "${{ steps.exercice3_leLabelEstAuCentreDuBorderPane.outputs.result }}"
+          EXERCICE4_LAFENETREESTVISIBLE_RESULTS: "${{ steps.exercice4_laFenetreEstVisible.outputs.result }}"
           EXERCICE4_LEROOTESTUNBORDERPANE_RESULTS: "${{ steps.exercice4_leRootEstUnBorderPane.outputs.result }}"
           EXERCICE4_LEMENUBARESTENHAUT_RESULTS: "${{ steps.exercice4_leMenuBarEstEnHaut.outputs.result }}"
           EXERCICE4_LESDEUXCHAMPSDESAISIEEXISTENT_RESULTS: "${{ steps.exercice4_lesDeuxChampsDeSaisieExistent.outputs.result }}"
@@ -241,5 +274,5 @@ jobs:
           EXERCICE6_CLIQUERINCREMENCELECOMPTEURCORRESPONDANT_RESULTS: "${{ steps.exercice6_cliquerIncremenceLeCompteurCorrespondant.outputs.result }}"
           EXERCICE6_LESCOMPTEURSSONTINDEPENDANTS_RESULTS: "${{ steps.exercice6_lesCompteursSontIndependants.outputs.result }}"
         with:
-          runners: compilation,exercice1_laFenetreEstVisible,exercice2_leTitreEstDefini,exercice2_lesDimensionsSontDefinies,exercice2_laFenetreNestPasRedimensionnable,exercice2_leStyleEstUndecorated,exercice3_laSceneExiste,exercice3_leLabelEstAffiche,exercice3_leLabelEstAuCentreDuBorderPane,exercice4_leRootEstUnBorderPane,exercice4_leMenuBarEstEnHaut,exercice4_lesDeuxChampsDeSaisieExistent,exercice4_lesBoutonsValiderEtAnnulerExistent,exercice5_handleIncrementeLeCompteur,exercice5_troisClicsAffichent3Clics,exercice6_lesTroisBoutonsExistent,exercice6_cliquerRougeMetLaZoneEnRouge,exercice6_cliquerIncremenceLeCompteurCorrespondant,exercice6_lesCompteursSontIndependants
+          runners: compilation,exercice1_laFenetreEstVisible,exercice2_laFenetreEstVisible,exercice2_leTitreEstDefini,exercice2_lesDimensionsSontDefinies,exercice2_laFenetreNestPasRedimensionnable,exercice2_leStyleEstUndecorated,exercice3_laFenetreEstVisible,exercice3_laSceneExiste,exercice3_leLabelEstAffiche,exercice3_leLabelEstAuCentreDuBorderPane,exercice4_laFenetreEstVisible,exercice4_leRootEstUnBorderPane,exercice4_leMenuBarEstEnHaut,exercice4_lesDeuxChampsDeSaisieExistent,exercice4_lesBoutonsValiderEtAnnulerExistent,exercice5_handleIncrementeLeCompteur,exercice5_troisClicsAffichent3Clics,exercice6_lesTroisBoutonsExistent,exercice6_cliquerRougeMetLaZoneEnRouge,exercice6_cliquerIncremenceLeCompteurCorrespondant,exercice6_lesCompteursSontIndependants
       #@@@AUTOGRADING-END@@@

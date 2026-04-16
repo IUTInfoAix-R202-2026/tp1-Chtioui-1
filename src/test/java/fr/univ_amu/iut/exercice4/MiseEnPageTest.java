@@ -28,6 +28,14 @@ class MiseEnPageTest {
 
   @Disabled("Retire cette annotation pour activer le test")
   @Test
+  void laFenetreEstVisible(FxRobot robot) {
+    assertThat(stage.isShowing())
+        .as("le Stage doit être affiché — appelle show() à la fin de start()")
+        .isTrue();
+  }
+
+  @Disabled("Retire cette annotation pour activer le test")
+  @Test
   void leRootEstUnBorderPane(FxRobot robot) {
     assertThat(stage.getScene().getRoot())
         .as("la racine de la Scene doit être un BorderPane")
