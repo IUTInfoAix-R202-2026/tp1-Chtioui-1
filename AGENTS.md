@@ -140,7 +140,7 @@ Après la création, dis à l'étudiant d'ouvrir la PR dans le navigateur :
 > Sur la page de la PR, tu peux :
 > - Voir le **diff** de ton code (ce que tu as changé)
 > - Voir les **checks CI** (compilation + tests + score autograding)
-> - **Demander une review Copilot** : dans la sidebar à droite, clique sur "Reviewers" et sélectionne "Copilot". Il analysera ton code et laissera des commentaires et suggestions.
+> - **Review Copilot** : une review automatique est normalement déclenchée à la création de la PR. Si ce n'est pas le cas, tu peux éventuellement la demander manuellement : dans la sidebar à droite, clique sur "Reviewers" et sélectionne "Copilot". Il analysera ton code et laissera des commentaires et suggestions.
 >
 > Prends le temps de lire les commentaires de Copilot — c'est un retour gratuit sur la qualité de ton code.
 
