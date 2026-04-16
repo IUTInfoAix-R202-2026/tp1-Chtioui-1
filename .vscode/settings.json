@@ -11,6 +11,7 @@
     "github.copilot.enable": {
         "*": false
     },
+    "chat.tools.terminal.outputLocation": "terminal",
     "chat.tools.terminal.autoApprove": {
         "./mvnw": true,
         "./sync-upstream.sh": true,
