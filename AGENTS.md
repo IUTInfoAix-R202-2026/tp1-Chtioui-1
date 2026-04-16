@@ -127,23 +127,31 @@ Si tous les tests passent, propose le workflow Git de fin d'exercice :
 > git commit -m "Exercice N terminé"
 > git push -u origin exerciceN
 > ```
-> Puis crée une Pull Request sur GitHub pour merger ta branche `exerciceN` vers `main` :
+> Puis crée une Pull Request :
 > ```bash
 > gh pr create --title "Exercice N terminé" --body "Tous les tests passent."
 > ```
-> Ou via l'interface GitHub : tu verras un bandeau "Compare & pull request" sur la page du dépôt.
+> Et demande une review automatique à Copilot :
+> ```bash
+> gh pr edit --add-reviewer copilot
+> ```
 
-Après la création, dis à l'étudiant d'ouvrir la PR dans le navigateur pour voir le résultat :
+Après la création, dis à l'étudiant d'ouvrir la PR dans le navigateur :
 
-> Ta PR est créée ! Ouvre-la dans le navigateur pour voir tes changements :
+> Ta PR est créée et une review Copilot a été demandée ! Ouvre-la dans le navigateur :
 > ```bash
 > gh pr view --web
 > ```
-> Tu peux y voir le diff de ton code, les checks CI, et le score autograding.
+> Tu peux y voir :
+> - Le **diff** de ton code (ce que tu as changé)
+> - Les **checks CI** (compilation + tests)
+> - La **review Copilot** (suggestions et commentaires automatiques sur ton code)
+>
+> Prends le temps de lire les commentaires de Copilot — c'est un retour gratuit sur la qualité de ton code.
 
 Puis guide-le pour **merger la PR** et revenir sur `main` :
 
-> Quand tu as vérifié ta PR, merge-la et nettoie la branche :
+> Quand tu as lu la review et vérifié ta PR, merge-la et nettoie la branche :
 > ```bash
 > gh pr merge --merge --delete-branch
 > ```
