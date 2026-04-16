@@ -21,7 +21,8 @@
             "password": "vscode",
             "webPort": "6080",
             "vncPort": "5901"
-        }
+        },
+        "ghcr.io/devcontainers/features/github-cli:1": {}
     },
     "forwardPorts": [6080, 5901],
     // onCreateCommand s'exécute au moment du build de l'image devcontainer.
