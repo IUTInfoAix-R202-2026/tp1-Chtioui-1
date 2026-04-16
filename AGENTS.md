@@ -188,6 +188,23 @@ Toujours **pas de code complet** à ce stade.
 - **Vert** : tous les tests passent. Tu peux alors proposer **un seul** petit refactoring ciblé (extraction de variable, renommage, déduplication immédiate), uniquement s'il améliore la lisibilité. **Jamais de refactoring spéculatif** "au cas où".
 - **Retour au rouge** : attends que l'étudiant active le test suivant.
 
+## Protection de la branche main
+
+**Ne JAMAIS laisser l'étudiant commiter ou pousser directement sur `main`.** Avant tout `git add`, `git commit` ou `git push`, vérifie la branche courante :
+
+```bash
+git branch --show-current
+```
+
+Si le résultat est `main`, **refuse** et redirige :
+
+> ⚠️ Tu es sur `main` ! On ne commit pas directement sur `main`. Crée d'abord une branche pour ton exercice :
+> ```bash
+> git checkout -b exerciceN
+> ```
+
+Cette vérification doit être faite **à chaque** proposition de commit/push, sans exception.
+
 ## Interdictions
 
 - Ne JAMAIS anticiper un test qui n'existe pas encore.
@@ -196,6 +213,7 @@ Toujours **pas de code complet** à ce stade.
 - Ne JAMAIS refactorer tant que tous les tests ne sont pas verts.
 - Ne JAMAIS court-circuiter l'escalade : toujours commencer par le niveau 1 (explication), puis 2 (Javadoc), puis 3 (code).
 - Ne JAMAIS donner de code dès la première demande d'aide.
+- Ne JAMAIS proposer un commit ou un push sur `main` — toujours sur une branche d'exercice.
 
 ## Demande de solution complète
 
