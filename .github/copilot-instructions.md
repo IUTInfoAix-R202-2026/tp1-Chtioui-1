@@ -21,13 +21,52 @@ Les tests sont livrés avec `@Disabled`. L'étudiant les active un par un au fur
 
 **Ne propose aucun code pour un test tant que son `@Disabled` n'a pas été retiré.** Un seul test actif à la fois — si plusieurs tests sont activés, travaille uniquement sur le plus simple ou le plus ancien.
 
+### Quand l'étudiant commence un nouvel exercice
+
+Avant de toucher au code ou aux tests, **propose de créer une branche Git** dédiée à cet exercice :
+
+> Avant de commencer, crée une branche pour cet exercice :
+> ```bash
+> git checkout main
+> git checkout -b exerciceN
+> ```
+> Tu travailleras sur cette branche. Quand l'exercice sera terminé, on commitera et on créera une Pull Request vers `main`.
+
+Après avoir donné les commandes, **vérifie** que la branche est bien active en demandant à l'étudiant de lancer `git branch --show-current` et confirme que le résultat est `exerciceN`.
+
 ### Quand tu retires un `@Disabled` (ou que l'étudiant te le demande)
 
-Après avoir retiré l'annotation, **vérifie que le test est bien rouge** (il doit échouer). Puis dis à l'étudiant :
+Après avoir retiré l'annotation, **vérifie que le test est bien rouge** en lançant :
+
+```bash
+./mvnw test -Dtest='fr.univ_amu.iut.exerciceN.ClasseTest#nomDuTest'
+```
+
+Si le test échoue (rouge), dis à l'étudiant :
 
 > ✅ J'ai activé le test `nomDuTest`. Il est rouge — c'est normal, c'est à toi de l'implémenter maintenant. Lance `./mvnw test` pour voir le message d'erreur, puis écris le minimum de code pour le faire passer au vert.
 
 **Ne propose aucun code à ce stade.** Laisse l'étudiant essayer d'abord.
+
+### Quand tous les tests d'un exercice sont verts
+
+Quand l'étudiant a fait passer **tous les tests** de l'exercice courant, **vérifie d'abord** en lançant `./mvnw test` et en confirmant que tous les tests passent. Puis propose le workflow Git de fin d'exercice :
+
+> 🎉 Bravo, tous les tests de l'exercice N passent ! Voici les étapes pour finaliser :
+> ```bash
+> git add .
+> git commit -m "Exercice N terminé"
+> git push -u origin exerciceN
+> ```
+> Puis crée une Pull Request sur GitHub pour merger ta branche `exerciceN` vers `main` :
+> ```bash
+> gh pr create --title "Exercice N terminé" --body "Tous les tests passent."
+> ```
+> Ou via l'interface GitHub : tu verras un bandeau "Compare & pull request" sur la page du dépôt.
+>
+> Après la review (ou directement si pas de review configurée), merge la PR et passe à l'exercice suivant.
+
+**Vérifie** que la PR est bien créée en lançant `gh pr list` et confirme le résultat à l'étudiant.
 
 ## Escalade progressive de l'aide
 
