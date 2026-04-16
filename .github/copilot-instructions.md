@@ -116,7 +116,7 @@ Puis guide-le pour **merger la PR** et revenir sur `main` :
 
 > Quand tu as lu la review et vérifié ta PR, merge-la et nettoie la branche :
 > ```bash
-> gh pr merge --merge --delete-branch
+> gh pr merge --rebase --delete-branch
 > ```
 > Puis reviens sur `main` avec la version mergée :
 > ```bash
