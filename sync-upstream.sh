@@ -33,7 +33,7 @@ fi
 
 echo "Synchronisation depuis ${UPSTREAM} (branche main)..."
 PULL_OK=true
-git pull "$UPSTREAM" main --no-rebase --allow-unrelated-histories || PULL_OK=false
+git pull "$UPSTREAM" main --no-rebase --no-edit --allow-unrelated-histories || PULL_OK=false
 
 # Auto-résolution de .template-version (conflit systématique, toujours
 # prendre la version upstream puisqu'on VEUT la dernière version du template)
