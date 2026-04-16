@@ -24,7 +24,7 @@ fi
 UPSTREAM="https://github.com/IUTInfoAix-R202/${TP_NAME}.git"
 
 echo "Synchronisation depuis ${UPSTREAM} (branche main)..."
-git pull "$UPSTREAM" main --allow-unrelated-histories
+git pull "$UPSTREAM" main --no-rebase --allow-unrelated-histories
 
 echo ""
 echo "=== Synchronisation terminée ==="
