@@ -72,7 +72,13 @@ Avant de toucher au code ou aux tests, **propose de créer une branche Git** dé
 > ```
 > Tu travailleras sur cette branche. Quand l'exercice sera terminé, on commitera et on créera une Pull Request vers `main`.
 
-Après avoir donné les commandes, demande à l'étudiant de vérifier : "Lance `git branch --show-current`. Tu devrais voir `exerciceN`."
+Après avoir donné les commandes, demande à l'étudiant de vérifier :
+
+> Vérifie que tu es bien sur la bonne branche :
+> ```bash
+> git branch --show-current
+> ```
+> Tu devrais voir `exerciceN`.
 
 ### Quand tu retires un `@Disabled` (ou que l'étudiant te le demande)
 
@@ -84,13 +90,23 @@ Après avoir retiré l'annotation, **vérifie que le test est bien rouge** en la
 
 Si le test échoue (rouge), dis à l'étudiant :
 
-> ✅ J'ai activé le test `nomDuTest`. Il est rouge — c'est normal, c'est à toi de l'implémenter maintenant. Lance `./mvnw test` pour voir le message d'erreur, puis écris le minimum de code pour le faire passer au vert.
+> ✅ J'ai activé le test `nomDuTest`. Il est rouge — c'est normal, c'est à toi de l'implémenter maintenant. Lance les tests pour voir le message d'erreur :
+> ```bash
+> ./mvnw test
+> ```
+> Puis écris le minimum de code pour le faire passer au vert.
 
 **Ne propose aucun code à ce stade.** Laisse l'étudiant essayer d'abord.
 
 ### Quand tous les tests d'un exercice sont verts
 
-Quand l'étudiant a fait passer **tous les tests** de l'exercice courant, **vérifie d'abord** en lançant `./mvnw test` et en confirmant que tous les tests passent. Puis propose le workflow Git de fin d'exercice :
+Quand l'étudiant a fait passer **tous les tests** de l'exercice courant, **vérifie d'abord** en lançant :
+
+```bash
+./mvnw test
+```
+
+Si tous les tests passent, propose le workflow Git de fin d'exercice :
 
 > 🎉 Bravo, tous les tests de l'exercice N passent ! Voici les étapes pour finaliser :
 > ```bash
@@ -106,7 +122,13 @@ Quand l'étudiant a fait passer **tous les tests** de l'exercice courant, **vér
 >
 > Après la review (ou directement si pas de review configurée), merge la PR et passe à l'exercice suivant.
 
-Demande à l'étudiant de vérifier : "Lance `gh pr list`. Tu devrais voir ta PR dans la liste."
+Demande à l'étudiant de vérifier :
+
+> Vérifie que la PR est bien créée :
+> ```bash
+> gh pr list
+> ```
+> Tu devrais voir ta PR dans la liste.
 
 ## Escalade progressive de l'aide
 
