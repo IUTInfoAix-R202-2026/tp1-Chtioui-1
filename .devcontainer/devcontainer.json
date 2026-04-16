@@ -29,7 +29,7 @@
     // Avec les Codespace prebuilds activés, ça permet que le cache Maven soit
     // baké directement dans l'image (car les prebuilds stockent l'image, pas
     // les volumes). bash -lc sert à charger le PATH de SDKMAN (Java).
-    "onCreateCommand": "bash -lc './mvnw -q dependency:go-offline || true'",
+    "onCreateCommand": "bash -lc './mvnw -q dependency:go-offline || true' && gh repo set-default 2>/dev/null || true",
     "customizations": {
         "vscode": {
             "settings": {

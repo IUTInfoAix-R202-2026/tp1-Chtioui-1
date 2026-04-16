@@ -1,7 +1,7 @@
 # Version du méta-template utilisée pour générer ce TP.
 # Maintenu automatiquement par create-tp.sh et sync-tp.sh.
 # Ne pas éditer à la main.
-template-commit: 6ab32c153a15d36adf7a8f922285dd0619333ab3
-template-date: 2026-04-16T11:40:48+02:00
+template-commit: e5c15720bf9568e842a312f56f6da063f3815058
+template-date: 2026-04-16T11:47:03+02:00
 generated-at: 2026-04-14T21:14:49Z
-last-sync-at: 2026-04-16T09:41:02Z
+last-sync-at: 2026-04-16T09:47:29Z
