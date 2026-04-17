@@ -550,9 +550,9 @@ Dans JavaFX, l'affichage suit une hiérarchie d'objets imbriqués. On appelle ce
 
 ```mermaid
 graph BT
-    D["🏷️ <b>Label</b><br/>composant texte"] -- "placé dans" --> C["📦 <b>BorderPane</b><br/>conteneur racine"]
-    C -- "passé à" --> B["🎬 <b>Scene</b><br/>contenu de la fenêtre"]
-    B -- "attachée au" --> A["🖼️ <b>Stage</b><br/>la fenêtre"]
+    D["🏷️ <b>Label</b><br/>composant texte&emsp;&emsp;&emsp;&emsp;&emsp;"] -- "placé dans" --> C["📦 <b>BorderPane</b><br/>conteneur racine&emsp;&emsp;&emsp;"]
+    C -- "passé à" --> B["🎬 <b>Scene</b><br/>contenu de la fenêtre&emsp;&emsp;"]
+    B -- "attachée au" --> A["🖼️ <b>Stage</b><br/>la fenêtre&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"]
     
     style A fill:#4a90d9,color:white
     style B fill:#7bb563,color:white
