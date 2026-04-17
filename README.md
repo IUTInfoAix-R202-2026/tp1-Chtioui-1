@@ -156,7 +156,9 @@ Vous pouvez aussi voir le détail test par test pour savoir exactement quels exe
 
 ### Commandes essentielles
 
-Toutes les commandes passent par le **Maven Wrapper** (`./mvnw`) — aucune installation de Maven n'est nécessaire.
+**Maven** est un outil de construction de projets Java utilisé dans la majorité des projets professionnels. Il gère automatiquement la compilation du code, le téléchargement des bibliothèques nécessaires (JavaFX, JUnit, TestFX…), l'exécution des tests et le packaging de l'application. Plutôt que de lancer `javac` et `java` à la main avec des dizaines d'options, une seule commande Maven suffit.
+
+Dans ce projet, Maven est embarqué via un **Maven Wrapper** (`./mvnw`) — un script qui télécharge et utilise automatiquement la bonne version de Maven. Aucune installation n'est nécessaire : la première exécution prend quelques secondes de plus (téléchargement), puis tout est instantané.
 
 | Commande | Effet |
 |----------|-------|
