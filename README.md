@@ -428,7 +428,11 @@ git checkout main
 git pull
 ```
 
-Votre exercice 1 est maintenant intégré dans `main`. Vous pouvez passer à l'exercice 2.
+Votre exercice 1 est maintenant intégré dans `main`.
+
+Vérifiez que votre note a augmenté : rendez-vous sur votre dépôt GitHub → onglet **"Actions"** → dernier run du workflow **"GitHub Classroom Workflow"**. Votre score devrait être passé de 10/100 à 25/100 (10 points de compilation + 15 points pour l'exercice 1).
+
+Vous pouvez passer à l'exercice 2.
 
 #### Essayer Copilot Chat
 
