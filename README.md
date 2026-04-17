@@ -568,26 +568,11 @@ On construit de l'intérieur vers l'extérieur :
 
 Le `BorderPane` organise ses enfants dans 5 zones :
 
-```mermaid
-graph TD
-    subgraph BorderPane
-        direction TB
-        T[top]
-        subgraph milieu[ ]
-            direction LR
-            L[left]
-            CE[center]
-            R[right]
-        end
-        B[bottom]
-    end
-    
-    style T fill:#e0e0e0
-    style L fill:#e0e0e0
-    style CE fill:#ffcc80,stroke:#e8a838,stroke-width:3px
-    style R fill:#e0e0e0
-    style B fill:#e0e0e0
-```
+| | | |
+|:---:|:---:|:---:|
+| | **top** | |
+| **left** | **✦ center ✦** | **right** |
+| | **bottom** | |
 
 Dans cet exercice, seule la zone **center** sera utilisée (pour le Label). Les autres zones resteront vides pour l'instant. Vous les utiliserez dans l'exercice 4.
 
