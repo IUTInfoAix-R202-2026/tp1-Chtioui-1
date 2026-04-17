@@ -105,7 +105,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest laFenetreEstVisible
           timeout: 5
-          max-score: 3
+          max-score: 2
 
       - name: "exercice3 : laSceneExiste"
         id: exercice3_laSceneExiste
@@ -115,17 +115,37 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest laSceneExiste
           timeout: 5
-          max-score: 3
+          max-score: 2
 
-      - name: "exercice3 : leLabelEstAffiche"
-        id: exercice3_leLabelEstAffiche
+      - name: "exercice3 : leRootEstUnBorderPane"
+        id: exercice3_leRootEstUnBorderPane
         uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
-          test-name: "exercice3 : leLabelEstAffiche"
+          test-name: "exercice3 : leRootEstUnBorderPane"
           setup-command: ""
-          command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest leLabelEstAffiche
+          command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest leRootEstUnBorderPane
           timeout: 5
-          max-score: 3
+          max-score: 2
+
+      - name: "exercice3 : unLabelEstPresent"
+        id: exercice3_unLabelEstPresent
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice3 : unLabelEstPresent"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest unLabelEstPresent
+          timeout: 5
+          max-score: 2
+
+      - name: "exercice3 : leLabelAfficheLeBonTexte"
+        id: exercice3_leLabelAfficheLeBonTexte
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice3 : leLabelAfficheLeBonTexte"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest leLabelAfficheLeBonTexte
+          timeout: 5
+          max-score: 2
 
       - name: "exercice3 : leLabelEstAuCentreDuBorderPane"
         id: exercice3_leLabelEstAuCentreDuBorderPane
@@ -135,7 +155,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest leLabelEstAuCentreDuBorderPane
           timeout: 5
-          max-score: 6
+          max-score: 5
 
       - name: "exercice4 : laFenetreEstVisible"
         id: exercice4_laFenetreEstVisible
@@ -255,7 +275,57 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice5.EcouteurClasseNommeeTest handleIncrementeLeCompteur
           timeout: 5
-          max-score: 7
+          max-score: 2
+
+      - name: "exercice5 : laFenetreEstVisible"
+        id: exercice5_laFenetreEstVisible
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice5 : laFenetreEstVisible"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice5.EvenementsBoutonTest laFenetreEstVisible
+          timeout: 5
+          max-score: 2
+
+      - name: "exercice5 : laSceneExiste"
+        id: exercice5_laSceneExiste
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice5 : laSceneExiste"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice5.EvenementsBoutonTest laSceneExiste
+          timeout: 5
+          max-score: 2
+
+      - name: "exercice5 : leBoutonExiste"
+        id: exercice5_leBoutonExiste
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice5 : leBoutonExiste"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice5.EvenementsBoutonTest leBoutonExiste
+          timeout: 5
+          max-score: 2
+
+      - name: "exercice5 : leBoutonAfficheLeBonTexte"
+        id: exercice5_leBoutonAfficheLeBonTexte
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice5 : leBoutonAfficheLeBonTexte"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice5.EvenementsBoutonTest leBoutonAfficheLeBonTexte
+          timeout: 5
+          max-score: 2
+
+      - name: "exercice5 : leLabelCompteurExiste"
+        id: exercice5_leLabelCompteurExiste
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice5 : leLabelCompteurExiste"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice5.EvenementsBoutonTest leLabelCompteurExiste
+          timeout: 5
+          max-score: 2
 
       - name: "exercice5 : troisClicsAffichent3Clics"
         id: exercice5_troisClicsAffichent3Clics
@@ -265,7 +335,27 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice5.EvenementsBoutonTest troisClicsAffichent3Clics
           timeout: 5
-          max-score: 8
+          max-score: 3
+
+      - name: "exercice6 : laFenetreEstVisible"
+        id: exercice6_laFenetreEstVisible
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice6 : laFenetreEstVisible"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest laFenetreEstVisible
+          timeout: 5
+          max-score: 1
+
+      - name: "exercice6 : laSceneExiste"
+        id: exercice6_laSceneExiste
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice6 : laSceneExiste"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest laSceneExiste
+          timeout: 5
+          max-score: 1
 
       - name: "exercice6 : lesTroisBoutonsExistent"
         id: exercice6_lesTroisBoutonsExistent
@@ -275,7 +365,27 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest lesTroisBoutonsExistent
           timeout: 5
-          max-score: 3
+          max-score: 1
+
+      - name: "exercice6 : laZoneDeCouleurExiste"
+        id: exercice6_laZoneDeCouleurExiste
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice6 : laZoneDeCouleurExiste"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest laZoneDeCouleurExiste
+          timeout: 5
+          max-score: 1
+
+      - name: "exercice6 : leLabelCompteursExiste"
+        id: exercice6_leLabelCompteursExiste
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice6 : leLabelCompteursExiste"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest leLabelCompteursExiste
+          timeout: 5
+          max-score: 1
 
       - name: "exercice6 : cliquerRougeMetLaZoneEnRouge"
         id: exercice6_cliquerRougeMetLaZoneEnRouge
@@ -285,17 +395,37 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest cliquerRougeMetLaZoneEnRouge
           timeout: 5
-          max-score: 3
+          max-score: 1
 
-      - name: "exercice6 : cliquerIncremenceLeCompteurCorrespondant"
-        id: exercice6_cliquerIncremenceLeCompteurCorrespondant
+      - name: "exercice6 : cliquerVertMetLaZoneEnVert"
+        id: exercice6_cliquerVertMetLaZoneEnVert
         uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
-          test-name: "exercice6 : cliquerIncremenceLeCompteurCorrespondant"
+          test-name: "exercice6 : cliquerVertMetLaZoneEnVert"
           setup-command: ""
-          command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest cliquerIncremenceLeCompteurCorrespondant
+          command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest cliquerVertMetLaZoneEnVert
           timeout: 5
-          max-score: 3
+          max-score: 1
+
+      - name: "exercice6 : cliquerBleuMetLaZoneEnBleu"
+        id: exercice6_cliquerBleuMetLaZoneEnBleu
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice6 : cliquerBleuMetLaZoneEnBleu"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest cliquerBleuMetLaZoneEnBleu
+          timeout: 5
+          max-score: 1
+
+      - name: "exercice6 : cliquerIncrementeLeCompteurCorrespondant"
+        id: exercice6_cliquerIncrementeLeCompteurCorrespondant
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice6 : cliquerIncrementeLeCompteurCorrespondant"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest cliquerIncrementeLeCompteurCorrespondant
+          timeout: 5
+          max-score: 1
 
       - name: "exercice6 : lesCompteursSontIndependants"
         id: exercice6_lesCompteursSontIndependants
@@ -320,7 +450,9 @@ jobs:
           EXERCICE2_LESTYLEESTUNDECORATED_RESULTS: "${{ steps.exercice2_leStyleEstUndecorated.outputs.result }}"
           EXERCICE3_LAFENETREESTVISIBLE_RESULTS: "${{ steps.exercice3_laFenetreEstVisible.outputs.result }}"
           EXERCICE3_LASCENEEXISTE_RESULTS: "${{ steps.exercice3_laSceneExiste.outputs.result }}"
-          EXERCICE3_LELABELESTAFFICHE_RESULTS: "${{ steps.exercice3_leLabelEstAffiche.outputs.result }}"
+          EXERCICE3_LEROOTESTUNBORDERPANE_RESULTS: "${{ steps.exercice3_leRootEstUnBorderPane.outputs.result }}"
+          EXERCICE3_UNLABELESTPRESENT_RESULTS: "${{ steps.exercice3_unLabelEstPresent.outputs.result }}"
+          EXERCICE3_LELABELAFFICHELEBONTEXTE_RESULTS: "${{ steps.exercice3_leLabelAfficheLeBonTexte.outputs.result }}"
           EXERCICE3_LELABELESTAUCENTREDUBORDERPANE_RESULTS: "${{ steps.exercice3_leLabelEstAuCentreDuBorderPane.outputs.result }}"
           EXERCICE4_LAFENETREESTVISIBLE_RESULTS: "${{ steps.exercice4_laFenetreEstVisible.outputs.result }}"
           EXERCICE4_LEROOTESTUNBORDERPANE_RESULTS: "${{ steps.exercice4_leRootEstUnBorderPane.outputs.result }}"
@@ -334,11 +466,22 @@ jobs:
           EXERCICE4_LEBOUTONVALIDEREXISTE_RESULTS: "${{ steps.exercice4_leBoutonValiderExiste.outputs.result }}"
           EXERCICE4_LEBOUTONANNULEREXISTE_RESULTS: "${{ steps.exercice4_leBoutonAnnulerExiste.outputs.result }}"
           EXERCICE5_HANDLEINCREMENTELECOMPTEUR_RESULTS: "${{ steps.exercice5_handleIncrementeLeCompteur.outputs.result }}"
+          EXERCICE5_LAFENETREESTVISIBLE_RESULTS: "${{ steps.exercice5_laFenetreEstVisible.outputs.result }}"
+          EXERCICE5_LASCENEEXISTE_RESULTS: "${{ steps.exercice5_laSceneExiste.outputs.result }}"
+          EXERCICE5_LEBOUTONEXISTE_RESULTS: "${{ steps.exercice5_leBoutonExiste.outputs.result }}"
+          EXERCICE5_LEBOUTONAFFICHELEBONTEXTE_RESULTS: "${{ steps.exercice5_leBoutonAfficheLeBonTexte.outputs.result }}"
+          EXERCICE5_LELABELCOMPTEUREXISTE_RESULTS: "${{ steps.exercice5_leLabelCompteurExiste.outputs.result }}"
           EXERCICE5_TROISCLICSAFFICHENT3CLICS_RESULTS: "${{ steps.exercice5_troisClicsAffichent3Clics.outputs.result }}"
+          EXERCICE6_LAFENETREESTVISIBLE_RESULTS: "${{ steps.exercice6_laFenetreEstVisible.outputs.result }}"
+          EXERCICE6_LASCENEEXISTE_RESULTS: "${{ steps.exercice6_laSceneExiste.outputs.result }}"
           EXERCICE6_LESTROISBOUTONSEXISTENT_RESULTS: "${{ steps.exercice6_lesTroisBoutonsExistent.outputs.result }}"
+          EXERCICE6_LAZONEDECOULEUREXISTE_RESULTS: "${{ steps.exercice6_laZoneDeCouleurExiste.outputs.result }}"
+          EXERCICE6_LELABELCOMPTEURSEXISTE_RESULTS: "${{ steps.exercice6_leLabelCompteursExiste.outputs.result }}"
           EXERCICE6_CLIQUERROUGEMETLAZONEENROUGE_RESULTS: "${{ steps.exercice6_cliquerRougeMetLaZoneEnRouge.outputs.result }}"
-          EXERCICE6_CLIQUERINCREMENCELECOMPTEURCORRESPONDANT_RESULTS: "${{ steps.exercice6_cliquerIncremenceLeCompteurCorrespondant.outputs.result }}"
+          EXERCICE6_CLIQUERVERTMETLAZONEENVERT_RESULTS: "${{ steps.exercice6_cliquerVertMetLaZoneEnVert.outputs.result }}"
+          EXERCICE6_CLIQUERBLEUMETLAZONEENBLEU_RESULTS: "${{ steps.exercice6_cliquerBleuMetLaZoneEnBleu.outputs.result }}"
+          EXERCICE6_CLIQUERINCREMENTELECOMPTEURCORRESPONDANT_RESULTS: "${{ steps.exercice6_cliquerIncrementeLeCompteurCorrespondant.outputs.result }}"
           EXERCICE6_LESCOMPTEURSSONTINDEPENDANTS_RESULTS: "${{ steps.exercice6_lesCompteursSontIndependants.outputs.result }}"
         with:
-          runners: compilation,exercice1_laFenetreEstVisible,exercice2_laFenetreEstVisible,exercice2_leTitreEstDefini,exercice2_lesDimensionsSontDefinies,exercice2_laFenetreNestPasRedimensionnable,exercice2_leStyleEstUndecorated,exercice3_laFenetreEstVisible,exercice3_laSceneExiste,exercice3_leLabelEstAffiche,exercice3_leLabelEstAuCentreDuBorderPane,exercice4_laFenetreEstVisible,exercice4_leRootEstUnBorderPane,exercice4_leMenuBarEstEnHaut,exercice4_leMenuBarContientDeuxMenus,exercice4_lesMenusOntLesBonsNoms,exercice4_leGridPaneEstAuCentre,exercice4_lesLabelsNomEtEmailExistent,exercice4_lesDeuxChampsDeSaisieExistent,exercice4_leHBoxEstEnBas,exercice4_leBoutonValiderExiste,exercice4_leBoutonAnnulerExiste,exercice5_handleIncrementeLeCompteur,exercice5_troisClicsAffichent3Clics,exercice6_lesTroisBoutonsExistent,exercice6_cliquerRougeMetLaZoneEnRouge,exercice6_cliquerIncremenceLeCompteurCorrespondant,exercice6_lesCompteursSontIndependants
+          runners: compilation,exercice1_laFenetreEstVisible,exercice2_laFenetreEstVisible,exercice2_leTitreEstDefini,exercice2_lesDimensionsSontDefinies,exercice2_laFenetreNestPasRedimensionnable,exercice2_leStyleEstUndecorated,exercice3_laFenetreEstVisible,exercice3_laSceneExiste,exercice3_leRootEstUnBorderPane,exercice3_unLabelEstPresent,exercice3_leLabelAfficheLeBonTexte,exercice3_leLabelEstAuCentreDuBorderPane,exercice4_laFenetreEstVisible,exercice4_leRootEstUnBorderPane,exercice4_leMenuBarEstEnHaut,exercice4_leMenuBarContientDeuxMenus,exercice4_lesMenusOntLesBonsNoms,exercice4_leGridPaneEstAuCentre,exercice4_lesLabelsNomEtEmailExistent,exercice4_lesDeuxChampsDeSaisieExistent,exercice4_leHBoxEstEnBas,exercice4_leBoutonValiderExiste,exercice4_leBoutonAnnulerExiste,exercice5_handleIncrementeLeCompteur,exercice5_laFenetreEstVisible,exercice5_laSceneExiste,exercice5_leBoutonExiste,exercice5_leBoutonAfficheLeBonTexte,exercice5_leLabelCompteurExiste,exercice5_troisClicsAffichent3Clics,exercice6_laFenetreEstVisible,exercice6_laSceneExiste,exercice6_lesTroisBoutonsExistent,exercice6_laZoneDeCouleurExiste,exercice6_leLabelCompteursExiste,exercice6_cliquerRougeMetLaZoneEnRouge,exercice6_cliquerVertMetLaZoneEnVert,exercice6_cliquerBleuMetLaZoneEnBleu,exercice6_cliquerIncrementeLeCompteurCorrespondant,exercice6_lesCompteursSontIndependants
       #@@@AUTOGRADING-END@@@
