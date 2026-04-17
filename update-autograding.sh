@@ -46,13 +46,26 @@ if [ ! -f "$CLASSROOM_YML" ]; then
     exit 1
 fi
 
-# Helper : extrait les noms de méthodes @Test d'un fichier de test
-# (toute déclaration "void XXX(" sauf "void start" qui est @Start).
+# Helper : extrait les noms de méthodes @Test d'un fichier de test.
+# On ne prend que les méthodes annotées @Test (pas @BeforeEach, @Start,
+# ni utilitaires void). L'annotation peut être sur la ligne au-dessus
+# ou sur la même ligne que la signature.
 extract_test_methods() {
     local file=$1
-    grep -oE 'void [a-zA-Z_][a-zA-Z0-9_]*' "$file" 2>/dev/null \
-        | awk '{print $2}' \
-        | grep -v '^start$' || true
+    awk '
+        /@Test([^a-zA-Z0-9_]|$)/ { pending = 1; next }
+        pending && /void[[:space:]]+[a-zA-Z_][a-zA-Z0-9_]*[[:space:]]*\(/ {
+            match($0, /void[[:space:]]+[a-zA-Z_][a-zA-Z0-9_]*/)
+            name = substr($0, RSTART, RLENGTH)
+            sub(/^void[[:space:]]+/, "", name)
+            print name
+            pending = 0
+            next
+        }
+        pending && /^[[:space:]]*$/ { next }
+        pending && /^[[:space:]]*@/ { next }
+        { pending = 0 }
+    ' "$file" 2>/dev/null || true
 }
 
 # --- Découverte des exercices ---
