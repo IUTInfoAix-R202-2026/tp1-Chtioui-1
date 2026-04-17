@@ -568,25 +568,7 @@ On construit de l'intérieur vers l'extérieur :
 
 Le `BorderPane` organise ses enfants dans 5 zones :
 
-<svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" width="900" height="340">
-  <!-- Cadre extérieur -->
-  <rect x="0" y="0" width="900" height="340" rx="6" fill="none" stroke="#888" stroke-width="2"/>
-  <!-- top -->
-  <rect x="2" y="2" width="896" height="76" rx="4" fill="#b0bec5"/>
-  <text x="450" y="46" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#37474f">top</text>
-  <!-- left -->
-  <rect x="2" y="82" width="196" height="176" rx="4" fill="#b0bec5"/>
-  <text x="100" y="176" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#37474f">left</text>
-  <!-- center -->
-  <rect x="202" y="82" width="496" height="176" rx="4" fill="#ffcc80" stroke="#e8a838" stroke-width="3"/>
-  <text x="450" y="176" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#e65100">center</text>
-  <!-- right -->
-  <rect x="702" y="82" width="196" height="176" rx="4" fill="#b0bec5"/>
-  <text x="800" y="176" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#37474f">right</text>
-  <!-- bottom -->
-  <rect x="2" y="262" width="896" height="76" rx="4" fill="#b0bec5"/>
-  <text x="450" y="306" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#37474f">bottom</text>
-</svg>
+![Les 5 zones du BorderPane](src/main/resources/assets/borderpane_zones.svg)
 
 Dans cet exercice, seule la zone **center** sera utilisée (pour le Label). Les autres zones resteront vides pour l'instant. Vous les utiliserez dans l'exercice 4.
 
