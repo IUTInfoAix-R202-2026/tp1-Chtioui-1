@@ -132,11 +132,11 @@ Puis lancez :
 
 Vous devriez voir un résultat du type :
 ```
-Tests run: 22, Failures: 0, Errors: 0, Skipped: 21
+Tests run: 41, Failures: 0, Errors: 0, Skipped: 40
 BUILD SUCCESS
 ```
 
-Si c'est le cas, tout est prêt. Le seul test actif (`AppTest`) passe, et les 21 tests d'exercices sont en attente (`Skipped`) - c'est normal, ils seront activés au fil de votre progression.
+Si c'est le cas, tout est prêt. Le seul test actif (`AppTest`) passe, et les 40 tests d'exercices sont en attente (`Skipped`) - c'est normal, ils seront activés au fil de votre progression.
 
 ---
 
@@ -467,7 +467,7 @@ Pour les exercices suivants, vous pouvez utiliser Copilot Chat dès que vous blo
    src/test/java/fr/univ_amu/iut/exercice2/StagePersonnaliseTest.java
    ```
 
-4. Vous remarquerez que cet exercice contient **5 tests** (tous `@Disabled`), chacun vérifiant un aspect différent de la personnalisation du `Stage`. Ils doivent être activés et implémentés **dans l'ordre**, car chaque test suppose que les précédents sont déjà implémentés.
+4. Vous remarquerez que cet exercice contient **5 tests** (tous `@Disabled`), chacun vérifiant un aspect différent de la personnalisation du `Stage`. L'ordre proposé ci-dessous est conseillé (progression pédagogique du plus simple au plus technique) ; la plupart des assertions sont indépendantes les unes des autres.
 
 5. Notez que le premier test (`laFenetreEstVisible`) vérifie à nouveau que `show()` est appelé. C'est un rappel : **chaque exercice doit afficher sa fenêtre**.
 

@@ -6,7 +6,7 @@ Ces instructions existent pour que l'étudiant apprenne à **raisonner par petit
 
 ## Contexte
 
-Ce projet est un TP de **R2.02 — Développement d'applications avec IHM** (IUT Informatique Aix-Marseille, BUT1). Les étudiants sont en première année et découvrent souvent JavaFX pour la première fois. L'outillage : Java 25, JavaFX 25, JUnit 5, TestFX, AssertJ, ApprovalTests.
+Ce projet est un TP de **R2.02 — Développement d'applications avec IHM** (IUT Informatique Aix-Marseille, BUT1). Les étudiants sont en première année et découvrent souvent JavaFX pour la première fois. L'outillage : Java 25, JavaFX 25, JUnit Jupiter 6, TestFX, AssertJ, ApprovalTests.
 
 Adapte ton niveau d'explication à un public débutant. Si un concept JavaFX est en jeu pour la première fois (`Property`, `Binding`, `FXML`, `Scene Graph`, `Observable`, `Controller`, etc.), **explique brièvement le concept avant de l'utiliser** dans du code.
 
