@@ -110,6 +110,8 @@ Une fois sur la page de votre dépôt :
   - Copilot Chat (votre assistant IA pédagogique)
   - Toutes les extensions nécessaires
 
+![VS Code dans le navigateur après ouverture du Codespace](src/main/resources/assets/codespace_vscode.png)
+
 > **Important** : le Codespace est **personnel et persistant**. Quand vous fermez l'onglet, votre travail est sauvegardé. Pour reprendre, retournez sur votre dépôt GitHub → **"Code"** → **"Codespaces"** → cliquez sur le Codespace existant (ne créez pas un nouveau à chaque fois).
 
 ### Vérification rapide
