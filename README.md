@@ -977,12 +977,9 @@ L'interface est décomposée en **trois zones** dans un `BorderPane`, comme dans
 graph TD
     ST["🖼️ <b>Stage</b>"] -->|"setScene()"| S["🎬 <b>Scene</b>"]
     S -->|"racine"| BP["📦 <b>BorderPane</b>"]
-    BP -->|"setTop()"| H["➡️ <b>HBox</b>"]
+    BP -->|"setTop()"| H["➡️ <b>HBox</b><br/>🔴 Rouge · 🟢 Vert · 🔵 Bleu"]
     BP -->|"setCenter()"| Z["🎨 <b>Pane</b><br/>zone de couleur"]
-    BP -->|"setBottom()"| L["🏷️ <b>Label</b><br/>&quot;Rouge: 0 …&quot;"]
-    H --- BR["🔴 <b>Button</b><br/>&quot;Rouge&quot;"]
-    H --- BV["🟢 <b>Button</b><br/>&quot;Vert&quot;"]
-    H --- BB["🔵 <b>Button</b><br/>&quot;Bleu&quot;"]
+    BP -->|"setBottom()"| L["🏷️ <b>Label</b><br/>&quot;Rouge: 0  Vert: 0  Bleu: 0&quot;"]
 
     style ST fill:#4a90d9,color:white
     style S fill:#7bb563,color:white
@@ -990,9 +987,6 @@ graph TD
     style H fill:#b0bec5,color:#333
     style Z fill:#b0bec5,color:#333
     style L fill:#b0bec5,color:#333
-    style BR fill:#e74c3c,color:white
-    style BV fill:#27ae60,color:white
-    style BB fill:#2980b9,color:white
 ```
 
 ### Découverte du code
