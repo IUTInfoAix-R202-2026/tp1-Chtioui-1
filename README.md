@@ -252,52 +252,186 @@ Vous avez le droit d'utiliser **Copilot Chat** (panneau latéral dans VS Code) q
 
 ## Exercices
 
-Le TP est découpé en **6 exercices** à faire dans l'ordre. Chaque exercice vit dans son propre sous-paquet `fr.univ_amu.iut.exerciceN/` (code et tests en miroir). Tous les tests sont livrés avec `@Disabled` : vous les activez **un à un** au fil de votre progression (pattern TDD baby steps).
+Le TP est découpé en **6 exercices** à faire dans l'ordre. Chaque exercice vit dans son propre sous-paquet `fr.univ_amu.iut.exerciceN/` (code et tests en miroir).
 
-**Boucle de travail pour chaque test** :
-
-1. Lis le TODO dans le fichier Java concerné.
-2. Retire l'annotation `@Disabled` du premier test du fichier de test.
-3. Lance `./mvnw test` — le test doit échouer (rouge).
-4. Écris le **minimum** de code pour faire passer ce test (vert).
-5. Commit, puis active le test suivant.
-
-> Un lanceur commun est disponible dans `fr.univ_amu.iut.App`. `./mvnw javafx:run` ouvre une fenêtre avec un bouton par exercice.
+L'exercice 1 est très guidé pas à pas pour vous familiariser avec l'environnement. À partir de l'exercice 2, une boucle de travail systématique est introduite que vous appliquerez pour tous les exercices suivants.
 
 ---
 
 ### Exercice 1 — Première fenêtre
 
-**Objectif** : créer l'application JavaFX la plus simple possible — une fenêtre vide qui s'affiche et se ferme quand on clique sur la croix.
+**Objectif** : créer l'application JavaFX la plus simple possible — une fenêtre vide qui apparaît à l'écran.
 
-**Concepts** :
-- `Application` (tu étends cette classe)
-- `Stage` (la fenêtre, reçue en paramètre de `start()`)
-- `launch()` (appelé depuis `main()` pour démarrer le framework JavaFX)
+**Ce que vous allez découvrir** :
+- La classe `Application` — le point d'entrée de toute application JavaFX
+- Le `Stage` — l'objet qui représente la fenêtre
+- La méthode `start(Stage)` — appelée automatiquement par JavaFX au lancement
 
-**Fichier** : [`src/main/java/fr/univ_amu/iut/exercice1/PremiereFenetre.java`](src/main/java/fr/univ_amu/iut/exercice1/PremiereFenetre.java)
+#### Découverte du code
 
-**Test** : `laFenetreEstVisible` — vérifie que le `Stage` est bien affiché. **Indice** : il suffit d'appeler une seule méthode de `Stage` dans `start()`. Consultez la Javadoc de `Stage` à la recherche d'une méthode qui "affiche".
+1. Dans l'explorateur de fichiers (panneau gauche de VS Code), naviguez vers :
+   ```
+   src/main/java/fr/univ_amu/iut/exercice1/PremiereFenetre.java
+   ```
+
+2. Ouvrez ce fichier. Vous voyez une classe qui **étend `Application`** avec une méthode `start(Stage primaryStage)` qui contient un commentaire TODO :
+   ```java
+   public class PremiereFenetre extends Application {
+       @Override
+       public void start(Stage primaryStage) {
+           // TODO exercice 1 : rendre la fenêtre visible.
+       }
+   }
+   ```
+
+3. Ouvrez maintenant le fichier de test correspondant :
+   ```
+   src/test/java/fr/univ_amu/iut/exercice1/PremiereFenetreTest.java
+   ```
+
+4. Vous voyez un test `laFenetreEstVisible` avec l'annotation `@Disabled`. Ce test vérifie que `stage.isShowing()` retourne `true` — autrement dit, que la fenêtre est bien affichée à l'écran.
+
+#### Travail à faire
+
+**Étape 1 — Créer une branche Git pour cet exercice**
+
+Ouvrez un terminal dans VS Code (`Ctrl+ù` ou menu **Terminal → New Terminal**) et exécutez :
+
+```bash
+git checkout -b exercice1
+```
+
+Vérifiez que vous êtes bien sur la branche :
+
+```bash
+git branch --show-current
+```
+
+Le résultat doit afficher `exercice1`.
+
+**Étape 2 — Activer le test**
+
+Dans le fichier `PremiereFenetreTest.java`, supprimez (ou commentez) la ligne :
+
+```java
+@Disabled("Retire cette annotation pour activer le test")
+```
+
+Sauvegardez le fichier (`Ctrl+S`).
+
+**Étape 3 — Vérifier que le test est rouge**
+
+Dans le terminal, lancez :
+
+```bash
+./mvnw test
+```
+
+Vous devriez voir un message d'erreur indiquant que le test `laFenetreEstVisible` a **échoué**. C'est normal et attendu — le test vérifie que la fenêtre est visible, mais votre méthode `start()` ne fait rien pour l'instant.
+
+**Étape 4 — Implémenter la solution**
+
+Retournez dans `PremiereFenetre.java`. Le `Stage` reçu en paramètre de `start()` représente la fenêtre principale. Pour l'afficher, il suffit d'appeler une seule méthode.
+
+**Indice** : consultez la [Javadoc de Stage](https://openjfx.io/javadoc/25/javafx.graphics/javafx/stage/Stage.html) et cherchez une méthode héritée qui rend la fenêtre visible.
+
+**Étape 5 — Vérifier que le test passe**
+
+```bash
+./mvnw test
+```
+
+Le test `laFenetreEstVisible` doit maintenant être **vert**. Si c'est le cas, félicitations — vous venez d'écrire votre première application JavaFX !
+
+#### Voir votre fenêtre avec VNC
+
+Les tests vérifient le comportement de votre code automatiquement, mais il est aussi possible de **voir votre application s'afficher** dans un navigateur.
+
+Le Codespace embarque un affichage graphique virtuel accessible via **VNC**. Pour y accéder :
+
+1. Dans VS Code, cliquez sur l'onglet **"Ports"** (en bas, à côté du terminal).
+2. Repérez le port **6080** (labellé "desktop" ou "VNC").
+3. Cliquez sur l'icône 🌐 (globe) à droite du port 6080 pour l'ouvrir dans un nouvel onglet du navigateur.
+4. Un bureau virtuel s'affiche. Laissez cet onglet ouvert.
+
+<!-- TODO: screenshot de l'onglet Ports avec le port 6080 -->
+
+Maintenant, lancez votre application :
+
+```bash
+./mvnw javafx:run
+```
+
+Dans l'onglet VNC, vous verrez apparaître la fenêtre du **lanceur** (`App.java`).
+
+#### Le lanceur `App.java`
+
+Le fichier `App.java` (dans `src/main/java/fr/univ_amu/iut/`) est un **menu principal** qui liste tous les exercices du TP. Il affiche une fenêtre avec un bouton par exercice :
+
+<!-- TODO: screenshot du lanceur avec les 6 boutons -->
+
+- Cliquez sur **"Exercice 1 — Première fenêtre"** : votre fenêtre vide s'ouvre (si vous avez bien implémenté `show()`).
+- Si vous cliquez sur un exercice que vous n'avez pas encore implémenté, une popup vous indiquera "rien à afficher" — c'est normal.
+
+Le lanceur est un outil pratique pour **tester visuellement** chaque exercice au fil de votre progression. Vous pouvez aussi lancer directement un exercice en faisant clic droit sur sa classe → **Run** dans VS Code.
+
+Pour fermer l'application, fermez la fenêtre JavaFX ou appuyez sur `Ctrl+C` dans le terminal.
+
+#### Finaliser l'exercice
+
+Suivez les étapes de rendu décrites dans la section [Workflow de développement](#workflow-de-développement--un-cycle-par-exercice) (étapes 8 à 10) : commit, push, Pull Request, merge.
 
 ---
 
 ### Exercice 2 — Stage personnalisé
 
-**Objectif** : personnaliser l'apparence de la fenêtre — titre, dimensions, décoration.
+**Objectif** : personnaliser l'apparence de la fenêtre — titre, dimensions, style de décoration.
 
-**Concepts** :
-- Propriétés de `Stage` : `setTitle`, `setWidth`, `setHeight`, `setResizable`
-- Énumération `StageStyle` pour `initStyle`
+**Ce que vous allez découvrir** :
+- Les propriétés du `Stage` : `setTitle`, `setWidth`, `setHeight`, `setResizable`
+- L'énumération `StageStyle` pour modifier la décoration de la fenêtre
+
+#### Boucle de travail pour chaque test
+
+À partir de cet exercice, vous appliquerez la **même boucle de travail** pour chaque test — c'est la méthode TDD (Test-Driven Development) que vous utiliserez tout au long du module :
+
+1. **Activez** le prochain test en retirant son `@Disabled` dans le fichier de test.
+2. **Lancez** les tests :
+   ```bash
+   ./mvnw test
+   ```
+3. **Constatez** que le test est rouge — lisez le message d'erreur, il vous dit ce que le test attend.
+4. **Implémentez** le minimum de code pour faire passer le test au vert.
+5. **Relancez** les tests pour vérifier :
+   ```bash
+   ./mvnw verify
+   ```
+6. **Passez** au test suivant (retour à l'étape 1).
+
+Quand **tous les tests de l'exercice** sont verts, finalisez l'exercice (commit, push, PR, merge — voir les étapes 8 à 10 du [Workflow de développement](#workflow-de-développement--un-cycle-par-exercice)).
+
+> 💡 Pour voir votre fenêtre dans le navigateur, utilisez le VNC comme expliqué dans l'[exercice 1](#voir-votre-fenêtre-avec-vnc).
+
+#### Travail à faire
 
 **Fichier** : [`src/main/java/fr/univ_amu/iut/exercice2/StagePersonnalise.java`](src/main/java/fr/univ_amu/iut/exercice2/StagePersonnalise.java)
 
-**Tests (4, à activer dans l'ordre)** :
-1. `leTitreEstDefini` — titre exact `"Ma fenêtre personnalisée"`
-2. `lesDimensionsSontDefinies` — largeur 500, hauteur 300
-3. `laFenetreNestPasRedimensionnable` — `setResizable(false)`
-4. `leStyleEstUndecorated` — `initStyle(StageStyle.UNDECORATED)` (à activer en dernier, c'est le plus subtil)
+Commencez par créer votre branche :
 
-**Attention** : `initStyle` doit être appelé **avant** `show()`, sinon il lance une exception.
+```bash
+git checkout main
+git checkout -b exercice2
+```
+
+Puis activez et implémentez les tests **un par un**, dans l'ordre :
+
+1. **`laFenetreEstVisible`** — le Stage doit être affiché (pensez à `show()`, comme dans l'exercice 1).
+2. **`leTitreEstDefini`** — le titre de la fenêtre doit être exactement `"Ma fenêtre personnalisée"`. Consultez la méthode `setTitle()` de `Stage`.
+3. **`lesDimensionsSontDefinies`** — la fenêtre doit faire 500 pixels de large et 300 pixels de haut. Consultez `setWidth()` et `setHeight()`.
+4. **`laFenetreNestPasRedimensionnable`** — la fenêtre ne doit pas pouvoir être redimensionnée. Consultez `setResizable()`.
+5. **`leStyleEstUndecorated`** — la fenêtre doit avoir le style `StageStyle.UNDECORATED` (sans barre de titre ni bordures). Consultez `initStyle()`.
+
+> **Attention** : `initStyle()` doit être appelé **avant** `show()`, sinon JavaFX lève une exception. L'ordre des instructions dans `start()` compte.
 
 ---
 
