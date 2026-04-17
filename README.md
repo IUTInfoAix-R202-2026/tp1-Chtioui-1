@@ -549,10 +549,10 @@ Vérifiez votre score sur l'onglet **Actions** de votre dépôt GitHub. Il devra
 Dans JavaFX, l'affichage suit une hiérarchie d'objets imbriqués. On appelle cela le **graphe de scène** (scene graph) :
 
 ```mermaid
-graph TD
-    A[Stage - la fenêtre] --> B[Scene - le contenu de la fenêtre]
-    B --> C[BorderPane - le conteneur racine]
-    C --> D["Label('Bonjour, JavaFX !')"]
+graph BT
+    D["Label('Bonjour, JavaFX !')"] -- "placé dans" --> C[BorderPane - conteneur racine]
+    C -- "passé à" --> B[Scene - le contenu de la fenêtre]
+    B -- "attachée au" --> A[Stage - la fenêtre]
     
     style A fill:#4a90d9,color:white
     style B fill:#7bb563,color:white
@@ -560,10 +560,11 @@ graph TD
     style D fill:#d35f5f,color:white
 ```
 
-- Le **Stage** est la fenêtre (vous l'avez déjà vu dans les exercices 1 et 2).
-- La **Scene** est le contenu de cette fenêtre. Un Stage ne peut contenir qu'une seule Scene.
-- La Scene contient un **nœud racine** (root node) : ici un `BorderPane`, un conteneur qui divise l'espace en 5 zones.
-- À l'intérieur du conteneur, on place des **composants** : ici un `Label` au centre.
+On construit de l'intérieur vers l'extérieur :
+1. On crée un **Label** (le composant à afficher)
+2. On le place dans un **BorderPane** (le conteneur qui organise la mise en page)
+3. On crée une **Scene** à partir du BorderPane (la Scene regroupe tout le contenu)
+4. On attache la Scene au **Stage** (la fenêtre) et on l'affiche
 
 Le `BorderPane` organise ses enfants dans 5 zones :
 
