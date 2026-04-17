@@ -593,11 +593,13 @@ Dans cet exercice, seule la zone **center** sera utilisée (pour le Label). Les 
    src/test/java/fr/univ_amu/iut/exercice3/PremiereSceneTest.java
    ```
 
-4. Cet exercice contient **4 tests** :
+4. Cet exercice contient **6 tests**, chacun correspondant à une étape de construction :
    - `laFenetreEstVisible` : le Stage doit être affiché
    - `laSceneExiste` : le Stage doit avoir une Scene attachée via `setScene()`
-   - `leLabelEstAffiche` : un Label avec le texte exact `"Bonjour, JavaFX !"` doit être visible
-   - `leLabelEstAuCentreDuBorderPane` : la racine de la Scene doit être un `BorderPane`, et le Label doit être placé au centre
+   - `leRootEstUnBorderPane` : la racine de la Scene doit être un `BorderPane`
+   - `unLabelEstPresent` : la scène doit contenir au moins un Label
+   - `leLabelAfficheLeBonTexte` : un Label avec le texte exact `"Bonjour, JavaFX !"` doit être visible
+   - `leLabelEstAuCentreDuBorderPane` : le Label doit être placé au centre du BorderPane via `setCenter()`
 
 ### Travail à faire
 
@@ -612,21 +614,23 @@ Appliquez la [boucle de travail](#boucle-de-travail-pour-chaque-test) : activez 
 
 1. **`laFenetreEstVisible`** : appelez `show()` sur le Stage (même principe que les exercices précédents).
 2. **`laSceneExiste`** : créez un `BorderPane`, créez une `Scene` à partir de ce BorderPane, et attachez-la au Stage avec `setScene()`. Consultez la [Javadoc de Scene](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/Scene.html).
-3. **`leLabelEstAffiche`** : créez un `Label` avec le texte exact `"Bonjour, JavaFX !"` et placez-le dans le BorderPane. Consultez la [Javadoc de Label](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/Label.html).
-4. **`leLabelEstAuCentreDuBorderPane`** : utilisez la méthode `setCenter()` du BorderPane pour positionner le Label au centre. Consultez la [Javadoc de BorderPane](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/BorderPane.html).
+3. **`leRootEstUnBorderPane`** : ce test vérifie que la racine de la Scene est bien un `BorderPane`. Si vous avez passé le BorderPane au constructeur de `Scene` à l'étape précédente, ce test devrait déjà passer.
+4. **`unLabelEstPresent`** : créez un `Label` et ajoutez-le au BorderPane (par exemple avec `setCenter()`). Consultez la [Javadoc de Label](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/Label.html).
+5. **`leLabelAfficheLeBonTexte`** : donnez au Label le texte exact `"Bonjour, JavaFX !"` via son constructeur ou la méthode `setText()`.
+6. **`leLabelEstAuCentreDuBorderPane`** : ce test vérifie que le Label est bien dans la zone center du BorderPane. Si vous avez utilisé `setCenter()` à l'étape 4, il devrait déjà passer. Consultez la [Javadoc de BorderPane](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/BorderPane.html).
 
 > [!TIP]
 > Pour voir votre fenêtre dans le navigateur, utilisez le VNC comme expliqué dans l'[exercice 1](#voir-votre-fenêtre-avec-vnc).
 
 ### Finaliser l'exercice
 
-Quand les 4 tests sont verts :
+Quand les 6 tests sont verts :
 
 ```bash
 git add .
 git commit -m "Exercice 3 terminé"
 git push -u origin exercice3
-gh pr create --title "Exercice 3 terminé" --body "Les 4 tests passent."
+gh pr create --title "Exercice 3 terminé" --body "Les 6 tests passent."
 gh pr view --web
 ```
 
@@ -741,7 +745,7 @@ Quand les 11 tests sont verts :
 git add .
 git commit -m "Exercice 4 terminé"
 git push -u origin exercice4
-gh pr create --title "Exercice 4 terminé" --body "Les 5 tests passent."
+gh pr create --title "Exercice 4 terminé" --body "Les 11 tests passent."
 gh pr view --web
 ```
 
@@ -762,26 +766,37 @@ Vérifiez votre score sur l'onglet **Actions**.
 
 ## Exercice 5 - Réagir à un clic
 
-**Objectif** : découvrir comment un composant JavaFX **réagit** à une action utilisateur. Tu vas brancher un écouteur sur un `Button` et voir qu'un clic peut modifier l'état de l'application (ici, un compteur).
+**Objectif** : découvrir comment un composant JavaFX **réagit** à une action utilisateur. Vous allez brancher un écouteur sur un [`Button`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/Button.html) et constater qu'un clic peut modifier l'état de l'application (ici, un compteur).
 
-**Structure de l'exercice** :
+**Ce que vous allez découvrir** :
+- [`EventHandler`](https://openjfx.io/javadoc/25/javafx.base/javafx/event/EventHandler.html) : l'interface fonctionnelle qui définit la réaction à un événement
+- [`Button.setOnAction()`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/ButtonBase.html#setOnAction(javafx.event.EventHandler)) : la méthode qui branche un écouteur sur un bouton
+- Trois styles d'écriture pour un même écouteur : classe nommée, classe anonyme, lambda
+
+### Structure de l'exercice
+
+Cet exercice contient **trois fichiers Java** :
 
 ```
 exercice5/
-├── Compteur.java              ← fourni (tu n'y touches pas)
+├── Compteur.java              ← fourni, ne pas modifier
 ├── EcouteurClasseNommee.java  ← vous implémentez handle()
-└── EvenementsBouton.java      ← vous construisez l'IHM + branchez l'écouteur
+└── EvenementsBouton.java      ← vous construisez l'IHM et branchez l'écouteur
 ```
 
-**Trois styles d'écouteur, tous équivalents** :
+La classe `Compteur` est un simple compteur avec `getValeur()` et `incrementer()`. Elle est entièrement fournie.
 
-JavaFX accepte trois écritures différentes pour définir ce qui se passe quand un bouton est cliqué. Elles produisent le même résultat, mais n'ont pas la même verbosité. La classe [`EvenementsBouton`](src/main/java/fr/univ_amu/iut/exercice5/EvenementsBouton.java) les montre toutes les trois en commentaires - vous en activez une, vous vérifiez que ça marche, et vous pouvez essayer les autres.
+### Trois styles d'écouteur, tous équivalents
+
+En Java, quand on veut réagir à un événement (un clic, une frappe clavier…), on passe un objet qui implémente l'interface [`EventHandler<ActionEvent>`](https://openjfx.io/javadoc/25/javafx.base/javafx/event/EventHandler.html). JavaFX accepte **trois écritures différentes** pour définir cet objet. Elles produisent le même résultat, mais n'ont pas la même verbosité.
+
+Le starter code de [`EvenementsBouton.java`](src/main/java/fr/univ_amu/iut/exercice5/EvenementsBouton.java) montre les trois styles en commentaires. Vous en activez un, vous vérifiez que ça marche, puis vous pouvez essayer les autres pour les comparer.
 
 **Style 1 - classe nommée** (style historique, avant Java 8) :
 ```java
 bouton.setOnAction(new EcouteurClasseNommee(compteur));
 ```
-C'est l'écouteur qui est dans son propre fichier. Le plus verbeux mais aussi le plus explicite.
+L'écouteur est dans son propre fichier `.java`. Le plus verbeux, mais aussi le plus explicite : on voit clairement que le comportement est encapsulé dans une classe dédiée.
 
 **Style 2 - classe anonyme** (intermédiaire) :
 ```java
@@ -793,7 +808,7 @@ bouton.setOnAction(new EventHandler<ActionEvent>() {
     }
 });
 ```
-Tu définis la classe sur place, sans lui donner de nom.
+On définit la classe directement sur place, sans lui donner de nom. Plus compact que le style 1, mais la syntaxe reste lourde.
 
 **Style 3 - lambda** (moderne, recommandé depuis Java 8) :
 ```java
@@ -802,31 +817,120 @@ bouton.setOnAction(e -> {
     labelCompteur.setText(compteur.getValeur() + " clics");
 });
 ```
-La syntaxe la plus compacte, celle que l'on rencontre le plus souvent dans du code JavaFX moderne.
+La syntaxe la plus compacte, celle que l'on rencontre le plus souvent dans du code JavaFX moderne. `EventHandler` étant une **interface fonctionnelle** (une seule méthode abstraite), le compilateur déduit automatiquement le type.
 
-**Tests (2)** :
-1. `EcouteurClasseNommeeTest.handleIncrementeLeCompteur` - **test unitaire** (pas de TestFX). Vérifie que la méthode `handle()` de la classe nommée incrémente bien le `Compteur`. Activez-le et implémentez le TODO dans `EcouteurClasseNommee.java`.
-2. `EvenementsBoutonTest.troisClicsAffichent3Clics` - **test d'intégration**. Clique 3 fois sur le bouton et vérifie que le label affiche `"3 clics"`. Activez-le, implémentez le TODO dans `EvenementsBouton.java` avec le style de votre choix.
+> [!NOTE]
+> Les trois styles sont strictement équivalents pour les tests. Le test d'intégration vérifie le résultat (le label affiche le bon texte), pas la manière dont l'écouteur est écrit.
 
-**Ids attendus** : `bouton-clique-moi` pour le bouton, `compteur` pour le label.
+### Découverte du code
+
+1. Ouvrez le fichier de la classe nommée :
+   ```
+   src/main/java/fr/univ_amu/iut/exercice5/EcouteurClasseNommee.java
+   ```
+
+2. Cette classe implémente `EventHandler<ActionEvent>` et reçoit un `Compteur` dans son constructeur. La méthode `handle()` contient un TODO : il suffit d'appeler `compteur.incrementer()`.
+
+3. Ouvrez le fichier principal de l'exercice :
+   ```
+   src/main/java/fr/univ_amu/iut/exercice5/EvenementsBouton.java
+   ```
+
+4. La méthode `start(Stage)` contient un TODO avec les trois styles en commentaire. L'IHM attendue : un `Button` "Clique-moi" (id `bouton-clique-moi`), un `Label` "0 clics" (id `compteur`), le tout dans un `VBox`.
+
+5. Ouvrez les fichiers de test :
+   ```
+   src/test/java/fr/univ_amu/iut/exercice5/EcouteurClasseNommeeTest.java
+   src/test/java/fr/univ_amu/iut/exercice5/EvenementsBoutonTest.java
+   ```
+
+6. Cet exercice contient **7 tests** dans deux fichiers séparés :
+
+   **`EcouteurClasseNommeeTest`** (1 test unitaire, pas de TestFX) :
+   - `handleIncrementeLeCompteur` : vérifie que `handle()` appelle bien `compteur.incrementer()` à chaque invocation
+
+   **`EvenementsBoutonTest`** (6 tests d'intégration, TestFX) :
+   - `laFenetreEstVisible` : le Stage doit être affiché
+   - `laSceneExiste` : le Stage doit avoir une Scene attachée
+   - `leBoutonExiste` : un Button avec l'id `bouton-clique-moi` doit être présent
+   - `leBoutonAfficheLeBonTexte` : le bouton doit afficher "Clique-moi"
+   - `leLabelCompteurExiste` : un Label avec l'id `compteur` doit être présent
+   - `troisClicsAffichent3Clics` : 3 clics sur le bouton → le label affiche "3 clics"
+
+### Travail à faire
+
+Créez votre branche :
+
+```bash
+git checkout main
+git checkout -b exercice5
+```
+
+Appliquez la [boucle de travail](#boucle-de-travail-pour-chaque-test) : activez et implémentez les tests **un par un**, dans l'ordre :
+
+1. **`handleIncrementeLeCompteur`** (dans `EcouteurClasseNommeeTest`) : ouvrez `EcouteurClasseNommee.java` et implémentez le TODO dans `handle()`. Une seule ligne suffit : appelez `compteur.incrementer()`.
+2. **`laFenetreEstVisible`** (dans `EvenementsBoutonTest`) : ouvrez `EvenementsBouton.java`. Pour l'instant, ajoutez simplement `primaryStage.show()` à la fin de `start()`.
+3. **`laSceneExiste`** : créez un conteneur (par exemple un [`VBox`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/VBox.html)), une `Scene`, et attachez-la au Stage avec `setScene()`.
+4. **`leBoutonExiste`** : créez un `Button` et ajoutez-le au `VBox`. Donnez-lui l'id `bouton-clique-moi` avec `bouton.setId("bouton-clique-moi")`.
+5. **`leBoutonAfficheLeBonTexte`** : passez le texte `"Clique-moi"` au constructeur du Button, ou utilisez `setText()`.
+6. **`leLabelCompteurExiste`** : créez un `Label` avec l'id `compteur` et ajoutez-le au VBox.
+7. **`troisClicsAffichent3Clics`** : c'est ici que vous branchez l'écouteur. Créez un `Compteur`, puis utilisez `bouton.setOnAction(...)` pour incrémenter le compteur et mettre à jour le texte du label à chaque clic. Choisissez le style d'écouteur de votre choix (voir les 3 styles ci-dessus).
+
+> [!TIP]
+> Commencez par le style lambda (style 3) : c'est le plus rapide à écrire. Quand le test passe, essayez de remplacer par le style 1 ou 2 pour voir la différence de syntaxe - le test doit toujours passer.
+
+> [!TIP]
+> Pour voir votre fenêtre dans le navigateur, utilisez le VNC comme expliqué dans l'[exercice 1](#voir-votre-fenêtre-avec-vnc).
+
+### Finaliser l'exercice
+
+Quand les 7 tests sont verts :
+
+```bash
+git add .
+git commit -m "Exercice 5 terminé"
+git push -u origin exercice5
+gh pr create --title "Exercice 5 terminé" --body "Les 7 tests passent."
+gh pr view --web
+```
+
+Consultez la PR, puis mergez :
+
+```bash
+gh pr merge --rebase --delete-branch
+git checkout main
+git pull
+```
+
+Vérifiez votre score sur l'onglet **Actions**. Il devrait avoir augmenté.
+
+> [!TIP]
+> Si vous ne savez plus où vous en êtes, demandez à Copilot Chat : `Quelle est la prochaine étape ?`
 
 ---
 
 ## Exercice 6 - Palette de couleurs (capstone)
 
-**Objectif** : **synthèse** - cet exercice mobilise l'ensemble des concepts vus jusqu'ici (layouts, composants, événements, mise à jour de label) sur une petite application autonome.
+**Objectif** : **synthèse** - cet exercice mobilise l'ensemble des concepts vus jusqu'ici (layouts, composants, événements, mise à jour de labels) dans une petite application autonome. C'est le dernier exercice du TP.
 
-**Comportement attendu** :
+**Ce que vous allez mobiliser** :
+- [`BorderPane`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/BorderPane.html) et [`HBox`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/HBox.html) pour la mise en page
+- [`Button`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/Button.html) et [`Pane`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/Pane.html) pour l'interaction
+- `setOnAction()` et `setStyle()` pour le comportement dynamique
+
+### Comportement attendu
+
+L'application affiche trois boutons de couleur, une zone centrale dont le fond change au clic, et un label récapitulatif des compteurs :
 
 ```
 ┌──────────────────────────────┐
-│ [Rouge] [Vert] [Bleu]        │  ← HBox de 3 boutons
+│ [Rouge] [Vert] [Bleu]        │  ← HBox de 3 boutons (top)
 ├──────────────────────────────┤
 │                              │
-│     (zone de couleur)        │  ← Pane dont le fond change
+│     (zone de couleur)        │  ← Pane dont le fond change (center)
 │                              │
 ├──────────────────────────────┤
-│ Rouge: 0  Vert: 0  Bleu: 0   │  ← Label récapitulatif
+│ Rouge: 0  Vert: 0  Bleu: 0   │  ← Label récapitulatif (bottom)
 └──────────────────────────────┘
 ```
 
@@ -834,24 +938,93 @@ La syntaxe la plus compacte, celle que l'on rencontre le plus souvent dans du co
 - Même principe pour Vert et Bleu
 - Les 3 compteurs sont **indépendants** : cliquer Rouge n'affecte pas les compteurs Vert et Bleu
 
-**Ids attendus** :
-- `btn-rouge`, `btn-vert`, `btn-bleu` pour les 3 boutons
-- `zone` pour le `Pane` central
-- `compteurs` pour le label du bas
+### Découverte du code
 
-**Format du label** : le test vérifie la présence des sous-chaînes `Rouge: N`, `Vert: N`, `Bleu: N`. Le séparateur est libre (espaces, tirets, virgules…).
+1. Ouvrez le fichier de l'exercice :
+   ```
+   src/main/java/fr/univ_amu/iut/exercice6/Palette.java
+   ```
 
-**Changer la couleur de fond d'un `Pane`** : utilise `setStyle("-fx-background-color: red;")` (ou `green`, `blue`).
+2. La méthode `start(Stage)` contient un TODO qui décrit la stratégie de construction en 6 points : BorderPane, HBox avec 3 boutons, Pane central, Label compteurs, 3 compteurs entiers, écouteurs pour chaque bouton.
 
-**Fichier** : [`src/main/java/fr/univ_amu/iut/exercice6/Palette.java`](src/main/java/fr/univ_amu/iut/exercice6/Palette.java)
+3. Ouvrez le fichier de test :
+   ```
+   src/test/java/fr/univ_amu/iut/exercice6/PaletteTest.java
+   ```
 
-**Tests (4, à activer dans l'ordre)** :
-1. `lesTroisBoutonsExistent` - les 3 boutons avec les bons ids sont présents
-2. `cliquerRougeMetLaZoneEnRouge` - le style du `Pane` contient `red` après un clic sur Rouge
-3. `cliquerIncremenceLeCompteurCorrespondant` - deux clics sur Vert → label contient `Vert: 2`
-4. `lesCompteursSontIndependants` - séquence 2×Rouge + 1×Bleu → label contient `Rouge: 2`, `Vert: 0`, `Bleu: 1`
+4. Cet exercice contient **10 tests** découpés en étapes progressives :
+   - `laFenetreEstVisible` : le Stage doit être affiché
+   - `laSceneExiste` : le Stage doit avoir une Scene attachée
+   - `lesTroisBoutonsExistent` : 3 boutons avec les ids `btn-rouge`, `btn-vert`, `btn-bleu`
+   - `laZoneDeCouleurExiste` : un Pane avec l'id `zone`
+   - `leLabelCompteursExiste` : un Label avec l'id `compteurs`
+   - `cliquerRougeMetLaZoneEnRouge` : le style du Pane contient `red` après un clic
+   - `cliquerVertMetLaZoneEnVert` : le style du Pane contient `green` après un clic
+   - `cliquerBleuMetLaZoneEnBleu` : le style du Pane contient `blue` après un clic
+   - `cliquerIncrementeLeCompteurCorrespondant` : 2 clics sur Vert → label contient `Vert: 2`
+   - `lesCompteursSontIndependants` : 2×Rouge + 1×Bleu → `Rouge: 2`, `Vert: 0`, `Bleu: 1`
 
-Quand les 4 tests sont verts, l'exercice 6 et le TP1 sont terminés. Bravo !
+### Ids attendus
+
+| Composant | Id |
+|---|---|
+| Bouton rouge | `btn-rouge` |
+| Bouton vert | `btn-vert` |
+| Bouton bleu | `btn-bleu` |
+| Zone de couleur (Pane) | `zone` |
+| Label des compteurs | `compteurs` |
+
+Attribuez les ids avec `setId("...")` sur chaque composant. Les tests les retrouvent via `robot.lookup("#btn-rouge")`, etc.
+
+### Travail à faire
+
+Créez votre branche :
+
+```bash
+git checkout main
+git checkout -b exercice6
+```
+
+Appliquez la [boucle de travail](#boucle-de-travail-pour-chaque-test) : activez et implémentez les tests **un par un**, dans l'ordre :
+
+1. **`laFenetreEstVisible`** : appelez `show()` sur le Stage.
+2. **`laSceneExiste`** : créez un `BorderPane`, une `Scene`, et attachez-la au Stage.
+3. **`lesTroisBoutonsExistent`** : créez 3 `Button` ("Rouge", "Vert", "Bleu") avec les ids `btn-rouge`, `btn-vert`, `btn-bleu`. Placez-les dans un `HBox` et assignez le HBox à `borderPane.setTop()`.
+4. **`laZoneDeCouleurExiste`** : créez un `Pane` avec l'id `zone` et placez-le au centre du BorderPane avec `setCenter()`. Donnez-lui une taille minimale avec `zone.setMinSize(300, 200)`.
+5. **`leLabelCompteursExiste`** : créez un `Label` avec l'id `compteurs` et le texte initial `"Rouge: 0  Vert: 0  Bleu: 0"`. Placez-le dans `borderPane.setBottom()`.
+6. **`cliquerRougeMetLaZoneEnRouge`** : branchez un écouteur sur le bouton Rouge qui change le style de la zone avec `zone.setStyle("-fx-background-color: red;")`.
+7. **`cliquerVertMetLaZoneEnVert`** : même principe pour le bouton Vert avec `green`.
+8. **`cliquerBleuMetLaZoneEnBleu`** : même principe pour le bouton Bleu avec `blue`.
+9. **`cliquerIncrementeLeCompteurCorrespondant`** : ajoutez 3 variables entières (`compteurRouge`, `compteurVert`, `compteurBleu`). Dans chaque écouteur, incrémentez le bon compteur et mettez à jour le texte du label avec le format `"Rouge: N  Vert: N  Bleu: N"`.
+10. **`lesCompteursSontIndependants`** : si vos compteurs sont bien séparés, ce test devrait passer sans modification supplémentaire.
+
+> [!NOTE]
+> Le format du texte du label est libre tant qu'il contient les sous-chaînes `Rouge: N`, `Vert: N` et `Bleu: N` (avec un espace après les deux-points). Le séparateur entre les trois est à votre choix (espaces, tirets, virgules...).
+
+> [!TIP]
+> Pour voir votre fenêtre dans le navigateur, utilisez le VNC comme expliqué dans l'[exercice 1](#voir-votre-fenêtre-avec-vnc).
+
+### Finaliser l'exercice
+
+Quand les 10 tests sont verts :
+
+```bash
+git add .
+git commit -m "Exercice 6 terminé"
+git push -u origin exercice6
+gh pr create --title "Exercice 6 terminé" --body "Les 10 tests passent. TP1 terminé !"
+gh pr view --web
+```
+
+Consultez la PR, puis mergez :
+
+```bash
+gh pr merge --rebase --delete-branch
+git checkout main
+git pull
+```
+
+Vérifiez votre score sur l'onglet **Actions**. Si tous les exercices sont terminés, votre score devrait être de **100/100**. Bravo, le TP1 est terminé !
 
 ---
 
