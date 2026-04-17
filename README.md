@@ -537,30 +537,120 @@ Vérifiez votre score sur l'onglet **Actions** de votre dépôt GitHub. Il devra
 
 ## Exercice 3 - Première Scene avec un Label
 
-**Objectif** : sortir de la fenêtre vide. Construire une `Scene` qui contient un `BorderPane` dans lequel un `Label` affiche un message.
+**Objectif** : sortir de la fenêtre vide et afficher du contenu. Cet exercice introduit les trois briques fondamentales de toute interface JavaFX : la `Scene`, le conteneur de layout, et les composants graphiques.
 
-**Concepts** :
-- `Scene` : le graphe de scène attaché au `Stage`
-- `BorderPane` : un conteneur à 5 zones (`setTop`, `setBottom`, `setLeft`, `setRight`, `setCenter`)
+**Ce que vous allez découvrir** :
+- `Scene` : le conteneur principal qui regroupe tout ce qui est affiché dans la fenêtre
+- `BorderPane` : un conteneur de mise en page à 5 zones (top, bottom, left, right, center)
 - `Label` : un composant qui affiche du texte statique
 
-**Fichier** : [`src/main/java/fr/univ_amu/iut/exercice3/PremiereScene.java`](src/main/java/fr/univ_amu/iut/exercice3/PremiereScene.java)
+### Comment JavaFX organise l'affichage
 
-**Message exact attendu** : `Bonjour, JavaFX !`
+Dans JavaFX, l'affichage suit une hiérarchie d'objets imbriqués. On appelle cela le **graphe de scène** (scene graph) :
 
-**Tests (3)** :
-1. `laSceneExiste` - la `Scene` est bien attachée au `Stage`
-2. `leLabelEstAffiche` - un `Label` avec le bon texte est visible
-3. `leLabelEstAuCentreDuBorderPane` - la racine est bien un `BorderPane` et le label est au centre
-
-**Schéma** :
-
+```mermaid
+graph TD
+    A[Stage - la fenêtre] --> B[Scene - le contenu de la fenêtre]
+    B --> C[BorderPane - le conteneur racine]
+    C --> D["Label('Bonjour, JavaFX !')"]
+    
+    style A fill:#4a90d9,color:white
+    style B fill:#7bb563,color:white
+    style C fill:#e8a838,color:white
+    style D fill:#d35f5f,color:white
 ```
-Stage
- └── Scene
-      └── BorderPane (root)
-           └── center : Label("Bonjour, JavaFX !")
+
+- Le **Stage** est la fenêtre (vous l'avez déjà vu dans les exercices 1 et 2).
+- La **Scene** est le contenu de cette fenêtre. Un Stage ne peut contenir qu'une seule Scene.
+- La Scene contient un **nœud racine** (root node) : ici un `BorderPane`, un conteneur qui divise l'espace en 5 zones.
+- À l'intérieur du conteneur, on place des **composants** : ici un `Label` au centre.
+
+Le `BorderPane` organise ses enfants dans 5 zones :
+
+```mermaid
+graph TD
+    subgraph BorderPane
+        direction TB
+        T[top]
+        subgraph milieu[ ]
+            direction LR
+            L[left]
+            CE[center]
+            R[right]
+        end
+        B[bottom]
+    end
+    
+    style T fill:#e0e0e0
+    style L fill:#e0e0e0
+    style CE fill:#ffcc80,stroke:#e8a838,stroke-width:3px
+    style R fill:#e0e0e0
+    style B fill:#e0e0e0
 ```
+
+Dans cet exercice, seule la zone **center** sera utilisée (pour le Label). Les autres zones resteront vides pour l'instant. Vous les utiliserez dans l'exercice 4.
+
+### Découverte du code
+
+1. Ouvrez le fichier de l'exercice :
+   ```
+   src/main/java/fr/univ_amu/iut/exercice3/PremiereScene.java
+   ```
+
+2. La méthode `start(Stage)` contient un TODO qui détaille les 6 étapes à suivre : créer un `BorderPane`, créer un `Label`, placer le label au centre, construire une `Scene`, l'attacher au `Stage`, et afficher.
+
+3. Ouvrez le fichier de test :
+   ```
+   src/test/java/fr/univ_amu/iut/exercice3/PremiereSceneTest.java
+   ```
+
+4. Cet exercice contient **4 tests** :
+   - `laFenetreEstVisible` : le Stage doit être affiché
+   - `laSceneExiste` : le Stage doit avoir une Scene attachée via `setScene()`
+   - `leLabelEstAffiche` : un Label avec le texte exact `"Bonjour, JavaFX !"` doit être visible
+   - `leLabelEstAuCentreDuBorderPane` : la racine de la Scene doit être un `BorderPane`, et le Label doit être placé au centre
+
+### Travail à faire
+
+Créez votre branche :
+
+```bash
+git checkout main
+git checkout -b exercice3
+```
+
+Appliquez la [boucle de travail](#boucle-de-travail-pour-chaque-test) : activez et implémentez les tests **un par un**, dans l'ordre :
+
+1. **`laFenetreEstVisible`** : appelez `show()` sur le Stage (même principe que les exercices précédents).
+2. **`laSceneExiste`** : créez un `BorderPane`, créez une `Scene` à partir de ce BorderPane, et attachez-la au Stage avec `setScene()`. Consultez la [Javadoc de Scene](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/Scene.html).
+3. **`leLabelEstAffiche`** : créez un `Label` avec le texte exact `"Bonjour, JavaFX !"` et placez-le dans le BorderPane. Consultez la [Javadoc de Label](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/Label.html).
+4. **`leLabelEstAuCentreDuBorderPane`** : utilisez la méthode `setCenter()` du BorderPane pour positionner le Label au centre. Consultez la [Javadoc de BorderPane](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/BorderPane.html).
+
+> 💡 Pour voir votre fenêtre dans le navigateur, utilisez le VNC comme expliqué dans l'[exercice 1](#voir-votre-fenêtre-avec-vnc).
+
+### Finaliser l'exercice
+
+Quand les 4 tests sont verts :
+
+```bash
+git add .
+git commit -m "Exercice 3 terminé"
+git push -u origin exercice3
+gh pr create --title "Exercice 3 terminé" --body "Les 4 tests passent."
+gh pr view --web
+```
+
+Consultez la PR, puis mergez :
+
+```bash
+gh pr merge --rebase --delete-branch
+git checkout main
+git pull
+```
+
+Vérifiez votre score sur l'onglet **Actions**. Il devrait avoir augmenté.
+
+> 💡 Si vous ne savez plus où vous en êtes, demandez à Copilot Chat : `Quelle est la prochaine étape ?`
 
 ---
 
