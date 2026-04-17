@@ -20,13 +20,13 @@
     * [Email](mailto:sebastien.nedjar@univ-amu.fr) pour toute question
 
 
-## TP1 — Bases JavaFX
+## TP1 - Bases JavaFX
 
 ## Objectifs de la séance
 
 ### Ce que vous saurez faire à la fin de cette séance
 
-Les exercices de ce TP sont organisés en progression : chaque exercice vous fait monter d'un cran dans la maîtrise de JavaFX. Cette progression suit la **taxonomie de Bloom**, un modèle pédagogique qui décrit les niveaux de maîtrise d'un savoir-faire — du plus simple (comprendre un concept) au plus complexe (créer une application complète).
+Les exercices de ce TP sont organisés en progression : chaque exercice vous fait monter d'un cran dans la maîtrise de JavaFX. Cette progression suit la **taxonomie de Bloom**, un modèle pédagogique qui décrit les niveaux de maîtrise d'un savoir-faire - du plus simple (comprendre un concept) au plus complexe (créer une application complète).
 
 | Niveau Bloom | Exercices | Vous serez capable de… | Compétence BUT |
 |---|---|---|---|
@@ -38,9 +38,9 @@ Les exercices de ce TP sont organisés en progression : chaque exercice vous fai
 
 ### Pourquoi cette démarche ?
 
-Ce TP utilise le **TDD (Test-Driven Development) en baby steps** : les tests sont livrés désactivés (`@Disabled`) et vous les activez un par un, comme un cahier des charges dont on implémente les exigences une à une. Ce n'est pas un artifice pédagogique — c'est une **méthode de développement professionnel** (formalisée par Kent Beck dans l'Extreme Programming) utilisée dans l'industrie logicielle.
+Ce TP utilise le **TDD (Test-Driven Development) en baby steps** : les tests sont livrés désactivés (`@Disabled`) et vous les activez un par un, comme un cahier des charges dont on implémente les exigences une à une. Ce n'est pas un artifice pédagogique - c'est une **méthode de développement professionnel** (formalisée par Kent Beck dans l'Extreme Programming) utilisée dans l'industrie logicielle.
 
-Le workflow Git que vous pratiquerez — créer une branche par exercice, pousser, ouvrir une Pull Request, recevoir une review automatique de Copilot, puis merger — reproduit le **cycle de travail en entreprise**. L'objectif est d'apprendre à collaborer avec des outils, pas seulement à écrire du code.
+Le workflow Git que vous pratiquerez - créer une branche par exercice, pousser, ouvrir une Pull Request, recevoir une review automatique de Copilot, puis merger - reproduit le **cycle de travail en entreprise**. L'objectif est d'apprendre à collaborer avec des outils, pas seulement à écrire du code.
 
 Copilot Chat est configuré dans ce projet comme un **tuteur** : il ne donnera pas la solution d'emblée. Il commence par expliquer le concept, puis oriente vers la documentation, et ne propose du code qu'en dernier recours. L'objectif est que vous compreniez chaque ligne de code que vous écrivez.
 
@@ -50,11 +50,11 @@ La SAE 2.01 vous demandera de **créer une interface d'extraction et manipulatio
 
 Pour construire cette interface, vous aurez besoin de compétences acquises progressivement dans les TP du module R2.02 :
 
-- **TP1** (celui-ci) : fenêtres, scènes, composants de base et événements — les **fondations**
-- **TP2** : properties et bindings — la **liaison de données** entre l'interface et le modèle
-- **TP3** : FXML — la **conception déclarative** d'interfaces complexes
-- **TP4** : architecture MVVM — la **séparation des responsabilités** entre vue et logique
-- **TP5** : persistance — la **lecture et écriture de données** (fichiers, bases de données)
+- **TP1** (celui-ci) : fenêtres, scènes, composants de base et événements - les **fondations**
+- **TP2** : properties et bindings - la **liaison de données** entre l'interface et le modèle
+- **TP3** : FXML - la **conception déclarative** d'interfaces complexes
+- **TP4** : architecture MVVM - la **séparation des responsabilités** entre vue et logique
+- **TP5** : persistance - la **lecture et écriture de données** (fichiers, bases de données)
 
 Ce TP1 pose les premières briques : créer une fenêtre, organiser des composants dans un layout, et réagir aux actions de l'utilisateur. Ces compétences seront vos outils quotidiens jusqu'à la SAE.
 
@@ -62,13 +62,13 @@ Ce TP1 pose les premières briques : créer une fenêtre, organiser des composan
 
 #### Connaissances attendues
 
-- **Bases de la programmation** : variables, types, structures de contrôle, tableaux — acquis en C++ dans la ressource R1.01
-- **Programmation orientée objet en Java** : classes, objets, héritage, interfaces, polymorphisme — acquis dans la ressource R2.01
+- **Bases de la programmation** : variables, types, structures de contrôle, tableaux - acquis en C++ dans la ressource R1.01
+- **Programmation orientée objet en Java** : classes, objets, héritage, interfaces, polymorphisme - acquis dans la ressource R2.01
 - **Git** : les concepts (dépôt, commit, branche) ont été vus en cours, mais pas encore réellement pratiqués. Un TP dédié en R2.03 est prévu en parallèle. Ce TP servira de première mise en pratique réelle du workflow Git, guidée par Copilot Chat
 
 #### Environnement technique
 
-L'ensemble du TP se fait sur **GitHub Codespaces** — aucune installation locale n'est nécessaire. L'environnement (Java 25, JavaFX 25, Maven, Git, Copilot Chat) est pré-configuré et prêt à l'emploi dès l'ouverture du Codespace.
+L'ensemble du TP se fait sur **GitHub Codespaces** - aucune installation locale n'est nécessaire. L'environnement (Java 25, JavaFX 25, Maven, Git, Copilot Chat) est pré-configuré et prêt à l'emploi dès l'ouverture du Codespace.
 
 > Pour une installation locale (facultative), voir la section [Dépannage](#dépannage) en fin de document.
 
@@ -83,7 +83,7 @@ L'ensemble du TP se fait sur **GitHub Codespaces** — aucune installation local
 
 La mise en place se fait en deux étapes : accepter le devoir sur GitHub Classroom (qui crée votre dépôt personnel), puis ouvrir ce dépôt dans un Codespace (votre environnement de développement dans le navigateur).
 
-### Étape 1 — Accepter le devoir sur GitHub Classroom
+### Étape 1 - Accepter le devoir sur GitHub Classroom
 
 1. Cliquez sur le lien suivant :
 
@@ -92,10 +92,10 @@ La mise en place se fait en deux étapes : accepter le devoir sur GitHub Classro
 2. Si c'est votre première utilisation de GitHub Classroom, autorisez l'accès à votre compte GitHub.
 3. Sélectionnez votre nom dans la liste des étudiants (si elle apparaît) pour associer votre compte GitHub à votre identité dans le cours.
 4. Cliquez sur **"Accept this assignment"**.
-5. Attendez quelques secondes — GitHub crée automatiquement un dépôt à votre nom : `IUTInfoAix-R202-2026/tp1-votreLogin`.
+5. Attendez quelques secondes - GitHub crée automatiquement un dépôt à votre nom : `IUTInfoAix-R202-2026/tp1-votreLogin`.
 6. Cliquez sur le lien du dépôt créé pour y accéder.
 
-### Étape 2 — Ouvrir le projet dans GitHub Codespaces
+### Étape 2 - Ouvrir le projet dans GitHub Codespaces
 
 Une fois sur la page de votre dépôt :
 
@@ -104,11 +104,11 @@ Une fois sur la page de votre dépôt :
 3. Cliquez sur **"Create codespace on main"**.
 4. Attendez que l'environnement se construise (de 1 à 5 minutes la première fois).
 5. VS Code s'ouvre **dans votre navigateur** avec tout l'environnement pré-configuré :
-   - Java 25 + JavaFX 25
-   - Maven (via le wrapper `./mvnw`)
-   - Git
-   - Copilot Chat (votre assistant IA pédagogique)
-   - Toutes les extensions nécessaires
+  - Java 25 + JavaFX 25
+  - Maven (via le wrapper `./mvnw`)
+  - Git
+  - Copilot Chat (votre assistant IA pédagogique)
+  - Toutes les extensions nécessaires
 
 > **Important** : le Codespace est **personnel et persistant**. Quand vous fermez l'onglet, votre travail est sauvegardé. Pour reprendre, retournez sur votre dépôt GitHub → **"Code"** → **"Codespaces"** → cliquez sur le Codespace existant (ne créez pas un nouveau à chaque fois).
 
@@ -126,7 +126,7 @@ Tests run: 22, Failures: 0, Errors: 0, Skipped: 21
 BUILD SUCCESS
 ```
 
-Si c'est le cas, tout est prêt. Le seul test actif (`AppTest`) passe, et les 21 tests d'exercices sont en attente (`Skipped`) — c'est normal, ils seront activés au fil de votre progression.
+Si c'est le cas, tout est prêt. Le seul test actif (`AppTest`) passe, et les 21 tests d'exercices sont en attente (`Skipped`) - c'est normal, ils seront activés au fil de votre progression.
 
 ---
 
@@ -138,7 +138,7 @@ L'évaluation de ce TP est **entièrement automatique** : à chaque fois que vou
 
 - **10 points** sont attribués si le projet **compile** correctement
 - **90 points** sont répartis entre les différents **tests des exercices** (chaque test vaut un certain nombre de points)
-- Un test `@Disabled` (non encore activé) rapporte **0 point** — c'est normal
+- Un test `@Disabled` (non encore activé) rapporte **0 point** - c'est normal
 - Un test activé et **qui passe** rapporte ses points
 - Un test activé et **qui échoue** rapporte 0 point
 
@@ -158,7 +158,7 @@ Vous pouvez aussi voir le détail test par test pour savoir exactement quels exe
 
 **Maven** est un outil de construction de projets Java utilisé dans la majorité des projets professionnels. Il gère automatiquement la compilation du code, le téléchargement des bibliothèques nécessaires (JavaFX, JUnit, TestFX…), l'exécution des tests et le packaging de l'application. Plutôt que de lancer `javac` et `java` à la main avec des dizaines d'options, une seule commande Maven suffit.
 
-Dans ce projet, Maven est embarqué via un **Maven Wrapper** (`./mvnw`) — un script qui télécharge et utilise automatiquement la bonne version de Maven. Aucune installation n'est nécessaire : la première exécution prend quelques secondes de plus (téléchargement), puis tout est instantané.
+Dans ce projet, Maven est embarqué via un **Maven Wrapper** (`./mvnw`) - un script qui télécharge et utilise automatiquement la bonne version de Maven. Aucune installation n'est nécessaire : la première exécution prend quelques secondes de plus (téléchargement), puis tout est instantané.
 
 | Commande | Effet |
 |----------|-------|
@@ -170,7 +170,7 @@ Dans ce projet, Maven est embarqué via un **Maven Wrapper** (`./mvnw`) — un s
 
 > Le code est aussi formaté **automatiquement** avant chaque commit via un hook pre-commit invisible. Il n'est pas nécessaire de lancer `spotless:apply` à la main, sauf pour vérifier visuellement le formatage avant un commit.
 
-### Workflow de développement — un cycle par exercice
+### Workflow de développement - un cycle par exercice
 
 Chaque exercice suit le même cycle. Cette démarche structurée vous aide à travailler de manière **méthodique et professionnelle** : c'est exactement le workflow que vous utiliserez en entreprise.
 
@@ -180,7 +180,7 @@ Chaque exercice suit le même cycle. Cette démarche structurée vous aide à tr
 git checkout -b exerciceN
 ```
 
-**2. Activer le premier test** — ouvrez le fichier de test correspondant et retirez l'annotation `@Disabled` du premier test.
+**2. Activer le premier test** - ouvrez le fichier de test correspondant et retirez l'annotation `@Disabled` du premier test.
 
 **3. Vérifier que le test est rouge**
 
@@ -188,7 +188,7 @@ git checkout -b exerciceN
 ./mvnw test
 ```
 
-Le test doit échouer — c'est normal et attendu. Le message d'erreur vous indique ce que le test attend.
+Le test doit échouer - c'est normal et attendu. Le message d'erreur vous indique ce que le test attend.
 
 **4. Implémenter le minimum** pour faire passer ce test au vert. Pas plus que nécessaire.
 
@@ -206,9 +206,9 @@ Le test doit échouer — c'est normal et attendu. Le message d'erreur vous indi
 
 Ou via `Ctrl+Shift+B` dans VS Code.
 
-**7. Recommencer** — activez le test suivant (étapes 2 à 6) jusqu'à ce que tous les tests de l'exercice soient verts.
+**7. Recommencer** - activez le test suivant (étapes 2 à 6) jusqu'à ce que tous les tests de l'exercice soient verts.
 
-**8. Finaliser l'exercice** — quand tous les tests passent :
+**8. Finaliser l'exercice** - quand tous les tests passent :
 
 ```bash
 git add .
@@ -234,13 +234,13 @@ git pull
 
 Votre score sur GitHub Actions augmente à chaque exercice terminé. Vous pouvez maintenant passer à l'exercice suivant en reprenant à l'étape 1.
 
-> **Copilot Chat** est là pour vous accompagner à chaque étape. N'hésitez pas à lui poser des questions — il vous guidera sans donner la solution directement.
+> **Copilot Chat** est là pour vous accompagner à chaque étape. N'hésitez pas à lui poser des questions - il vous guidera sans donner la solution directement.
 
 ---
 
 ## Assistance IA
 
-Vous avez le droit d'utiliser **Copilot Chat** (panneau latéral dans VS Code) quand vous bloquez sur un exercice. Il est configuré spécifiquement pour ce TP : il ne donnera pas la solution directement, mais vous guidera par étapes — d'abord une explication du concept, puis un pointeur vers la documentation, et seulement en dernier recours un minimum de code.
+Vous avez le droit d'utiliser **Copilot Chat** (panneau latéral dans VS Code) quand vous bloquez sur un exercice. Il est configuré spécifiquement pour ce TP : il ne donnera pas la solution directement, mais vous guidera par étapes - d'abord une explication du concept, puis un pointeur vers la documentation, et seulement en dernier recours un minimum de code.
 
 **Copilot Chat n'est pas un raccourci, c'est un tuteur.** Il vous aide à comprendre, pas à copier-coller. L'objectif est que vous soyez capable d'écrire ce code **seul(e)** à la fin de la séance.
 
@@ -258,14 +258,14 @@ L'exercice 1 est très guidé pas à pas pour vous familiariser avec l'environne
 
 ---
 
-### Exercice 1 — Première fenêtre
+### Exercice 1 - Première fenêtre
 
-**Objectif** : créer l'application JavaFX la plus simple possible — une fenêtre vide qui apparaît à l'écran.
+**Objectif** : créer l'application JavaFX la plus simple possible - une fenêtre vide qui apparaît à l'écran.
 
 **Ce que vous allez découvrir** :
-- La classe `Application` — le point d'entrée de toute application JavaFX
-- Le `Stage` — l'objet qui représente la fenêtre
-- La méthode `start(Stage)` — appelée automatiquement par JavaFX au lancement
+- La classe `Application` - le point d'entrée de toute application JavaFX
+- Le `Stage` - l'objet qui représente la fenêtre
+- La méthode `start(Stage)` - appelée automatiquement par JavaFX au lancement
 
 #### Découverte du code
 
@@ -289,11 +289,11 @@ L'exercice 1 est très guidé pas à pas pour vous familiariser avec l'environne
    src/test/java/fr/univ_amu/iut/exercice1/PremiereFenetreTest.java
    ```
 
-4. Vous voyez un test `laFenetreEstVisible` avec l'annotation `@Disabled`. Ce test vérifie que `stage.isShowing()` retourne `true` — autrement dit, que la fenêtre est bien affichée à l'écran.
+4. Vous voyez un test `laFenetreEstVisible` avec l'annotation `@Disabled`. Ce test vérifie que `stage.isShowing()` retourne `true` - autrement dit, que la fenêtre est bien affichée à l'écran.
 
 #### Travail à faire
 
-**Étape 1 — Créer une branche Git pour cet exercice**
+**Étape 1 - Créer une branche Git pour cet exercice**
 
 Ouvrez un terminal dans VS Code (`Ctrl+ù` ou menu **Terminal → New Terminal**) et exécutez :
 
@@ -309,7 +309,7 @@ git branch --show-current
 
 Le résultat doit afficher `exercice1`.
 
-**Étape 2 — Activer le test**
+**Étape 2 - Activer le test**
 
 Dans le fichier `PremiereFenetreTest.java`, supprimez (ou commentez) la ligne :
 
@@ -319,7 +319,7 @@ Dans le fichier `PremiereFenetreTest.java`, supprimez (ou commentez) la ligne :
 
 Sauvegardez le fichier (`Ctrl+S`).
 
-**Étape 3 — Vérifier que le test est rouge**
+**Étape 3 - Vérifier que le test est rouge**
 
 Dans le terminal, lancez :
 
@@ -327,21 +327,21 @@ Dans le terminal, lancez :
 ./mvnw test
 ```
 
-Vous devriez voir un message d'erreur indiquant que le test `laFenetreEstVisible` a **échoué**. C'est normal et attendu — le test vérifie que la fenêtre est visible, mais votre méthode `start()` ne fait rien pour l'instant.
+Vous devriez voir un message d'erreur indiquant que le test `laFenetreEstVisible` a **échoué**. C'est normal et attendu - le test vérifie que la fenêtre est visible, mais votre méthode `start()` ne fait rien pour l'instant.
 
-**Étape 4 — Implémenter la solution**
+**Étape 4 - Implémenter la solution**
 
 Retournez dans `PremiereFenetre.java`. Le `Stage` reçu en paramètre de `start()` représente la fenêtre principale. Pour l'afficher, il suffit d'appeler une seule méthode.
 
 **Indice** : consultez la [Javadoc de Stage](https://openjfx.io/javadoc/25/javafx.graphics/javafx/stage/Stage.html) et cherchez une méthode héritée qui rend la fenêtre visible.
 
-**Étape 5 — Vérifier que le test passe**
+**Étape 5 - Vérifier que le test passe**
 
 ```bash
 ./mvnw test
 ```
 
-Le test `laFenetreEstVisible` doit maintenant être **vert**. Si c'est le cas, félicitations — vous venez d'écrire votre première application JavaFX !
+Le test `laFenetreEstVisible` doit maintenant être **vert**. Si c'est le cas, félicitations - vous venez d'écrire votre première application JavaFX !
 
 #### Voir votre fenêtre avec VNC
 
@@ -354,7 +354,7 @@ Le Codespace embarque un affichage graphique virtuel accessible via **VNC**. Pou
 3. Cliquez sur l'icône 🌐 (globe) à droite du port 6080 pour l'ouvrir dans un nouvel onglet du navigateur.
 4. Un bureau virtuel s'affiche. Laissez cet onglet ouvert.
 
-<!-- TODO: screenshot de l'onglet Ports avec le port 6080 -->
+![Onglet Ports dans VS Code - cliquez sur l'icône globe du port 6080](src/main/resources/assets/codespace_onglet_port.png)
 
 Maintenant, lancez votre application :
 
@@ -368,10 +368,10 @@ Dans l'onglet VNC, vous verrez apparaître la fenêtre du **lanceur** (`App.java
 
 Le fichier `App.java` (dans `src/main/java/fr/univ_amu/iut/`) est un **menu principal** qui liste tous les exercices du TP. Il affiche une fenêtre avec un bouton par exercice :
 
-<!-- TODO: screenshot du lanceur avec les 6 boutons -->
+![Le lanceur App.java dans le VNC - un bouton par exercice](src/main/resources/assets/vnc_lanceur_app.png)
 
-- Cliquez sur **"Exercice 1 — Première fenêtre"** : votre fenêtre vide s'ouvre (si vous avez bien implémenté `show()`).
-- Si vous cliquez sur un exercice que vous n'avez pas encore implémenté, une popup vous indiquera "rien à afficher" — c'est normal.
+- Cliquez sur **"Exercice 1 - Première fenêtre"** : votre fenêtre vide s'ouvre (si vous avez bien implémenté `show()`).
+- Si vous cliquez sur un exercice que vous n'avez pas encore implémenté, une popup vous indiquera "rien à afficher" - c'est normal.
 
 Le lanceur est un outil pratique pour **tester visuellement** chaque exercice au fil de votre progression. Vous pouvez aussi lancer directement un exercice en faisant clic droit sur sa classe → **Run** dans VS Code.
 
@@ -383,9 +383,9 @@ Suivez les étapes de rendu décrites dans la section [Workflow de développemen
 
 ---
 
-### Exercice 2 — Stage personnalisé
+### Exercice 2 - Stage personnalisé
 
-**Objectif** : personnaliser l'apparence de la fenêtre — titre, dimensions, style de décoration.
+**Objectif** : personnaliser l'apparence de la fenêtre - titre, dimensions, style de décoration.
 
 **Ce que vous allez découvrir** :
 - Les propriétés du `Stage` : `setTitle`, `setWidth`, `setHeight`, `setResizable`
@@ -393,14 +393,14 @@ Suivez les étapes de rendu décrites dans la section [Workflow de développemen
 
 #### Boucle de travail pour chaque test
 
-À partir de cet exercice, vous appliquerez la **même boucle de travail** pour chaque test — c'est la méthode TDD (Test-Driven Development) que vous utiliserez tout au long du module :
+À partir de cet exercice, vous appliquerez la **même boucle de travail** pour chaque test - c'est la méthode TDD (Test-Driven Development) que vous utiliserez tout au long du module :
 
 1. **Activez** le prochain test en retirant son `@Disabled` dans le fichier de test.
 2. **Lancez** les tests :
    ```bash
    ./mvnw test
    ```
-3. **Constatez** que le test est rouge — lisez le message d'erreur, il vous dit ce que le test attend.
+3. **Constatez** que le test est rouge - lisez le message d'erreur, il vous dit ce que le test attend.
 4. **Implémentez** le minimum de code pour faire passer le test au vert.
 5. **Relancez** les tests pour vérifier :
    ```bash
@@ -408,7 +408,7 @@ Suivez les étapes de rendu décrites dans la section [Workflow de développemen
    ```
 6. **Passez** au test suivant (retour à l'étape 1).
 
-Quand **tous les tests de l'exercice** sont verts, finalisez l'exercice (commit, push, PR, merge — voir les étapes 8 à 10 du [Workflow de développement](#workflow-de-développement--un-cycle-par-exercice)).
+Quand **tous les tests de l'exercice** sont verts, finalisez l'exercice (commit, push, PR, merge - voir les étapes 8 à 10 du [Workflow de développement](#workflow-de-développement--un-cycle-par-exercice)).
 
 > 💡 Pour voir votre fenêtre dans le navigateur, utilisez le VNC comme expliqué dans l'[exercice 1](#voir-votre-fenêtre-avec-vnc).
 
@@ -425,17 +425,17 @@ git checkout -b exercice2
 
 Puis activez et implémentez les tests **un par un**, dans l'ordre :
 
-1. **`laFenetreEstVisible`** — le Stage doit être affiché (pensez à `show()`, comme dans l'exercice 1).
-2. **`leTitreEstDefini`** — le titre de la fenêtre doit être exactement `"Ma fenêtre personnalisée"`. Consultez la méthode `setTitle()` de `Stage`.
-3. **`lesDimensionsSontDefinies`** — la fenêtre doit faire 500 pixels de large et 300 pixels de haut. Consultez `setWidth()` et `setHeight()`.
-4. **`laFenetreNestPasRedimensionnable`** — la fenêtre ne doit pas pouvoir être redimensionnée. Consultez `setResizable()`.
-5. **`leStyleEstUndecorated`** — la fenêtre doit avoir le style `StageStyle.UNDECORATED` (sans barre de titre ni bordures). Consultez `initStyle()`.
+1. **`laFenetreEstVisible`** - le Stage doit être affiché (pensez à `show()`, comme dans l'exercice 1).
+2. **`leTitreEstDefini`** - le titre de la fenêtre doit être exactement `"Ma fenêtre personnalisée"`. Consultez la méthode `setTitle()` de `Stage`.
+3. **`lesDimensionsSontDefinies`** - la fenêtre doit faire 500 pixels de large et 300 pixels de haut. Consultez `setWidth()` et `setHeight()`.
+4. **`laFenetreNestPasRedimensionnable`** - la fenêtre ne doit pas pouvoir être redimensionnée. Consultez `setResizable()`.
+5. **`leStyleEstUndecorated`** - la fenêtre doit avoir le style `StageStyle.UNDECORATED` (sans barre de titre ni bordures). Consultez `initStyle()`.
 
 > **Attention** : `initStyle()` doit être appelé **avant** `show()`, sinon JavaFX lève une exception. L'ordre des instructions dans `start()` compte.
 
 ---
 
-### Exercice 3 — Première Scene avec un Label
+### Exercice 3 - Première Scene avec un Label
 
 **Objectif** : sortir de la fenêtre vide. Construire une `Scene` qui contient un `BorderPane` dans lequel un `Label` affiche un message.
 
@@ -449,9 +449,9 @@ Puis activez et implémentez les tests **un par un**, dans l'ordre :
 **Message exact attendu** : `Bonjour, JavaFX !`
 
 **Tests (3)** :
-1. `laSceneExiste` — la `Scene` est bien attachée au `Stage`
-2. `leLabelEstAffiche` — un `Label` avec le bon texte est visible
-3. `leLabelEstAuCentreDuBorderPane` — la racine est bien un `BorderPane` et le label est au centre
+1. `laSceneExiste` - la `Scene` est bien attachée au `Stage`
+2. `leLabelEstAffiche` - un `Label` avec le bon texte est visible
+3. `leLabelEstAuCentreDuBorderPane` - la racine est bien un `BorderPane` et le label est au centre
 
 **Schéma** :
 
@@ -464,7 +464,7 @@ Stage
 
 ---
 
-### Exercice 4 — Mise en page d'un formulaire
+### Exercice 4 - Mise en page d'un formulaire
 
 **Objectif** : apprendre à combiner plusieurs conteneurs pour reproduire une maquette réaliste. C'est l'exercice qui te force à réfléchir à la **décomposition** d'une IHM en zones.
 
@@ -483,7 +483,7 @@ Stage
 
 **Concepts** :
 - `BorderPane` comme **squelette** de l'application
-- `MenuBar` + `Menu` (menus déroulants — ici vides, pas d'action)
+- `MenuBar` + `Menu` (menus déroulants - ici vides, pas d'action)
 - `GridPane` pour la grille de saisie (2 colonnes, 2 lignes)
 - `HBox` pour aligner les boutons horizontalement
 
@@ -501,14 +501,14 @@ Stage
 **Fichier** : [`src/main/java/fr/univ_amu/iut/exercice4/MiseEnPage.java`](src/main/java/fr/univ_amu/iut/exercice4/MiseEnPage.java)
 
 **Tests (4)** :
-1. `leRootEstUnBorderPane` — la racine est bien un `BorderPane`
-2. `leMenuBarEstEnHaut` — `borderPane.getTop()` est un `MenuBar`
-3. `lesDeuxChampsDeSaisieExistent` — au moins 2 `TextField` dans la scène
-4. `lesBoutonsValiderEtAnnulerExistent` — deux boutons avec les textes exacts `Valider` et `Annuler`
+1. `leRootEstUnBorderPane` - la racine est bien un `BorderPane`
+2. `leMenuBarEstEnHaut` - `borderPane.getTop()` est un `MenuBar`
+3. `lesDeuxChampsDeSaisieExistent` - au moins 2 `TextField` dans la scène
+4. `lesBoutonsValiderEtAnnulerExistent` - deux boutons avec les textes exacts `Valider` et `Annuler`
 
 ---
 
-### Exercice 5 — Réagir à un clic
+### Exercice 5 - Réagir à un clic
 
 **Objectif** : découvrir comment un composant JavaFX **réagit** à une action utilisateur. Tu vas brancher un écouteur sur un `Button` et voir qu'un clic peut modifier l'état de l'application (ici, un compteur).
 
@@ -523,15 +523,15 @@ exercice5/
 
 **Trois styles d'écouteur, tous équivalents** :
 
-JavaFX accepte trois écritures différentes pour définir ce qui se passe quand un bouton est cliqué. Elles produisent le même résultat, mais n'ont pas la même verbosité. La classe [`EvenementsBouton`](src/main/java/fr/univ_amu/iut/exercice5/EvenementsBouton.java) les montre toutes les trois en commentaires — vous en activez une, vous vérifiez que ça marche, et vous pouvez essayer les autres.
+JavaFX accepte trois écritures différentes pour définir ce qui se passe quand un bouton est cliqué. Elles produisent le même résultat, mais n'ont pas la même verbosité. La classe [`EvenementsBouton`](src/main/java/fr/univ_amu/iut/exercice5/EvenementsBouton.java) les montre toutes les trois en commentaires - vous en activez une, vous vérifiez que ça marche, et vous pouvez essayer les autres.
 
-**Style 1 — classe nommée** (style historique, avant Java 8) :
+**Style 1 - classe nommée** (style historique, avant Java 8) :
 ```java
 bouton.setOnAction(new EcouteurClasseNommee(compteur));
 ```
 C'est l'écouteur qui est dans son propre fichier. Le plus verbeux mais aussi le plus explicite.
 
-**Style 2 — classe anonyme** (intermédiaire) :
+**Style 2 - classe anonyme** (intermédiaire) :
 ```java
 bouton.setOnAction(new EventHandler<ActionEvent>() {
     @Override
@@ -543,7 +543,7 @@ bouton.setOnAction(new EventHandler<ActionEvent>() {
 ```
 Tu définis la classe sur place, sans lui donner de nom.
 
-**Style 3 — lambda** (moderne, recommandé depuis Java 8) :
+**Style 3 - lambda** (moderne, recommandé depuis Java 8) :
 ```java
 bouton.setOnAction(e -> {
     compteur.incrementer();
@@ -553,16 +553,16 @@ bouton.setOnAction(e -> {
 La syntaxe la plus compacte, celle que l'on rencontre le plus souvent dans du code JavaFX moderne.
 
 **Tests (2)** :
-1. `EcouteurClasseNommeeTest.handleIncrementeLeCompteur` — **test unitaire** (pas de TestFX). Vérifie que la méthode `handle()` de la classe nommée incrémente bien le `Compteur`. Activez-le et implémentez le TODO dans `EcouteurClasseNommee.java`.
-2. `EvenementsBoutonTest.troisClicsAffichent3Clics` — **test d'intégration**. Clique 3 fois sur le bouton et vérifie que le label affiche `"3 clics"`. Activez-le, implémentez le TODO dans `EvenementsBouton.java` avec le style de votre choix.
+1. `EcouteurClasseNommeeTest.handleIncrementeLeCompteur` - **test unitaire** (pas de TestFX). Vérifie que la méthode `handle()` de la classe nommée incrémente bien le `Compteur`. Activez-le et implémentez le TODO dans `EcouteurClasseNommee.java`.
+2. `EvenementsBoutonTest.troisClicsAffichent3Clics` - **test d'intégration**. Clique 3 fois sur le bouton et vérifie que le label affiche `"3 clics"`. Activez-le, implémentez le TODO dans `EvenementsBouton.java` avec le style de votre choix.
 
 **Ids attendus** : `bouton-clique-moi` pour le bouton, `compteur` pour le label.
 
 ---
 
-### Exercice 6 — Palette de couleurs (capstone)
+### Exercice 6 - Palette de couleurs (capstone)
 
-**Objectif** : **synthèse** — cet exercice mobilise l'ensemble des concepts vus jusqu'ici (layouts, composants, événements, mise à jour de label) sur une petite application autonome.
+**Objectif** : **synthèse** - cet exercice mobilise l'ensemble des concepts vus jusqu'ici (layouts, composants, événements, mise à jour de label) sur une petite application autonome.
 
 **Comportement attendu** :
 
@@ -594,10 +594,10 @@ La syntaxe la plus compacte, celle que l'on rencontre le plus souvent dans du co
 **Fichier** : [`src/main/java/fr/univ_amu/iut/exercice6/Palette.java`](src/main/java/fr/univ_amu/iut/exercice6/Palette.java)
 
 **Tests (4, à activer dans l'ordre)** :
-1. `lesTroisBoutonsExistent` — les 3 boutons avec les bons ids sont présents
-2. `cliquerRougeMetLaZoneEnRouge` — le style du `Pane` contient `red` après un clic sur Rouge
-3. `cliquerIncremenceLeCompteurCorrespondant` — deux clics sur Vert → label contient `Vert: 2`
-4. `lesCompteursSontIndependants` — séquence 2×Rouge + 1×Bleu → label contient `Rouge: 2`, `Vert: 0`, `Bleu: 1`
+1. `lesTroisBoutonsExistent` - les 3 boutons avec les bons ids sont présents
+2. `cliquerRougeMetLaZoneEnRouge` - le style du `Pane` contient `red` après un clic sur Rouge
+3. `cliquerIncremenceLeCompteurCorrespondant` - deux clics sur Vert → label contient `Vert: 2`
+4. `lesCompteursSontIndependants` - séquence 2×Rouge + 1×Bleu → label contient `Rouge: 2`, `Vert: 0`, `Bleu: 1`
 
 Quand les 4 tests sont verts, l'exercice 6 et le TP1 sont terminés. Bravo !
 
@@ -613,22 +613,22 @@ Quand les 4 tests sont verts, l'exercice 6 et le TP1 sont terminés. Bravo !
 
 ## Dépannage
 
-**Le premier `./mvnw` prend plusieurs minutes** — c'est normal. Le wrapper télécharge Maven 3.9.14 puis toutes les dépendances JavaFX / JUnit / TestFX (~50 Mo au total). Les exécutions suivantes utilisent le cache local et sont quasi instantanées.
+**Le premier `./mvnw` prend plusieurs minutes** - c'est normal. Le wrapper télécharge Maven 3.9.14 puis toutes les dépendances JavaFX / JUnit / TestFX (~50 Mo au total). Les exécutions suivantes utilisent le cache local et sont quasi instantanées.
 
-**`./mvnw: Permission denied`** — après certains clones, le bit exécutable peut être perdu. Corrigez avec :
+**`./mvnw: Permission denied`** - après certains clones, le bit exécutable peut être perdu. Corrigez avec :
 ```bash
 chmod +x mvnw
 ```
 
-**`java: command not found` ou version < 25** — ce problème ne devrait pas se produire dans un Codespace. En cas d'installation locale, voir ci-dessous.
+**`java: command not found` ou version < 25** - ce problème ne devrait pas se produire dans un Codespace. En cas d'installation locale, voir ci-dessous.
 
-**Tests TestFX qui plantent avec `No X11 DISPLAY`** (Linux sans serveur X actif) — lancez les tests via `xvfb-run` :
+**Tests TestFX qui plantent avec `No X11 DISPLAY`** (Linux sans serveur X actif) - lancez les tests via `xvfb-run` :
 ```bash
 xvfb-run --auto-servernum ./mvnw test
 ```
 Dans un Codespace, le display virtuel est déjà configuré et ce problème ne se produit pas.
 
-**Sous Windows, `./mvnw ...` ne fonctionne pas** — utilisez `mvnw.cmd` à la place :
+**Sous Windows, `./mvnw ...` ne fonctionne pas** - utilisez `mvnw.cmd` à la place :
 ```powershell
 .\mvnw.cmd javafx:run
 ```
@@ -636,7 +636,7 @@ Dans un Codespace, le display virtuel est déjà configuré et ce problème ne s
 ---
 
 <details>
-<summary>📦 Installation locale (facultative) — pour travailler en dehors du Codespace</summary>
+<summary>📦 Installation locale (facultative) - pour travailler en dehors du Codespace</summary>
 
 **Sur les machines de l'IUT** (Linux, SDKMAN pré-installé) :
 
@@ -644,9 +644,9 @@ Dans un Codespace, le display virtuel est déjà configuré et ce problème ne s
 sdk install java 25.fx-zulu
 ```
 
-**Chez vous sous Linux / macOS** — installez d'abord SDKMAN depuis [sdkman.io](https://sdkman.io), puis la commande ci-dessus.
+**Chez vous sous Linux / macOS** - installez d'abord SDKMAN depuis [sdkman.io](https://sdkman.io), puis la commande ci-dessus.
 
-**Windows** — via [Scoop](https://scoop.sh) :
+**Windows** - via [Scoop](https://scoop.sh) :
 
 ```powershell
 scoop bucket add java
