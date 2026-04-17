@@ -265,8 +265,8 @@ Le TP est découpé en **6 exercices** à faire dans l'ordre. Chaque exercice vi
 **Objectif** : créer l'application JavaFX la plus simple possible, une fenêtre vide qui apparaît à l'écran.
 
 **Ce que vous allez découvrir** :
-- La classe `Application` : le point d'entrée de toute application JavaFX
-- Le `Stage` : l'objet qui représente la fenêtre
+- La classe [`Application`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/application/Application.html) : le point d'entrée de toute application JavaFX
+- Le [`Stage`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/stage/Stage.html) : l'objet qui représente la fenêtre
 - La méthode `start(Stage)` : appelée automatiquement par JavaFX au lancement
 
 ### Découverte du code
@@ -446,8 +446,8 @@ Pour les exercices suivants, vous pouvez utiliser Copilot Chat dès que vous blo
 **Objectif** : personnaliser l'apparence de la fenêtre (titre, dimensions, style de décoration).
 
 **Ce que vous allez découvrir** :
-- Les propriétés du `Stage` : `setTitle`, `setWidth`, `setHeight`, `setResizable`
-- L'énumération `StageStyle` pour modifier la décoration de la fenêtre
+- Les propriétés du [`Stage`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/stage/Stage.html) : `setTitle`, `setWidth`, `setHeight`, `setResizable`
+- L'énumération [`StageStyle`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/stage/StageStyle.html) pour modifier la décoration de la fenêtre
 
 ### Découverte du code
 
@@ -540,9 +540,9 @@ Vérifiez votre score sur l'onglet **Actions** de votre dépôt GitHub. Il devra
 **Objectif** : sortir de la fenêtre vide et afficher du contenu. Cet exercice introduit les trois briques fondamentales de toute interface JavaFX : la `Scene`, le conteneur de layout, et les composants graphiques.
 
 **Ce que vous allez découvrir** :
-- `Scene` : le conteneur principal qui regroupe tout ce qui est affiché dans la fenêtre
-- `BorderPane` : un conteneur de mise en page à 5 zones (top, bottom, left, right, center)
-- `Label` : un composant qui affiche du texte statique
+- [`Scene`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/Scene.html) : le conteneur principal qui regroupe tout ce qui est affiché dans la fenêtre
+- [`BorderPane`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/BorderPane.html) : un conteneur de mise en page à 5 zones (top, bottom, left, right, center)
+- [`Label`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/Label.html) : un composant qui affiche du texte statique
 
 ### Comment JavaFX organise l'affichage
 
