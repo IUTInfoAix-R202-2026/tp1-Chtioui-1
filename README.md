@@ -351,41 +351,6 @@ Retournez dans `PremiereFenetre.java`. Le `Stage` reçu en paramètre de `start(
 
 Le test `laFenetreEstVisible` doit maintenant être **vert**. Si c'est le cas, félicitations : vous venez d'écrire votre première application JavaFX !
 
-#### Voir votre fenêtre avec VNC
-
-Les tests vérifient le comportement de votre code automatiquement, mais il est aussi possible de **voir votre application s'afficher** dans un navigateur.
-
-Le Codespace embarque un affichage graphique virtuel accessible via **VNC**. Pour y accéder :
-
-1. Dans VS Code, cliquez sur l'onglet **"Ports"** (en bas, à côté du terminal).
-2. Repérez le port **6080** (labellé "desktop" ou "VNC").
-3. Cliquez sur l'icône 🌐 (globe) à droite du port 6080 pour l'ouvrir dans un nouvel onglet du navigateur.
-4. Dans le nouvel onglet, cliquez sur le bouton "🔗 Connecter"
-5. Un bureau virtuel s'affiche. Laissez cet onglet ouvert.
-
-![Onglet Ports dans VS Code - cliquez sur l'icône globe du port 6080](src/main/resources/assets/codespace_onglet_port.png)
-
-Maintenant, lancez votre application :
-
-```bash
-./mvnw javafx:run
-```
-
-Dans l'onglet VNC, vous verrez apparaître la fenêtre du **lanceur** (`App.java`).
-
-#### Le lanceur `App.java`
-
-Le fichier `App.java` (dans `src/main/java/fr/univ_amu/iut/`) est un **menu principal** qui liste tous les exercices du TP. Il affiche une fenêtre avec un bouton par exercice :
-
-![Le lanceur App.java dans le VNC - un bouton par exercice](src/main/resources/assets/vnc_lanceur_app.png)
-
-- Cliquez sur **"Exercice 1 - Première fenêtre"** : votre fenêtre vide s'ouvre (si vous avez bien implémenté `show()`).
-- Si vous cliquez sur un exercice que vous n'avez pas encore implémenté, une popup vous indiquera "rien à afficher", c'est normal.
-
-Le lanceur est un outil pratique pour **tester visuellement** chaque exercice au fil de votre progression. Vous pouvez aussi lancer directement un exercice en faisant clic droit sur sa classe → **Run** dans VS Code.
-
-Pour fermer l'application, fermez la fenêtre JavaFX ou appuyez sur `Ctrl+C` dans le terminal.
-
 **Étape 6 - Pousser, créer une Pull Request et merger**
 
 Votre premier exercice est terminé. Il est temps de sauvegarder votre travail et de pratiquer le workflow Git que vous utiliserez pour chaque exercice.
@@ -432,7 +397,40 @@ Votre exercice 1 est maintenant intégré dans `main`.
 
 Vérifiez que votre note a augmenté : rendez-vous sur votre dépôt GitHub → onglet **"Actions"** → dernier run du workflow **"GitHub Classroom Workflow"**. Votre score devrait être passé de 10/100 à 25/100 (10 points de compilation + 15 points pour l'exercice 1).
 
-Vous pouvez passer à l'exercice 2.
+#### Voir votre fenêtre avec VNC
+
+Les tests vérifient le comportement de votre code automatiquement, mais il est aussi possible de **voir votre application s'afficher** dans un navigateur.
+
+Le Codespace embarque un affichage graphique virtuel accessible via **VNC**. Pour y accéder :
+
+1. Dans VS Code, cliquez sur l'onglet **"Ports"** (en bas, à côté du terminal).
+2. Repérez le port **6080** (labellé "desktop" ou "VNC").
+3. Cliquez sur l'icône 🌐 (globe) à droite du port 6080 pour l'ouvrir dans un nouvel onglet du navigateur.
+4. Dans le nouvel onglet, cliquez sur le bouton "🔗 Connecter"
+5. Un bureau virtuel s'affiche. Laissez cet onglet ouvert.
+
+![Onglet Ports dans VS Code - cliquez sur l'icône globe du port 6080](src/main/resources/assets/codespace_onglet_port.png)
+
+Maintenant, lancez votre application :
+
+```bash
+./mvnw javafx:run
+```
+
+Dans l'onglet VNC, vous verrez apparaître la fenêtre du **lanceur** (`App.java`).
+
+#### Le lanceur `App.java`
+
+Le fichier `App.java` (dans `src/main/java/fr/univ_amu/iut/`) est un **menu principal** qui liste tous les exercices du TP. Il affiche une fenêtre avec un bouton par exercice :
+
+![Le lanceur App.java dans le VNC - un bouton par exercice](src/main/resources/assets/vnc_lanceur_app.png)
+
+- Cliquez sur **"Exercice 1 - Première fenêtre"** : votre fenêtre vide s'ouvre (si vous avez bien implémenté `show()`).
+- Si vous cliquez sur un exercice que vous n'avez pas encore implémenté, une popup vous indiquera "rien à afficher", c'est normal.
+
+Le lanceur est un outil pratique pour **tester visuellement** chaque exercice au fil de votre progression. Vous pouvez aussi lancer directement un exercice en faisant clic droit sur sa classe → **Run** dans VS Code.
+
+Pour fermer l'application, fermez la fenêtre JavaFX ou appuyez sur `Ctrl+C` dans le terminal.
 
 #### Essayer Copilot Chat
 
