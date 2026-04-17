@@ -386,6 +386,19 @@ Le lanceur est un outil pratique pour **tester visuellement** chaque exercice au
 
 Pour fermer l'application, fermez la fenêtre JavaFX ou appuyez sur `Ctrl+C` dans le terminal.
 
+#### Essayer Copilot Chat
+
+C'est le bon moment pour découvrir votre assistant IA. Ouvrez le panneau **Copilot Chat** (icône dans la barre latérale gauche) et essayez quelques questions simples pour vous familiariser :
+
+- `Qu'est-ce qu'un Stage dans JavaFX ?`
+- `Explique-moi la différence entre Stage et Scene`
+- `À quoi sert la méthode launch() dans une Application JavaFX ?`
+- `Pourquoi mon test laFenetreEstVisible vérifie isShowing() ?`
+
+Observez comment Copilot répond : il explique le concept sans donner directement du code. Si vous insistez, il vous orientera vers la Javadoc, puis seulement en dernier recours proposera un minimum de code.
+
+Pour les exercices suivants, vous pouvez utiliser Copilot Chat dès que vous bloquez. C'est un outil d'apprentissage, pas de triche.
+
 #### Finaliser l'exercice
 
 Suivez les étapes de rendu décrites dans la section [Workflow de développement](#workflow-de-développement--un-cycle-par-exercice) (étapes 8 à 10) : commit, push, Pull Request, merge.
