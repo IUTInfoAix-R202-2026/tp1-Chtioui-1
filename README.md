@@ -638,45 +638,138 @@ Vérifiez votre score sur l'onglet **Actions**. Il devrait avoir augmenté.
 
 ## Exercice 4 - Mise en page d'un formulaire
 
-**Objectif** : apprendre à combiner plusieurs conteneurs pour reproduire une maquette réaliste. C'est l'exercice qui te force à réfléchir à la **décomposition** d'une IHM en zones.
+**Objectif** : combiner plusieurs conteneurs pour reproduire une maquette réaliste. Cet exercice vous apprend à **décomposer une interface** en zones, chacune gérée par un conteneur adapté.
 
-**Maquette à reproduire** :
+**Ce que vous allez découvrir** :
+- [`GridPane`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/GridPane.html) : un conteneur en grille (lignes × colonnes) pour aligner des champs de formulaire
+- [`HBox`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/HBox.html) : un conteneur qui aligne ses enfants horizontalement
+- [`MenuBar`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/MenuBar.html) et [`Menu`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/Menu.html) : la barre de menus d'une application
+- [`TextField`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/TextField.html) : un champ de saisie de texte
+- [`Button`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/Button.html) : un bouton cliquable
 
-```
-┌───────────────────────────────┐
-│ [Fichier] [Aide]              │  ← MenuBar
-├───────────────────────────────┤
-│ Nom :     [__________]        │  ┐
-│ Email :   [__________]        │  │ GridPane (2 × 2)
-│                               │  ┘
-│ [  Valider  ]  [ Annuler ]    │  ← HBox
-└───────────────────────────────┘
-```
+### Comment décomposer une interface en conteneurs
 
-**Concepts** :
-- `BorderPane` comme **squelette** de l'application
-- `MenuBar` + `Menu` (menus déroulants - ici vides, pas d'action)
-- `GridPane` pour la grille de saisie (2 colonnes, 2 lignes)
-- `HBox` pour aligner les boutons horizontalement
-
-**Pourquoi ces conteneurs et pas d'autres ?**
+Quand on construit une interface, la première étape est de se demander : **quel conteneur utiliser pour chaque zone ?** Voici un guide :
 
 | Conteneur | Quand l'utiliser |
 |---|---|
-| `BorderPane` | Tu as 5 zones distinctes (top/left/right/bottom/center) |
-| `VBox` | Empiler des composants verticalement à la suite |
-| `HBox` | Aligner des composants horizontalement à la suite |
-| `GridPane` | Tu as une **grille** (lignes × colonnes) avec alignement strict |
-| `StackPane` | Superposer des composants |
-| `Pane` | Positionnement absolu (rarement utilisé pour une IHM réelle) |
+| [`BorderPane`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/BorderPane.html) | L'interface a des zones distinctes (barre en haut, contenu au centre, barre en bas) |
+| [`VBox`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/VBox.html) | Les composants sont empilés **verticalement** |
+| [`HBox`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/HBox.html) | Les composants sont alignés **horizontalement** |
+| [`GridPane`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/GridPane.html) | Les composants forment une **grille** avec des lignes et colonnes alignées |
+| [`StackPane`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/StackPane.html) | Les composants sont **superposés** les uns sur les autres |
 
-**Fichier** : [`src/main/java/fr/univ_amu/iut/exercice4/MiseEnPage.java`](src/main/java/fr/univ_amu/iut/exercice4/MiseEnPage.java)
+### Maquette à reproduire
 
-**Tests (4)** :
-1. `leRootEstUnBorderPane` - la racine est bien un `BorderPane`
-2. `leMenuBarEstEnHaut` - `borderPane.getTop()` est un `MenuBar`
-3. `lesDeuxChampsDeSaisieExistent` - au moins 2 `TextField` dans la scène
-4. `lesBoutonsValiderEtAnnulerExistent` - deux boutons avec les textes exacts `Valider` et `Annuler`
+Voici l'interface que vous devez construire :
+
+<svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" width="600" height="300">
+  <!-- Fond -->
+  <rect x="0" y="0" width="600" height="300" rx="6" fill="#ffffff" stroke="#666" stroke-width="2"/>
+  <!-- MenuBar (top) -->
+  <rect x="1" y="1" width="598" height="40" fill="#e0e0e0" stroke="#bbb" stroke-width="1"/>
+  <text x="20" y="26" font-family="sans-serif" font-size="14" fill="#333">📁 Fichier</text>
+  <text x="110" y="26" font-family="sans-serif" font-size="14" fill="#333">❓ Aide</text>
+  <text x="500" y="26" font-family="sans-serif" font-size="11" fill="#999">← MenuBar (top)</text>
+  <!-- GridPane (center) -->
+  <rect x="1" y="41" width="598" height="180" fill="#f5f5f5" stroke="#bbb" stroke-width="1"/>
+  <text x="30" y="90" font-family="sans-serif" font-size="14" fill="#333">Nom :</text>
+  <rect x="120" y="72" width="300" height="28" rx="4" fill="#fff" stroke="#aaa" stroke-width="1"/>
+  <text x="30" y="140" font-family="sans-serif" font-size="14" fill="#333">Email :</text>
+  <rect x="120" y="122" width="300" height="28" rx="4" fill="#fff" stroke="#aaa" stroke-width="1"/>
+  <text x="470" y="120" font-family="sans-serif" font-size="11" fill="#999">← GridPane</text>
+  <text x="470" y="135" font-family="sans-serif" font-size="11" fill="#999">(center)</text>
+  <!-- HBox (bottom) -->
+  <rect x="1" y="221" width="598" height="78" fill="#e8e8e8" stroke="#bbb" stroke-width="1"/>
+  <rect x="30" y="242" width="120" height="36" rx="6" fill="#4a90d9" stroke="#3a7bc8" stroke-width="1"/>
+  <text x="90" y="266" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="white">Valider</text>
+  <rect x="170" y="242" width="120" height="36" rx="6" fill="#ccc" stroke="#aaa" stroke-width="1"/>
+  <text x="230" y="266" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#333">Annuler</text>
+  <text x="470" y="266" font-family="sans-serif" font-size="11" fill="#999">← HBox (bottom)</text>
+</svg>
+
+L'interface est décomposée en **trois zones** dans un `BorderPane` :
+
+```mermaid
+graph BT
+    M["📁 <b>MenuBar</b><br/>Fichier, Aide"] -- "setTop()" --> BP["📦 <b>BorderPane</b><br/>racine"]
+    G["📋 <b>GridPane</b><br/>Nom + Email"] -- "setCenter()" --> BP
+    H["➡️ <b>HBox</b><br/>Valider, Annuler"] -- "setBottom()" --> BP
+    BP -- "passé à" --> S["🎬 <b>Scene</b>"]
+    S -- "attachée au" --> ST["🖼️ <b>Stage</b>"]
+
+    style ST fill:#4a90d9,color:white
+    style S fill:#7bb563,color:white
+    style BP fill:#e8a838,color:white
+    style M fill:#b0bec5,color:#333
+    style G fill:#b0bec5,color:#333
+    style H fill:#b0bec5,color:#333
+```
+
+### Découverte du code
+
+1. Ouvrez le fichier de l'exercice :
+   ```
+   src/main/java/fr/univ_amu/iut/exercice4/MiseEnPage.java
+   ```
+
+2. La méthode `start(Stage)` contient un TODO qui décrit la stratégie de construction : BorderPane comme racine, MenuBar en top, GridPane au center, HBox en bottom.
+
+3. Ouvrez le fichier de test :
+   ```
+   src/test/java/fr/univ_amu/iut/exercice4/MiseEnPageTest.java
+   ```
+
+4. Cet exercice contient **5 tests** :
+   - `laFenetreEstVisible` : le Stage doit être affiché
+   - `leRootEstUnBorderPane` : la racine de la Scene doit être un BorderPane
+   - `leMenuBarEstEnHaut` : la zone `top` du BorderPane doit contenir un MenuBar
+   - `lesDeuxChampsDeSaisieExistent` : au moins 2 TextField doivent être présents
+   - `lesBoutonsValiderEtAnnulerExistent` : deux boutons avec les textes exacts `Valider` et `Annuler`
+
+### Travail à faire
+
+Créez votre branche :
+
+```bash
+git checkout main
+git checkout -b exercice4
+```
+
+Appliquez la [boucle de travail](#boucle-de-travail-pour-chaque-test) : activez et implémentez les tests **un par un**, dans l'ordre.
+
+**Conseils pour la construction** :
+
+1. Commencez par créer le `BorderPane` racine, une `Scene`, et `show()` (les 2 premiers tests).
+2. Pour le `MenuBar` : créez un `MenuBar`, ajoutez-y deux `Menu` ("Fichier" et "Aide"), puis placez-le dans `borderPane.setTop(menuBar)`.
+3. Pour le `GridPane` : créez un `GridPane`, puis utilisez `gridPane.add(composant, colonne, ligne)` pour placer les labels et les TextField. Colonne 0 = les labels ("Nom :", "Email :"), colonne 1 = les TextField.
+4. Pour le `HBox` : créez un `HBox`, ajoutez-y deux `Button` ("Valider" et "Annuler"), puis placez-le dans `borderPane.setBottom(hbox)`.
+
+> 💡 Pour voir votre fenêtre dans le navigateur, utilisez le VNC comme expliqué dans l'[exercice 1](#voir-votre-fenêtre-avec-vnc).
+
+### Finaliser l'exercice
+
+Quand les 5 tests sont verts :
+
+```bash
+git add .
+git commit -m "Exercice 4 terminé"
+git push -u origin exercice4
+gh pr create --title "Exercice 4 terminé" --body "Les 5 tests passent."
+gh pr view --web
+```
+
+Consultez la PR, puis mergez :
+
+```bash
+gh pr merge --rebase --delete-branch
+git checkout main
+git pull
+```
+
+Vérifiez votre score sur l'onglet **Actions**.
+
+> 💡 Si vous ne savez plus où vous en êtes, demandez à Copilot Chat : `Quelle est la prochaine étape ?`
 
 ---
 
