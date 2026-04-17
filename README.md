@@ -102,6 +102,8 @@ Une fois sur la page de votre dépôt :
 1. Cliquez sur le bouton vert **"Code"** (en haut à droite du listing de fichiers).
 2. Sélectionnez l'onglet **"Codespaces"**.
 3. Cliquez sur **"Create codespace on main"**.
+
+![Bouton Code → Codespaces → Create codespace on main](src/main/resources/assets/create_codespace_on_main.png)
 4. Attendez que l'environnement se construise (de 1 à 5 minutes la première fois).
 5. VS Code s'ouvre **dans votre navigateur** avec tout l'environnement pré-configuré :
   - Java 25 + JavaFX 25
