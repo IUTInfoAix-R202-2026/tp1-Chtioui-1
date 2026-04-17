@@ -974,7 +974,7 @@ Vérifiez votre score sur l'onglet **Actions**. Il devrait avoir augmenté.
 L'interface est décomposée en **trois zones** dans un `BorderPane`, comme dans l'exercice 4 :
 
 ```mermaid
-graph LR
+graph TD
     ST["🖼️ <b>Stage</b>"] -->|"setScene()"| S["🎬 <b>Scene</b>"]
     S -->|"racine"| BP["📦 <b>BorderPane</b>"]
     BP -->|"setTop()"| H["➡️ <b>HBox</b>"]
