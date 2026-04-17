@@ -509,6 +509,28 @@ Puis activez et implémentez les tests **un par un**, dans l'ordre :
 
 > **Attention** : `initStyle()` doit être appelé **avant** `show()`, sinon JavaFX lève une exception. L'ordre des instructions dans `start()` compte.
 
+### Finaliser l'exercice
+
+Quand les 5 tests sont verts, finalisez votre travail :
+
+```bash
+git add .
+git commit -m "Exercice 2 terminé"
+git push -u origin exercice2
+gh pr create --title "Exercice 2 terminé" --body "Les 5 tests passent."
+gh pr view --web
+```
+
+Consultez la PR (diff, CI, review Copilot), puis mergez et revenez sur `main` :
+
+```bash
+gh pr merge --rebase --delete-branch
+git checkout main
+git pull
+```
+
+Vérifiez votre score sur l'onglet **Actions** de votre dépôt GitHub. Il devrait avoir augmenté.
+
 ---
 
 ## Exercice 3 - Première Scene avec un Label
