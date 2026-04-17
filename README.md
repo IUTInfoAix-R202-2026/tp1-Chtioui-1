@@ -961,25 +961,39 @@ Vérifiez votre score sur l'onglet **Actions**. Il devrait avoir augmenté.
 - [`Button`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/Button.html) et [`Pane`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/Pane.html) pour l'interaction
 - `setOnAction()` et `setStyle()` pour le comportement dynamique
 
-### Comportement attendu
+### Maquette de l'IHM attendue
 
-L'application affiche trois boutons de couleur, une zone centrale dont le fond change au clic, et un label récapitulatif des compteurs :
-
-```
-┌──────────────────────────────┐
-│ [Rouge] [Vert] [Bleu]        │  ← HBox de 3 boutons (top)
-├──────────────────────────────┤
-│                              │
-│     (zone de couleur)        │  ← Pane dont le fond change (center)
-│                              │
-├──────────────────────────────┤
-│ Rouge: 0  Vert: 0  Bleu: 0   │  ← Label récapitulatif (bottom)
-└──────────────────────────────┘
-```
+![Maquette de la palette de couleurs](src/main/resources/assets/maquette_palette.svg)
 
 - Cliquer **Rouge** → le fond du `Pane` central devient rouge, et le compteur Rouge du label augmente de 1
 - Même principe pour Vert et Bleu
 - Les 3 compteurs sont **indépendants** : cliquer Rouge n'affecte pas les compteurs Vert et Bleu
+
+### Le graphe de scène
+
+L'interface est décomposée en **trois zones** dans un `BorderPane`, comme dans l'exercice 4 :
+
+```mermaid
+graph BT
+    BR["🔴 <b>Button</b><br/>&quot;Rouge&quot;"] -- "enfant" --> H["➡️ <b>HBox</b><br/>3 boutons"]
+    BV["🟢 <b>Button</b><br/>&quot;Vert&quot;"] -- "enfant" --> H
+    BB["🔵 <b>Button</b><br/>&quot;Bleu&quot;"] -- "enfant" --> H
+    H -- "setTop()" --> BP["📦 <b>BorderPane</b><br/>racine"]
+    Z["🎨 <b>Pane</b><br/>zone de couleur"] -- "setCenter()" --> BP
+    L["🏷️ <b>Label</b><br/>&quot;Rouge: 0 …&quot;"] -- "setBottom()" --> BP
+    BP -- "passé à" --> S["🎬 <b>Scene</b>"]
+    S -- "attachée au" --> ST["🖼️ <b>Stage</b>"]
+
+    style ST fill:#4a90d9,color:white
+    style S fill:#7bb563,color:white
+    style BP fill:#e8a838,color:white
+    style H fill:#b0bec5,color:#333
+    style Z fill:#b0bec5,color:#333
+    style L fill:#b0bec5,color:#333
+    style BR fill:#e74c3c,color:white
+    style BV fill:#27ae60,color:white
+    style BB fill:#2980b9,color:white
+```
 
 ### Découverte du code
 
