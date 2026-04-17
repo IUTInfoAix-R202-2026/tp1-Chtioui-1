@@ -20,48 +20,57 @@
     * [Email](mailto:sebastien.nedjar@univ-amu.fr) pour toute question
 
 
-## TP1 - Bases JavaFX
+## TP1 — Bases JavaFX
 
-## Aperçu et objectifs d'apprentissage
+## Objectifs de la séance
 
-Premiers pas avec JavaFX : Application, Stage, Scene, composants simples, événements et layouts
+### Ce que vous saurez faire à la fin de cette séance
+
+Les exercices de ce TP sont organisés en progression : chaque exercice vous fait monter d'un cran dans la maîtrise de JavaFX. Cette progression suit la **taxonomie de Bloom**, un modèle pédagogique qui décrit les niveaux de maîtrise d'un savoir-faire — du plus simple (comprendre un concept) au plus complexe (créer une application complète).
+
+| Niveau Bloom | Exercices | Vous serez capable de… | Compétence BUT |
+|---|---|---|---|
+| **Comprendre** | 1–2 | Expliquer le rôle de `Application`, `Stage` et du cycle de lancement JavaFX. Personnaliser une fenêtre (titre, dimensions, style). | AC11.02 |
+| **Appliquer** | 3–4 | Construire une interface graphique en combinant conteneurs (`BorderPane`, `GridPane`, `HBox`) et composants (`Label`, `TextField`, `MenuBar`). | AC11.04 |
+| **Analyser / Créer** | 5–6 | Concevoir une application interactive complète avec écouteurs d'événements, compteurs indépendants et feedback visuel. | AC11.04, AC15.06 |
+
+**Tout au long du TP**, vous développerez également votre maîtrise de l'écosystème de développement (**AC16.01**) : GitHub Classroom, Codespace, Maven, et le workflow professionnel branche → Pull Request → review.
+
+### Pourquoi cette démarche ?
+
+Ce TP utilise le **TDD (Test-Driven Development) en baby steps** : les tests sont livrés désactivés (`@Disabled`) et vous les activez un par un, comme un cahier des charges dont on implémente les exigences une à une. Ce n'est pas un artifice pédagogique — c'est une **méthode de développement professionnel** (formalisée par Kent Beck dans l'Extreme Programming) utilisée dans l'industrie logicielle.
+
+Le workflow Git que vous pratiquerez — créer une branche par exercice, pousser, ouvrir une Pull Request, recevoir une review automatique de Copilot, puis merger — reproduit le **cycle de travail en entreprise**. L'objectif est d'apprendre à collaborer avec des outils, pas seulement à écrire du code.
+
+Copilot Chat est configuré dans ce projet comme un **tuteur** : il ne donnera pas la solution d'emblée. Il commence par expliquer le concept, puis oriente vers la documentation, et ne propose du code qu'en dernier recours. L'objectif est que vous compreniez chaque ligne de code que vous écrivez.
+
+### Lien avec la SAE 2.01
+
+La SAE 2.01 vous demandera de **créer une interface d'extraction et manipulation de données** pour des capteurs permettant de **détecter et identifier les chauve-souris** à partir de leurs émissions ultrasonores.
+
+Pour construire cette interface, vous aurez besoin de compétences acquises progressivement dans les TP du module R2.02 :
+
+- **TP1** (celui-ci) : fenêtres, scènes, composants de base et événements — les **fondations**
+- **TP2** : properties et bindings — la **liaison de données** entre l'interface et le modèle
+- **TP3** : FXML — la **conception déclarative** d'interfaces complexes
+- **TP4** : architecture MVVM — la **séparation des responsabilités** entre vue et logique
+- **TP5** : persistance — la **lecture et écriture de données** (fichiers, bases de données)
+
+Ce TP1 pose les premières briques : créer une fenêtre, organiser des composants dans un layout, et réagir aux actions de l'utilisateur. Ces compétences seront vos outils quotidiens jusqu'à la SAE.
 
 ### Prérequis
 
-- Java 25 (JDK avec JavaFX inclus, ex: Zulu JDK FX)
-- Maven : non requis, le projet embarque un Maven Wrapper (`./mvnw`) qui télécharge automatiquement la bonne version
-- Un IDE (IntelliJ IDEA, VS Code avec Extension Pack for Java, Eclipse)
+#### Connaissances attendues
 
-<details>
-<summary>📦 Installer Java 25 localement — cliquer pour déplier</summary>
+- **Bases de la programmation** : variables, types, structures de contrôle, tableaux — acquis en C++ dans la ressource R1.01
+- **Programmation orientée objet en Java** : classes, objets, héritage, interfaces, polymorphisme — acquis dans la ressource R2.01
+- **Git** : les concepts (dépôt, commit, branche) ont été vus en cours, mais pas encore réellement pratiqués. Un TP dédié en R2.03 est prévu en parallèle. Ce TP servira de première mise en pratique réelle du workflow Git, guidée par Copilot Chat
 
-**Le plus simple : pas d'installation du tout.** Utilise [GitHub Codespaces](#github-codespaces-recommandé) ou le devcontainer local : tout est déjà prêt.
+#### Environnement technique
 
-**Sur les machines de l'IUT** (Linux, SDKMAN pré-installé) :
+L'ensemble du TP se fait sur **GitHub Codespaces** — aucune installation locale n'est nécessaire. L'environnement (Java 25, JavaFX 25, Maven, Git, Copilot Chat) est pré-configuré et prêt à l'emploi dès l'ouverture du Codespace.
 
-```bash
-sdk install java 25.fx-zulu
-```
-
-**Chez toi sous Linux / macOS** — installer d'abord SDKMAN depuis [sdkman.io](https://sdkman.io), puis la commande ci-dessus.
-
-**Windows** — via [Scoop](https://scoop.sh) :
-
-```powershell
-scoop bucket add java
-scoop install java/zulu-jdk-fx25
-```
-
-Alternative Windows : installateur GUI sur [azul.com/downloads](https://www.azul.com/downloads/?package=jdk-fx&version=25).
-
-**Vérifier l'installation** :
-
-```bash
-java -version
-# doit afficher "openjdk version \"25.0.x\"" ou similaire
-```
-
-</details>
+> Pour une installation locale (facultative), voir la section [Dépannage](#dépannage) en fin de document.
 
 ### Documentation de référence
 
@@ -80,29 +89,13 @@ Créez votre fork via GitHub Classroom :
 
 GitHub créera automatiquement un dépôt `IUTInfoAix-R202/tp1-votreUsername`.
 
-### Import dans votre IDE
+### Ouvrir le projet dans GitHub Codespaces
 
-#### IntelliJ IDEA
-1. File → New → Project from Version Control
-2. Collez l'URL de votre fork
-3. Attendez l'indexation Maven
-4. **Lancer l'application** : panneau Maven (barre latérale droite) → `Plugins → javafx → javafx:run` (double-clic). Une configuration "Lancer l'application" est aussi pré-câblée dans le menu Run/Debug.
-5. **Lancer les tests** : clic droit sur `src/test/java` → `Run 'All Tests'`
+1. Sur votre fork GitHub, cliquez sur **"Code"** → **"Codespaces"** → **"Create codespace on main"**
+2. Attendez quelques instants — l'environnement se construit automatiquement
+3. VS Code s'ouvre dans le navigateur avec Java 25, JavaFX, Maven, Git et Copilot Chat pré-configurés
 
-#### VS Code
-1. Clonez le dépôt : `git clone <url-de-votre-fork>`
-2. Ouvrez le dossier dans VS Code
-3. Acceptez l'installation des extensions recommandées (bandeau qui apparaît)
-4. **Lancer l'application** : `F5` (configuration "JavaFX : lancer l'application" pré-câblée)
-5. **Compiler / build** : `Ctrl+Shift+B` (tâche "Build complet" par défaut)
-6. **Lancer les tests** : panneau Testing dans la barre latérale, ou `Ctrl+Shift+P → Tasks: Run Test Task`
-
-#### GitHub Codespaces (recommandé)
-1. Sur votre fork GitHub, cliquez sur "Code" → "Codespaces"
-2. Créez un nouveau Codespace
-3. L'environnement est prêt avec Java 25 + JavaFX
-
-> **Note** : le Codespace embarque un display virtuel via le feature `desktop-lite` (VNC sur le port 6080), donc `./mvnw test` et `./mvnw javafx:run` fonctionnent directement. Si vous désactivez `desktop-lite` pour un container plus léger, lancez plutôt `xvfb-run ./mvnw test`.
+Vous êtes prêts à travailler. Aucune installation locale nécessaire.
 
 ---
 
@@ -116,9 +109,7 @@ GitHub créera automatiquement un dépôt `IUTInfoAix-R202/tp1-votreUsername`.
 | `./mvnw clean` | Supprime les artefacts (`target/`) |
 | `./mvnw spotless:apply` | Formate le code Java (Google Java Style) |
 
-> Sous Windows, remplacez `./mvnw` par `mvnw.cmd`.
->
-> Le code est aussi formaté **automatiquement** avant chaque commit via un hook pre-commit invisible. Pas besoin de lancer `spotless:apply` à la main, sauf si tu veux vérifier visuellement avant de commit.
+> Le code est aussi formaté **automatiquement** avant chaque commit via un hook pre-commit invisible. Il n'est pas nécessaire de lancer `spotless:apply` à la main, sauf pour vérifier visuellement le formatage avant un commit.
 
 ---
 
@@ -140,7 +131,7 @@ Vérifiez que les tests passent sur GitHub Actions (badge vert).
 
 ## Exercices
 
-Le TP est découpé en **6 exercices** à faire dans l'ordre. Chaque exercice vit dans son propre sous-paquet `fr.univ_amu.iut.exerciceN/` (code et tests en miroir). Tous les tests sont livrés avec `@Disabled` : tu les actives **un à un** au fil de ta progression (pattern TDD baby steps).
+Le TP est découpé en **6 exercices** à faire dans l'ordre. Chaque exercice vit dans son propre sous-paquet `fr.univ_amu.iut.exerciceN/` (code et tests en miroir). Tous les tests sont livrés avec `@Disabled` : vous les activez **un à un** au fil de votre progression (pattern TDD baby steps).
 
 **Boucle de travail pour chaque test** :
 
@@ -156,7 +147,7 @@ Le TP est découpé en **6 exercices** à faire dans l'ordre. Chaque exercice vi
 
 ### Exercice 1 — Première fenêtre
 
-**Objectif** : créer l'application JavaFX la plus simple possible — une fenêtre vide qui s'affiche et se ferme quand tu cliques sur la croix.
+**Objectif** : créer l'application JavaFX la plus simple possible — une fenêtre vide qui s'affiche et se ferme quand on clique sur la croix.
 
 **Concepts** :
 - `Application` (tu étends cette classe)
@@ -165,7 +156,7 @@ Le TP est découpé en **6 exercices** à faire dans l'ordre. Chaque exercice vi
 
 **Fichier** : [`src/main/java/fr/univ_amu/iut/exercice1/PremiereFenetre.java`](src/main/java/fr/univ_amu/iut/exercice1/PremiereFenetre.java)
 
-**Test** : `laFenetreEstVisible` — vérifie que le `Stage` est bien affiché. **Indice** : il suffit d'appeler une seule méthode de `Stage` dans `start()`. Regarde la Javadoc de `Stage` à la recherche d'une méthode qui "affiche".
+**Test** : `laFenetreEstVisible` — vérifie que le `Stage` est bien affiché. **Indice** : il suffit d'appeler une seule méthode de `Stage` dans `start()`. Consultez la Javadoc de `Stage` à la recherche d'une méthode qui "affiche".
 
 ---
 
@@ -271,13 +262,13 @@ Stage
 ```
 exercice5/
 ├── Compteur.java              ← fourni (tu n'y touches pas)
-├── EcouteurClasseNommee.java  ← tu implémentes handle()
-└── EvenementsBouton.java      ← tu construis l'IHM + branches l'écouteur
+├── EcouteurClasseNommee.java  ← vous implémentez handle()
+└── EvenementsBouton.java      ← vous construisez l'IHM + branchez l'écouteur
 ```
 
 **Trois styles d'écouteur, tous équivalents** :
 
-JavaFX accepte trois écritures différentes pour définir ce qui se passe quand un bouton est cliqué. Elles produisent le même résultat, mais n'ont pas la même verbosité. La classe [`EvenementsBouton`](src/main/java/fr/univ_amu/iut/exercice5/EvenementsBouton.java) les montre toutes les trois en commentaires — tu en actives une, tu vérifies que ça marche, tu peux essayer les autres.
+JavaFX accepte trois écritures différentes pour définir ce qui se passe quand un bouton est cliqué. Elles produisent le même résultat, mais n'ont pas la même verbosité. La classe [`EvenementsBouton`](src/main/java/fr/univ_amu/iut/exercice5/EvenementsBouton.java) les montre toutes les trois en commentaires — vous en activez une, vous vérifiez que ça marche, et vous pouvez essayer les autres.
 
 **Style 1 — classe nommée** (style historique, avant Java 8) :
 ```java
@@ -304,11 +295,11 @@ bouton.setOnAction(e -> {
     labelCompteur.setText(compteur.getValeur() + " clics");
 });
 ```
-La syntaxe la plus compacte. C'est celle que tu verras le plus souvent dans du code JavaFX moderne.
+La syntaxe la plus compacte, celle que l'on rencontre le plus souvent dans du code JavaFX moderne.
 
 **Tests (2)** :
-1. `EcouteurClasseNommeeTest.handleIncrementeLeCompteur` — **test unitaire** (pas de TestFX). Vérifie que la méthode `handle()` de ta classe nommée incrémente bien le `Compteur`. Active-le et implémente le TODO dans `EcouteurClasseNommee.java`.
-2. `EvenementsBoutonTest.troisClicsAffichent3Clics` — **test d'intégration**. Clique 3 fois sur le bouton et vérifie que le label affiche `"3 clics"`. Active-le, implémente le TODO dans `EvenementsBouton.java` avec le style de ton choix.
+1. `EcouteurClasseNommeeTest.handleIncrementeLeCompteur` — **test unitaire** (pas de TestFX). Vérifie que la méthode `handle()` de la classe nommée incrémente bien le `Compteur`. Activez-le et implémentez le TODO dans `EcouteurClasseNommee.java`.
+2. `EvenementsBoutonTest.troisClicsAffichent3Clics` — **test d'intégration**. Clique 3 fois sur le bouton et vérifie que le label affiche `"3 clics"`. Activez-le, implémentez le TODO dans `EvenementsBouton.java` avec le style de votre choix.
 
 **Ids attendus** : `bouton-clique-moi` pour le bouton, `compteur` pour le label.
 
@@ -316,7 +307,7 @@ La syntaxe la plus compacte. C'est celle que tu verras le plus souvent dans du c
 
 ### Exercice 6 — Palette de couleurs (capstone)
 
-**Objectif** : **synthèse** — tu mobilises tout ce que tu as vu jusqu'ici (layouts, composants, événements, mise à jour de label) sur une petite application autonome.
+**Objectif** : **synthèse** — cet exercice mobilise l'ensemble des concepts vus jusqu'ici (layouts, composants, événements, mise à jour de label) sur une petite application autonome.
 
 **Comportement attendu** :
 
@@ -341,7 +332,7 @@ La syntaxe la plus compacte. C'est celle que tu verras le plus souvent dans du c
 - `zone` pour le `Pane` central
 - `compteurs` pour le label du bas
 
-**Format du label** : le test vérifie la présence des sous-chaînes `Rouge: N`, `Vert: N`, `Bleu: N`. Tu peux choisir le séparateur que tu veux (espaces, tirets, virgules…).
+**Format du label** : le test vérifie la présence des sous-chaînes `Rouge: N`, `Vert: N`, `Bleu: N`. Le séparateur est libre (espaces, tirets, virgules…).
 
 **Changer la couleur de fond d'un `Pane`** : utilise `setStyle("-fx-background-color: red;")` (ou `green`, `blue`).
 
@@ -353,7 +344,7 @@ La syntaxe la plus compacte. C'est celle que tu verras le plus souvent dans du c
 3. `cliquerIncremenceLeCompteurCorrespondant` — deux clics sur Vert → label contient `Vert: 2`
 4. `lesCompteursSontIndependants` — séquence 2×Rouge + 1×Bleu → label contient `Rouge: 2`, `Vert: 0`, `Bleu: 1`
 
-Quand tu as les 4 tests verts, tu as terminé le TP1. Bravo 🎉
+Quand les 4 tests sont verts, l'exercice 6 et le TP1 sont terminés. Bravo !
 
 ---
 
@@ -367,25 +358,56 @@ Quand tu as les 4 tests verts, tu as terminé le TP1. Bravo 🎉
 
 ## Dépannage
 
-**Le premier `./mvnw` prend plusieurs minutes** — normal. Le wrapper télécharge Maven 3.9.14 puis toutes les dépendances JavaFX / JUnit / TestFX (~50 Mo au total). Les runs suivants utilisent le cache local et sont quasi instantanés.
+**Le premier `./mvnw` prend plusieurs minutes** — c'est normal. Le wrapper télécharge Maven 3.9.14 puis toutes les dépendances JavaFX / JUnit / TestFX (~50 Mo au total). Les exécutions suivantes utilisent le cache local et sont quasi instantanées.
 
-**`./mvnw: Permission denied`** — après certains clones, le bit exécutable est perdu. Corrige avec :
+**`./mvnw: Permission denied`** — après certains clones, le bit exécutable peut être perdu. Corrigez avec :
 ```bash
 chmod +x mvnw
 ```
 
-**`java: command not found` ou version < 25** — voir la section [Prérequis](#prérequis) ci-dessus pour installer Java 25. Vérifie ensuite avec `java -version`.
+**`java: command not found` ou version < 25** — ce problème ne devrait pas se produire dans un Codespace. En cas d'installation locale, voir ci-dessous.
 
-**Tests TestFX qui plantent avec `No X11 DISPLAY`** (Linux sans serveur X actif) — lance les tests via `xvfb-run` :
+**Tests TestFX qui plantent avec `No X11 DISPLAY`** (Linux sans serveur X actif) — lancez les tests via `xvfb-run` :
 ```bash
 xvfb-run --auto-servernum ./mvnw test
 ```
-Ou plus simple : travaille dans le Codespace / devcontainer, qui embarque déjà un display virtuel.
+Dans un Codespace, le display virtuel est déjà configuré et ce problème ne se produit pas.
 
-**Sous Windows, `./mvnw ...` ne marche pas** — utilise `mvnw.cmd` à la place :
+**Sous Windows, `./mvnw ...` ne fonctionne pas** — utilisez `mvnw.cmd` à la place :
 ```powershell
 .\mvnw.cmd javafx:run
 ```
+
+---
+
+<details>
+<summary>📦 Installation locale (facultative) — pour travailler en dehors du Codespace</summary>
+
+**Sur les machines de l'IUT** (Linux, SDKMAN pré-installé) :
+
+```bash
+sdk install java 25.fx-zulu
+```
+
+**Chez vous sous Linux / macOS** — installez d'abord SDKMAN depuis [sdkman.io](https://sdkman.io), puis la commande ci-dessus.
+
+**Windows** — via [Scoop](https://scoop.sh) :
+
+```powershell
+scoop bucket add java
+scoop install java/zulu-jdk-fx25
+```
+
+Alternative Windows : installateur GUI sur [azul.com/downloads](https://www.azul.com/downloads/?package=jdk-fx&version=25).
+
+**Vérifier l'installation** :
+
+```bash
+java -version
+# doit afficher "openjdk version \"25.0.x\"" ou similaire
+```
+
+</details>
 
 ---
 
