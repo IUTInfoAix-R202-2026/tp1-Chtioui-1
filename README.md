@@ -974,15 +974,15 @@ Vérifiez votre score sur l'onglet **Actions**. Il devrait avoir augmenté.
 L'interface est décomposée en **trois zones** dans un `BorderPane`, comme dans l'exercice 4 :
 
 ```mermaid
-graph BT
-    BR["🔴 <b>Button</b><br/>&quot;Rouge&quot;"] -- "enfant" --> H["➡️ <b>HBox</b><br/>3 boutons"]
-    BV["🟢 <b>Button</b><br/>&quot;Vert&quot;"] -- "enfant" --> H
-    BB["🔵 <b>Button</b><br/>&quot;Bleu&quot;"] -- "enfant" --> H
-    H -- "setTop()" --> BP["📦 <b>BorderPane</b><br/>racine"]
-    Z["🎨 <b>Pane</b><br/>zone de couleur"] -- "setCenter()" --> BP
-    L["🏷️ <b>Label</b><br/>&quot;Rouge: 0 …&quot;"] -- "setBottom()" --> BP
-    BP -- "passé à" --> S["🎬 <b>Scene</b>"]
-    S -- "attachée au" --> ST["🖼️ <b>Stage</b>"]
+graph TD
+    ST["🖼️ <b>Stage</b>"] -->|"setScene()"| S["🎬 <b>Scene</b>"]
+    S -->|"racine"| BP["📦 <b>BorderPane</b>"]
+    BP -->|"setTop()"| H["➡️ <b>HBox</b>"]
+    BP -->|"setCenter()"| Z["🎨 <b>Pane</b><br/>zone de couleur"]
+    BP -->|"setBottom()"| L["🏷️ <b>Label</b><br/>&quot;Rouge: 0 …&quot;"]
+    H --- BR["🔴 <b>Button</b><br/>&quot;Rouge&quot;"]
+    H --- BV["🟢 <b>Button</b><br/>&quot;Vert&quot;"]
+    H --- BB["🔵 <b>Button</b><br/>&quot;Bleu&quot;"]
 
     style ST fill:#4a90d9,color:white
     style S fill:#7bb563,color:white
