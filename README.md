@@ -238,6 +238,18 @@ Votre score sur GitHub Actions augmente à chaque exercice terminé. Vous pouvez
 
 ---
 
+## Assistance IA
+
+Vous avez le droit d'utiliser **Copilot Chat** (panneau latéral dans VS Code) quand vous bloquez sur un exercice. Il est configuré spécifiquement pour ce TP : il ne donnera pas la solution directement, mais vous guidera par étapes — d'abord une explication du concept, puis un pointeur vers la documentation, et seulement en dernier recours un minimum de code.
+
+**Copilot Chat n'est pas un raccourci, c'est un tuteur.** Il vous aide à comprendre, pas à copier-coller. L'objectif est que vous soyez capable d'écrire ce code **seul(e)** à la fin de la séance.
+
+**Pourquoi c'est important** : l'évaluation de ce module (CC2, CC3) se fera **sur papier, sans aucun outil d'assistance**. Il est donc essentiel que vous construisiez vos automatismes en écrivant le code vous-même. Copilot Chat est un filet de sécurité pour débloquer, pas un substitut à la réflexion.
+
+**Conseil pratique** : sur les premiers exercices (1–3), n'hésitez pas à demander de l'aide pour vous familiariser avec JavaFX et le workflow. Sur les exercices avancés (4–6), essayez d'aller le plus loin possible par vous-même avant de solliciter l'assistant. C'est cette progression vers l'autonomie qui vous préparera le mieux aux évaluations.
+
+---
+
 ## Exercices
 
 Le TP est découpé en **6 exercices** à faire dans l'ordre. Chaque exercice vit dans son propre sous-paquet `fr.univ_amu.iut.exerciceN/` (code et tests en miroir). Tous les tests sont livrés avec `@Disabled` : vous les activez **un à un** au fil de votre progression (pattern TDD baby steps).
