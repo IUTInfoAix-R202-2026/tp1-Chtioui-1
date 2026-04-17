@@ -568,19 +568,25 @@ On construit de l'intérieur vers l'extérieur :
 
 Le `BorderPane` organise ses enfants dans 5 zones :
 
-<table border="2" cellpadding="10" cellspacing="0">
-  <tr>
-    <td colspan="3" align="center" height="80" bgcolor="#d0d0d0"><b>top</b></td>
-  </tr>
-  <tr>
-    <td align="center" width="200" height="180" bgcolor="#d0d0d0"><b>left</b></td>
-    <td align="center" width="500" height="180" bgcolor="#ffcc80"><b>✦ center ✦</b></td>
-    <td align="center" width="200" height="180" bgcolor="#d0d0d0"><b>right</b></td>
-  </tr>
-  <tr>
-    <td colspan="3" align="center" height="80" bgcolor="#d0d0d0"><b>bottom</b></td>
-  </tr>
-</table>
+<svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" width="900" height="340">
+  <!-- Cadre extérieur -->
+  <rect x="0" y="0" width="900" height="340" rx="6" fill="none" stroke="#888" stroke-width="2"/>
+  <!-- top -->
+  <rect x="2" y="2" width="896" height="76" rx="4" fill="#b0bec5"/>
+  <text x="450" y="46" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#37474f">top</text>
+  <!-- left -->
+  <rect x="2" y="82" width="196" height="176" rx="4" fill="#b0bec5"/>
+  <text x="100" y="176" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#37474f">left</text>
+  <!-- center -->
+  <rect x="202" y="82" width="496" height="176" rx="4" fill="#ffcc80" stroke="#e8a838" stroke-width="3"/>
+  <text x="450" y="176" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#e65100">center</text>
+  <!-- right -->
+  <rect x="702" y="82" width="196" height="176" rx="4" fill="#b0bec5"/>
+  <text x="800" y="176" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#37474f">right</text>
+  <!-- bottom -->
+  <rect x="2" y="262" width="896" height="76" rx="4" fill="#b0bec5"/>
+  <text x="450" y="306" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#37474f">bottom</text>
+</svg>
 
 Dans cet exercice, seule la zone **center** sera utilisée (pour le Label). Les autres zones resteront vides pour l'instant. Vous les utiliserez dans l'exercice 4.
 
