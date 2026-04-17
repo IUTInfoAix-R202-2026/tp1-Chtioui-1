@@ -24,6 +24,8 @@ class PremiereSceneTest {
     new PremiereScene().start(stage);
   }
 
+  // --- Étape 1 : afficher la fenêtre ---
+
   @Disabled("Retire cette annotation pour activer le test")
   @Test
   void laFenetreEstVisible(FxRobot robot) {
@@ -31,6 +33,8 @@ class PremiereSceneTest {
         .as("le Stage doit être affiché — appelle show() à la fin de start()")
         .isTrue();
   }
+
+  // --- Étape 2 : créer une Scene et l'attacher au Stage ---
 
   @Disabled("Retire cette annotation pour activer le test")
   @Test
@@ -40,20 +44,45 @@ class PremiereSceneTest {
         .isNotNull();
   }
 
+  // --- Étape 3 : utiliser un BorderPane comme racine ---
+
   @Disabled("Retire cette annotation pour activer le test")
   @Test
-  void leLabelEstAffiche(FxRobot robot) {
-    Label label = robot.lookup("Bonjour, JavaFX !").queryAs(Label.class);
-    assertThat(label).as("un Label avec le texte attendu doit être visible").isNotNull();
+  void leRootEstUnBorderPane(FxRobot robot) {
+    assertThat(stage.getScene().getRoot())
+        .as("la racine de la Scene doit être un BorderPane — passez-le au constructeur de Scene")
+        .isInstanceOf(BorderPane.class);
   }
+
+  // --- Étape 4 : créer un Label ---
+
+  @Disabled("Retire cette annotation pour activer le test")
+  @Test
+  void unLabelEstPresent(FxRobot robot) {
+    assertThat(robot.lookup(".label").queryAll())
+        .as("la scène doit contenir au moins un Label")
+        .isNotEmpty();
+  }
+
+  // --- Étape 5 : donner le bon texte au Label ---
+
+  @Disabled("Retire cette annotation pour activer le test")
+  @Test
+  void leLabelAfficheLeBonTexte(FxRobot robot) {
+    Label label = robot.lookup("Bonjour, JavaFX !").queryAs(Label.class);
+    assertThat(label)
+        .as("un Label avec le texte exact 'Bonjour, JavaFX !' doit être visible")
+        .isNotNull();
+  }
+
+  // --- Étape 6 : placer le Label au centre du BorderPane ---
 
   @Disabled("Retire cette annotation pour activer le test")
   @Test
   void leLabelEstAuCentreDuBorderPane(FxRobot robot) {
-    assertThat(stage.getScene().getRoot())
-        .as("la racine de la Scene doit être un BorderPane")
-        .isInstanceOf(BorderPane.class);
     BorderPane root = (BorderPane) stage.getScene().getRoot();
-    assertThat(root.getCenter()).as("le Label doit être placé au centre").isInstanceOf(Label.class);
+    assertThat(root.getCenter())
+        .as("le Label doit être placé au centre du BorderPane via setCenter()")
+        .isInstanceOf(Label.class);
   }
 }
