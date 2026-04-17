@@ -773,6 +773,49 @@ Vérifiez votre score sur l'onglet **Actions**.
 - [`Button.setOnAction()`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/ButtonBase.html#setOnAction(javafx.event.EventHandler)) : la méthode qui branche un écouteur sur un bouton
 - Trois styles d'écriture pour un même écouteur : classe nommée, classe anonyme, lambda
 
+### Maquette de l'IHM attendue
+
+![Maquette de l'exercice 5 — bouton et compteur](src/main/resources/assets/maquette_evenements_bouton.svg)
+
+L'interface est simple : un bouton "Clique-moi" et un label qui affiche le nombre de clics. Le tout est empilé verticalement dans un `VBox`.
+
+### Le graphe de scène
+
+```mermaid
+graph BT
+    B["🔘 <b>Button</b><br/>&quot;Clique-moi&quot;"] -- "enfant" --> V["📦 <b>VBox</b><br/>conteneur racine"]
+    L["🏷️ <b>Label</b><br/>&quot;0 clics&quot;"] -- "enfant" --> V
+    V -- "passé à" --> S["🎬 <b>Scene</b>"]
+    S -- "attachée au" --> ST["🖼️ <b>Stage</b>"]
+
+    style ST fill:#4a90d9,color:white
+    style S fill:#7bb563,color:white
+    style V fill:#e8a838,color:white
+    style B fill:#d35f5f,color:white
+    style L fill:#d35f5f,color:white
+```
+
+### Comment fonctionne un événement
+
+Quand l'utilisateur clique sur le bouton, JavaFX déclenche une chaîne d'appels :
+
+```mermaid
+sequenceDiagram
+    participant U as 👤 Utilisateur
+    participant B as Button
+    participant H as EventHandler
+    participant C as Compteur
+    participant L as Label
+
+    U->>B: clic
+    B->>H: handle(ActionEvent)
+    H->>C: incrementer()
+    C-->>H: valeur = N
+    H->>L: setText("N clics")
+```
+
+La méthode `setOnAction()` du bouton enregistre un `EventHandler` : c'est l'objet qui sera appelé à chaque clic. À l'intérieur de `handle()`, on incrémente le compteur puis on met à jour le texte du label.
+
 ### Structure de l'exercice
 
 Cet exercice contient **trois fichiers Java** :
