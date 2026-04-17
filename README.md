@@ -386,6 +386,50 @@ Le lanceur est un outil pratique pour **tester visuellement** chaque exercice au
 
 Pour fermer l'application, fermez la fenêtre JavaFX ou appuyez sur `Ctrl+C` dans le terminal.
 
+**Étape 6 - Pousser, créer une Pull Request et merger**
+
+Votre premier exercice est terminé. Il est temps de sauvegarder votre travail et de pratiquer le workflow Git que vous utiliserez pour chaque exercice.
+
+Commencez par commiter vos modifications :
+
+```bash
+git add .
+git commit -m "Exercice 1 terminé"
+```
+
+Poussez votre branche sur GitHub :
+
+```bash
+git push -u origin exercice1
+```
+
+Créez une Pull Request pour que votre travail soit visible sur GitHub :
+
+```bash
+gh pr create --title "Exercice 1 terminé" --body "Le test laFenetreEstVisible passe."
+```
+
+Ouvrez la Pull Request dans votre navigateur pour voir le résultat :
+
+```bash
+gh pr view --web
+```
+
+Sur la page de la PR, prenez le temps d'observer :
+- Le **diff** : le code que vous avez ajouté (en vert) par rapport au code d'origine
+- Les **checks CI** : la compilation et les tests s'exécutent automatiquement
+- La **review Copilot** : si elle est activée, Copilot analyse votre code et laisse des commentaires. Lisez-les, c'est un retour gratuit sur la qualité de votre code.
+
+Quand vous avez consulté la PR, mergez-la et revenez sur `main` :
+
+```bash
+gh pr merge --rebase --delete-branch
+git checkout main
+git pull
+```
+
+Votre exercice 1 est maintenant intégré dans `main`. Vous pouvez passer à l'exercice 2.
+
 #### Essayer Copilot Chat
 
 C'est le bon moment pour découvrir votre assistant IA. Ouvrez le panneau **Copilot Chat** (icône dans la barre latérale gauche) et essayez quelques questions simples pour vous familiariser :
@@ -398,10 +442,6 @@ C'est le bon moment pour découvrir votre assistant IA. Ouvrez le panneau **Copi
 Observez comment Copilot répond : il explique le concept sans donner directement du code. Si vous insistez, il vous orientera vers la Javadoc, puis seulement en dernier recours proposera un minimum de code.
 
 Pour les exercices suivants, vous pouvez utiliser Copilot Chat dès que vous bloquez. C'est un outil d'apprentissage, pas de triche.
-
-#### Finaliser l'exercice
-
-Suivez les étapes de rendu décrites dans la section [Workflow de développement](#workflow-de-développement--un-cycle-par-exercice) (étapes 8 à 10) : commit, push, Pull Request, merge.
 
 ---
 
