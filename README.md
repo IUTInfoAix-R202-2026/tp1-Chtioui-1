@@ -116,7 +116,11 @@ Une fois sur la page de votre dépôt :
 
 ### Vérification rapide
 
-Une fois le Codespace ouvert, ouvrez un terminal (`Ctrl+ù` ou menu **Terminal → New Terminal**) et lancez :
+Une fois le Codespace ouvert, ouvrez un terminal via le menu **Terminal → New Terminal** :
+
+![Menu Terminal → New Terminal](src/main/resources/assets/codespace_vscode_nouveau_terminal.png)
+
+Puis lancez :
 
 ```bash
 ./mvnw test
@@ -297,7 +301,7 @@ L'exercice 1 est très guidé pas à pas pour vous familiariser avec l'environne
 
 **Étape 1 - Créer une branche Git pour cet exercice**
 
-Ouvrez un terminal dans VS Code (`Ctrl+ù` ou menu **Terminal → New Terminal**) et exécutez :
+Ouvrez un terminal dans VS Code (menu **Terminal → New Terminal**) et exécutez :
 
 ```bash
 git checkout -b exercice1
