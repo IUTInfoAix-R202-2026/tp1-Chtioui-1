@@ -252,21 +252,15 @@ Vous avez le droit d'utiliser **Copilot Chat** (panneau latéral dans VS Code) q
 
 **Copilot Chat n'est pas un raccourci, c'est un tuteur.** Il vous aide à comprendre, pas à copier-coller. L'objectif est que vous soyez capable d'écrire ce code **seul(e)** à la fin de la séance.
 
-**Pourquoi c'est important** : l'évaluation de ce module (CC2, CC3) se fera **sur papier, sans aucun outil d'assistance**. Il est donc essentiel que vous construisiez vos automatismes en écrivant le code vous-même. Copilot Chat est un filet de sécurité pour débloquer, pas un substitut à la réflexion.
+**Pourquoi c'est important** : l'évaluation de ce module se fera **sur papier, sans aucun outil d'assistance**. Il est donc essentiel que vous construisiez vos automatismes en écrivant le code vous-même. Copilot Chat est un filet de sécurité pour débloquer, pas un substitut à la réflexion.
 
 **Conseil pratique** : sur les premiers exercices (1–3), n'hésitez pas à demander de l'aide pour vous familiariser avec JavaFX et le workflow. Sur les exercices avancés (4–6), essayez d'aller le plus loin possible par vous-même avant de solliciter l'assistant. C'est cette progression vers l'autonomie qui vous préparera le mieux aux évaluations.
 
----
-
-## Exercices
-
-Le TP est découpé en **6 exercices** à faire dans l'ordre. Chaque exercice vit dans son propre sous-paquet `fr.univ_amu.iut.exerciceN/` (code et tests en miroir).
-
-L'exercice 1 est très guidé pas à pas pour vous familiariser avec l'environnement. À partir de l'exercice 2, une boucle de travail systématique est introduite que vous appliquerez pour tous les exercices suivants.
+Le TP est découpé en **6 exercices** à faire dans l'ordre. Chaque exercice vit dans son propre sous-paquet `fr.univ_amu.iut.exerciceN/` (code et tests en miroir). L'exercice 1 est très guidé pas à pas pour vous familiariser avec l'environnement. À partir de l'exercice 2, une boucle de travail systématique est introduite que vous appliquerez pour tous les exercices suivants.
 
 ---
 
-### Exercice 1 - Première fenêtre
+## Exercice 1 - Première fenêtre
 
 **Objectif** : créer l'application JavaFX la plus simple possible, une fenêtre vide qui apparaît à l'écran.
 
@@ -275,7 +269,7 @@ L'exercice 1 est très guidé pas à pas pour vous familiariser avec l'environne
 - Le `Stage` : l'objet qui représente la fenêtre
 - La méthode `start(Stage)` : appelée automatiquement par JavaFX au lancement
 
-#### Découverte du code
+### Découverte du code
 
 1. Dans l'explorateur de fichiers (panneau gauche de VS Code), naviguez vers :
    ```
@@ -299,7 +293,7 @@ L'exercice 1 est très guidé pas à pas pour vous familiariser avec l'environne
 
 4. Vous voyez un test `laFenetreEstVisible` avec l'annotation `@Disabled`. Ce test vérifie que `stage.isShowing()` retourne `true`, autrement dit que la fenêtre est bien affichée à l'écran.
 
-#### Travail à faire
+### Travail à faire
 
 **Étape 1 - Créer une branche Git pour cet exercice**
 
@@ -397,7 +391,7 @@ Votre exercice 1 est maintenant intégré dans `main`.
 
 Vérifiez que votre note a augmenté : rendez-vous sur votre dépôt GitHub → onglet **"Actions"** → dernier run du workflow **"GitHub Classroom Workflow"**. Votre score devrait être passé de 10/100 à 25/100 (10 points de compilation + 15 points pour l'exercice 1).
 
-#### Voir votre fenêtre avec VNC
+### Voir votre fenêtre avec VNC
 
 Les tests vérifient le comportement de votre code automatiquement, mais il est aussi possible de **voir votre application s'afficher** dans un navigateur.
 
@@ -419,7 +413,7 @@ Maintenant, lancez votre application :
 
 Dans l'onglet VNC, vous verrez apparaître la fenêtre du **lanceur** (`App.java`).
 
-#### Le lanceur `App.java`
+### Le lanceur `App.java`
 
 Le fichier `App.java` (dans `src/main/java/fr/univ_amu/iut/`) est un **menu principal** qui liste tous les exercices du TP. Il affiche une fenêtre avec un bouton par exercice :
 
@@ -432,7 +426,7 @@ Le lanceur est un outil pratique pour **tester visuellement** chaque exercice au
 
 Pour fermer l'application, fermez la fenêtre JavaFX ou appuyez sur `Ctrl+C` dans le terminal.
 
-#### Essayer Copilot Chat
+### Essayer Copilot Chat
 
 C'est le bon moment pour découvrir votre assistant IA. Ouvrez le panneau **Copilot Chat** (icône dans la barre latérale gauche) et essayez quelques questions simples pour vous familiariser :
 
@@ -447,7 +441,7 @@ Pour les exercices suivants, vous pouvez utiliser Copilot Chat dès que vous blo
 
 ---
 
-### Exercice 2 - Stage personnalisé
+## Exercice 2 - Stage personnalisé
 
 **Objectif** : personnaliser l'apparence de la fenêtre (titre, dimensions, style de décoration).
 
@@ -455,7 +449,7 @@ Pour les exercices suivants, vous pouvez utiliser Copilot Chat dès que vous blo
 - Les propriétés du `Stage` : `setTitle`, `setWidth`, `setHeight`, `setResizable`
 - L'énumération `StageStyle` pour modifier la décoration de la fenêtre
 
-#### Boucle de travail pour chaque test
+### Boucle de travail pour chaque test
 
 À partir de cet exercice, vous appliquerez la **même boucle de travail** pour chaque test - c'est la méthode TDD (Test-Driven Development) que vous utiliserez tout au long du module :
 
@@ -476,7 +470,7 @@ Quand **tous les tests de l'exercice** sont verts, finalisez l'exercice (commit,
 
 > 💡 Pour voir votre fenêtre dans le navigateur, utilisez le VNC comme expliqué dans l'[exercice 1](#voir-votre-fenêtre-avec-vnc).
 
-#### Travail à faire
+### Travail à faire
 
 **Fichier** : [`src/main/java/fr/univ_amu/iut/exercice2/StagePersonnalise.java`](src/main/java/fr/univ_amu/iut/exercice2/StagePersonnalise.java)
 
@@ -499,7 +493,7 @@ Puis activez et implémentez les tests **un par un**, dans l'ordre :
 
 ---
 
-### Exercice 3 - Première Scene avec un Label
+## Exercice 3 - Première Scene avec un Label
 
 **Objectif** : sortir de la fenêtre vide. Construire une `Scene` qui contient un `BorderPane` dans lequel un `Label` affiche un message.
 
@@ -528,7 +522,7 @@ Stage
 
 ---
 
-### Exercice 4 - Mise en page d'un formulaire
+## Exercice 4 - Mise en page d'un formulaire
 
 **Objectif** : apprendre à combiner plusieurs conteneurs pour reproduire une maquette réaliste. C'est l'exercice qui te force à réfléchir à la **décomposition** d'une IHM en zones.
 
@@ -572,7 +566,7 @@ Stage
 
 ---
 
-### Exercice 5 - Réagir à un clic
+## Exercice 5 - Réagir à un clic
 
 **Objectif** : découvrir comment un composant JavaFX **réagit** à une action utilisateur. Tu vas brancher un écouteur sur un `Button` et voir qu'un clic peut modifier l'état de l'application (ici, un compteur).
 
@@ -624,7 +618,7 @@ La syntaxe la plus compacte, celle que l'on rencontre le plus souvent dans du co
 
 ---
 
-### Exercice 6 - Palette de couleurs (capstone)
+## Exercice 6 - Palette de couleurs (capstone)
 
 **Objectif** : **synthèse** - cet exercice mobilise l'ensemble des concepts vus jusqu'ici (layouts, composants, événements, mise à jour de label) sur une petite application autonome.
 
