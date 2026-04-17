@@ -568,11 +568,19 @@ On construit de l'intérieur vers l'extérieur :
 
 Le `BorderPane` organise ses enfants dans 5 zones :
 
-| | | |
-|:---:|:---:|:---:|
-| | **top** | |
-| **left** | **✦ center ✦** | **right** |
-| | **bottom** | |
+<table>
+  <tr>
+    <td colspan="3" align="center">top</td>
+  </tr>
+  <tr>
+    <td align="center">left</td>
+    <td align="center"><b>✦ center ✦</b></td>
+    <td align="center">right</td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center">bottom</td>
+  </tr>
+</table>
 
 Dans cet exercice, seule la zone **center** sera utilisée (pour le Label). Les autres zones resteront vides pour l'instant. Vous les utiliserez dans l'exercice 4.
 
