@@ -449,6 +449,24 @@ Pour les exercices suivants, vous pouvez utiliser Copilot Chat dès que vous blo
 - Les propriétés du `Stage` : `setTitle`, `setWidth`, `setHeight`, `setResizable`
 - L'énumération `StageStyle` pour modifier la décoration de la fenêtre
 
+### Découverte du code
+
+1. Ouvrez le fichier de l'exercice :
+   ```
+   src/main/java/fr/univ_amu/iut/exercice2/StagePersonnalise.java
+   ```
+
+2. Comme dans l'exercice 1, la classe étend `Application` et possède une méthode `start(Stage primaryStage)` avec un TODO. Cette fois, au lieu de simplement afficher la fenêtre, vous allez la **configurer** avant de l'afficher.
+
+3. Ouvrez le fichier de test correspondant :
+   ```
+   src/test/java/fr/univ_amu/iut/exercice2/StagePersonnaliseTest.java
+   ```
+
+4. Vous remarquerez que cet exercice contient **5 tests** (tous `@Disabled`), chacun vérifiant un aspect différent de la personnalisation du `Stage`. Ils doivent être activés et implémentés **dans l'ordre**, car chaque test suppose que les précédents sont déjà implémentés.
+
+5. Notez que le premier test (`laFenetreEstVisible`) vérifie à nouveau que `show()` est appelé. C'est un rappel : **chaque exercice doit afficher sa fenêtre**.
+
 ### Boucle de travail pour chaque test
 
 À partir de cet exercice, vous appliquerez la **même boucle de travail** pour chaque test - c'est la méthode TDD (Test-Driven Development) que vous utiliserez tout au long du module :
