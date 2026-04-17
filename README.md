@@ -295,7 +295,7 @@ Le TP est découpé en **6 exercices** à faire dans l'ordre. Chaque exercice vi
 
 ### Travail à faire
 
-**Étape 1 - Créer une branche Git pour cet exercice**
+#### Étape 1 - Créer une branche Git pour cet exercice
 
 Ouvrez un terminal dans VS Code (menu **Terminal → New Terminal**) et exécutez :
 
@@ -311,7 +311,7 @@ git branch --show-current
 
 Le résultat doit afficher `exercice1`.
 
-**Étape 2 - Activer le test**
+#### Étape 2 - Activer le test
 
 Dans le fichier `PremiereFenetreTest.java`, supprimez (ou commentez) la ligne :
 
@@ -321,7 +321,7 @@ Dans le fichier `PremiereFenetreTest.java`, supprimez (ou commentez) la ligne :
 
 Sauvegardez le fichier (`Ctrl+S`).
 
-**Étape 3 - Vérifier que le test est rouge**
+#### Étape 3 - Vérifier que le test est rouge
 
 Dans le terminal, lancez :
 
@@ -331,13 +331,13 @@ Dans le terminal, lancez :
 
 Vous devriez voir un message d'erreur indiquant que le test `laFenetreEstVisible` a **échoué**. C'est normal et attendu : le test vérifie que la fenêtre est visible, mais votre méthode `start()` ne fait rien pour l'instant.
 
-**Étape 4 - Implémenter la solution**
+#### Étape 4 - Implémenter la solution
 
 Retournez dans `PremiereFenetre.java`. Le `Stage` reçu en paramètre de `start()` représente la fenêtre principale. Pour l'afficher, il suffit d'appeler une seule méthode.
 
 **Indice** : consultez la [Javadoc de Stage](https://openjfx.io/javadoc/25/javafx.graphics/javafx/stage/Stage.html) et cherchez une méthode héritée qui rend la fenêtre visible.
 
-**Étape 5 - Vérifier que le test passe**
+#### Étape 5 - Vérifier que le test passe
 
 ```bash
 ./mvnw test
@@ -345,7 +345,7 @@ Retournez dans `PremiereFenetre.java`. Le `Stage` reçu en paramètre de `start(
 
 Le test `laFenetreEstVisible` doit maintenant être **vert**. Si c'est le cas, félicitations : vous venez d'écrire votre première application JavaFX !
 
-**Étape 6 - Pousser, créer une Pull Request et merger**
+#### Étape 6 - Pousser, créer une Pull Request et merger
 
 Votre premier exercice est terminé. Il est temps de sauvegarder votre travail et de pratiquer le workflow Git que vous utiliserez pour chaque exercice.
 
