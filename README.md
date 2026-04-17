@@ -81,21 +81,52 @@ L'ensemble du TP se fait sur **GitHub Codespaces** — aucune installation local
 
 ## Mise en place
 
-### Fork du dépôt
+La mise en place se fait en deux étapes : accepter le devoir sur GitHub Classroom (qui crée votre dépôt personnel), puis ouvrir ce dépôt dans un Codespace (votre environnement de développement dans le navigateur).
 
-Créez votre fork via GitHub Classroom :
+### Étape 1 — Accepter le devoir sur GitHub Classroom
 
-👉 **https://classroom.github.com/a/z4Z-5u0m**
+1. Cliquez sur le lien suivant :
 
-GitHub créera automatiquement un dépôt `IUTInfoAix-R202/tp1-votreUsername`.
+   👉 **https://classroom.github.com/a/z4Z-5u0m**
 
-### Ouvrir le projet dans GitHub Codespaces
+2. Si c'est votre première utilisation de GitHub Classroom, autorisez l'accès à votre compte GitHub.
+3. Sélectionnez votre nom dans la liste des étudiants (si elle apparaît) pour associer votre compte GitHub à votre identité dans le cours.
+4. Cliquez sur **"Accept this assignment"**.
+5. Attendez quelques secondes — GitHub crée automatiquement un dépôt à votre nom : `IUTInfoAix-R202-2026/tp1-votreLogin`.
+6. Cliquez sur le lien du dépôt créé pour y accéder.
 
-1. Sur votre fork GitHub, cliquez sur **"Code"** → **"Codespaces"** → **"Create codespace on main"**
-2. Attendez quelques instants — l'environnement se construit automatiquement
-3. VS Code s'ouvre dans le navigateur avec Java 25, JavaFX, Maven, Git et Copilot Chat pré-configurés
+### Étape 2 — Ouvrir le projet dans GitHub Codespaces
 
-Vous êtes prêts à travailler. Aucune installation locale nécessaire.
+Une fois sur la page de votre dépôt :
+
+1. Cliquez sur le bouton vert **"Code"** (en haut à droite du listing de fichiers).
+2. Sélectionnez l'onglet **"Codespaces"**.
+3. Cliquez sur **"Create codespace on main"**.
+4. Attendez que l'environnement se construise (de 1 à 5 minutes la première fois).
+5. VS Code s'ouvre **dans votre navigateur** avec tout l'environnement pré-configuré :
+   - Java 25 + JavaFX 25
+   - Maven (via le wrapper `./mvnw`)
+   - Git
+   - Copilot Chat (votre assistant IA pédagogique)
+   - Toutes les extensions nécessaires
+
+> **Important** : le Codespace est **personnel et persistant**. Quand vous fermez l'onglet, votre travail est sauvegardé. Pour reprendre, retournez sur votre dépôt GitHub → **"Code"** → **"Codespaces"** → cliquez sur le Codespace existant (ne créez pas un nouveau à chaque fois).
+
+### Vérification rapide
+
+Une fois le Codespace ouvert, ouvrez un terminal (`Ctrl+ù` ou menu **Terminal → New Terminal**) et lancez :
+
+```bash
+./mvnw test
+```
+
+Vous devriez voir un résultat du type :
+```
+Tests run: 22, Failures: 0, Errors: 0, Skipped: 21
+BUILD SUCCESS
+```
+
+Si c'est le cas, tout est prêt. Le seul test actif (`AppTest`) passe, et les 21 tests d'exercices sont en attente (`Skipped`) — c'est normal, ils seront activés au fil de votre progression.
 
 ---
 
