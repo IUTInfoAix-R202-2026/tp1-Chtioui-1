@@ -38,7 +38,7 @@ Les exercices de ce TP sont organisés en progression : chaque exercice vous fai
 
 ### Pourquoi cette démarche ?
 
-Ce TP utilise le **TDD (Test-Driven Development) en baby steps** : les tests sont livrés désactivés (`@Disabled`) et vous les activez un par un, comme un cahier des charges dont on implémente les exigences une à une. Ce n'est pas un artifice pédagogique - c'est une **méthode de développement professionnel** (formalisée par Kent Beck dans l'Extreme Programming) utilisée dans l'industrie logicielle.
+Ce TP utilise le **TDD (Test-Driven Development) en baby steps** : les tests sont livrés désactivés (`@Disabled`) et vous les activez un par un, comme un cahier des charges dont on implémente les exigences une à une. Ce n'est pas un artifice pédagogique : c'est une **méthode de développement professionnel** (formalisée par Kent Beck dans l'Extreme Programming) utilisée dans l'industrie logicielle.
 
 Le workflow Git que vous pratiquerez - créer une branche par exercice, pousser, ouvrir une Pull Request, recevoir une review automatique de Copilot, puis merger - reproduit le **cycle de travail en entreprise**. L'objectif est d'apprendre à collaborer avec des outils, pas seulement à écrire du code.
 
@@ -50,11 +50,11 @@ La SAE 2.01 vous demandera de **créer une interface d'extraction et manipulatio
 
 Pour construire cette interface, vous aurez besoin de compétences acquises progressivement dans les TP du module R2.02 :
 
-- **TP1** (celui-ci) : fenêtres, scènes, composants de base et événements - les **fondations**
-- **TP2** : properties et bindings - la **liaison de données** entre l'interface et le modèle
-- **TP3** : FXML - la **conception déclarative** d'interfaces complexes
-- **TP4** : architecture MVVM - la **séparation des responsabilités** entre vue et logique
-- **TP5** : persistance - la **lecture et écriture de données** (fichiers, bases de données)
+- **TP1** (celui-ci) : fenêtres, scènes, composants de base et événements, les **fondations**
+- **TP2** : properties et bindings, la **liaison de données** entre l'interface et le modèle
+- **TP3** : FXML, la **conception déclarative** d'interfaces complexes
+- **TP4** : architecture MVVM, la **séparation des responsabilités** entre vue et logique
+- **TP5** : persistance, la **lecture et écriture de données** (fichiers, bases de données)
 
 Ce TP1 pose les premières briques : créer une fenêtre, organiser des composants dans un layout, et réagir aux actions de l'utilisateur. Ces compétences seront vos outils quotidiens jusqu'à la SAE.
 
@@ -62,13 +62,13 @@ Ce TP1 pose les premières briques : créer une fenêtre, organiser des composan
 
 #### Connaissances attendues
 
-- **Bases de la programmation** : variables, types, structures de contrôle, tableaux - acquis en C++ dans la ressource R1.01
-- **Programmation orientée objet en Java** : classes, objets, héritage, interfaces, polymorphisme - acquis dans la ressource R2.01
+- **Bases de la programmation** : variables, types, structures de contrôle, tableaux (acquis en C++ dans la ressource R1.01)
+- **Programmation orientée objet en Java** : classes, objets, héritage, interfaces, polymorphisme (acquis dans la ressource R2.01)
 - **Git** : les concepts (dépôt, commit, branche) ont été vus en cours, mais pas encore réellement pratiqués. Un TP dédié en R2.03 est prévu en parallèle. Ce TP servira de première mise en pratique réelle du workflow Git, guidée par Copilot Chat
 
 #### Environnement technique
 
-L'ensemble du TP se fait sur **GitHub Codespaces** - aucune installation locale n'est nécessaire. L'environnement (Java 25, JavaFX 25, Maven, Git, Copilot Chat) est pré-configuré et prêt à l'emploi dès l'ouverture du Codespace.
+L'ensemble du TP se fait sur **GitHub Codespaces** : aucune installation locale n'est nécessaire. L'environnement (Java 25, JavaFX 25, Maven, Git, Copilot Chat) est pré-configuré et prêt à l'emploi dès l'ouverture du Codespace.
 
 > Pour une installation locale (facultative), voir la section [Dépannage](#dépannage) en fin de document.
 
@@ -158,7 +158,7 @@ Vous pouvez aussi voir le détail test par test pour savoir exactement quels exe
 
 **Maven** est un outil de construction de projets Java utilisé dans la majorité des projets professionnels. Il gère automatiquement la compilation du code, le téléchargement des bibliothèques nécessaires (JavaFX, JUnit, TestFX…), l'exécution des tests et le packaging de l'application. Plutôt que de lancer `javac` et `java` à la main avec des dizaines d'options, une seule commande Maven suffit.
 
-Dans ce projet, Maven est embarqué via un **Maven Wrapper** (`./mvnw`) - un script qui télécharge et utilise automatiquement la bonne version de Maven. Aucune installation n'est nécessaire : la première exécution prend quelques secondes de plus (téléchargement), puis tout est instantané.
+Dans ce projet, Maven est embarqué via un **Maven Wrapper** (`./mvnw`) : un script qui télécharge et utilise automatiquement la bonne version de Maven. Aucune installation n'est nécessaire : la première exécution prend quelques secondes de plus (téléchargement), puis tout est instantané.
 
 | Commande | Effet |
 |----------|-------|
@@ -240,7 +240,7 @@ Votre score sur GitHub Actions augmente à chaque exercice terminé. Vous pouvez
 
 ## Assistance IA
 
-Vous avez le droit d'utiliser **Copilot Chat** (panneau latéral dans VS Code) quand vous bloquez sur un exercice. Il est configuré spécifiquement pour ce TP : il ne donnera pas la solution directement, mais vous guidera par étapes - d'abord une explication du concept, puis un pointeur vers la documentation, et seulement en dernier recours un minimum de code.
+Vous avez le droit d'utiliser **Copilot Chat** (panneau latéral dans VS Code) quand vous bloquez sur un exercice. Il est configuré spécifiquement pour ce TP : il ne donnera pas la solution directement, mais vous guidera par étapes : d'abord une explication du concept, puis un pointeur vers la documentation, et seulement en dernier recours un minimum de code.
 
 **Copilot Chat n'est pas un raccourci, c'est un tuteur.** Il vous aide à comprendre, pas à copier-coller. L'objectif est que vous soyez capable d'écrire ce code **seul(e)** à la fin de la séance.
 
@@ -260,12 +260,12 @@ L'exercice 1 est très guidé pas à pas pour vous familiariser avec l'environne
 
 ### Exercice 1 - Première fenêtre
 
-**Objectif** : créer l'application JavaFX la plus simple possible - une fenêtre vide qui apparaît à l'écran.
+**Objectif** : créer l'application JavaFX la plus simple possible, une fenêtre vide qui apparaît à l'écran.
 
 **Ce que vous allez découvrir** :
-- La classe `Application` - le point d'entrée de toute application JavaFX
-- Le `Stage` - l'objet qui représente la fenêtre
-- La méthode `start(Stage)` - appelée automatiquement par JavaFX au lancement
+- La classe `Application` : le point d'entrée de toute application JavaFX
+- Le `Stage` : l'objet qui représente la fenêtre
+- La méthode `start(Stage)` : appelée automatiquement par JavaFX au lancement
 
 #### Découverte du code
 
@@ -289,7 +289,7 @@ L'exercice 1 est très guidé pas à pas pour vous familiariser avec l'environne
    src/test/java/fr/univ_amu/iut/exercice1/PremiereFenetreTest.java
    ```
 
-4. Vous voyez un test `laFenetreEstVisible` avec l'annotation `@Disabled`. Ce test vérifie que `stage.isShowing()` retourne `true` - autrement dit, que la fenêtre est bien affichée à l'écran.
+4. Vous voyez un test `laFenetreEstVisible` avec l'annotation `@Disabled`. Ce test vérifie que `stage.isShowing()` retourne `true`, autrement dit que la fenêtre est bien affichée à l'écran.
 
 #### Travail à faire
 
@@ -327,7 +327,7 @@ Dans le terminal, lancez :
 ./mvnw test
 ```
 
-Vous devriez voir un message d'erreur indiquant que le test `laFenetreEstVisible` a **échoué**. C'est normal et attendu - le test vérifie que la fenêtre est visible, mais votre méthode `start()` ne fait rien pour l'instant.
+Vous devriez voir un message d'erreur indiquant que le test `laFenetreEstVisible` a **échoué**. C'est normal et attendu : le test vérifie que la fenêtre est visible, mais votre méthode `start()` ne fait rien pour l'instant.
 
 **Étape 4 - Implémenter la solution**
 
@@ -341,7 +341,7 @@ Retournez dans `PremiereFenetre.java`. Le `Stage` reçu en paramètre de `start(
 ./mvnw test
 ```
 
-Le test `laFenetreEstVisible` doit maintenant être **vert**. Si c'est le cas, félicitations - vous venez d'écrire votre première application JavaFX !
+Le test `laFenetreEstVisible` doit maintenant être **vert**. Si c'est le cas, félicitations : vous venez d'écrire votre première application JavaFX !
 
 #### Voir votre fenêtre avec VNC
 
@@ -371,7 +371,7 @@ Le fichier `App.java` (dans `src/main/java/fr/univ_amu/iut/`) est un **menu prin
 ![Le lanceur App.java dans le VNC - un bouton par exercice](src/main/resources/assets/vnc_lanceur_app.png)
 
 - Cliquez sur **"Exercice 1 - Première fenêtre"** : votre fenêtre vide s'ouvre (si vous avez bien implémenté `show()`).
-- Si vous cliquez sur un exercice que vous n'avez pas encore implémenté, une popup vous indiquera "rien à afficher" - c'est normal.
+- Si vous cliquez sur un exercice que vous n'avez pas encore implémenté, une popup vous indiquera "rien à afficher", c'est normal.
 
 Le lanceur est un outil pratique pour **tester visuellement** chaque exercice au fil de votre progression. Vous pouvez aussi lancer directement un exercice en faisant clic droit sur sa classe → **Run** dans VS Code.
 
@@ -385,7 +385,7 @@ Suivez les étapes de rendu décrites dans la section [Workflow de développemen
 
 ### Exercice 2 - Stage personnalisé
 
-**Objectif** : personnaliser l'apparence de la fenêtre - titre, dimensions, style de décoration.
+**Objectif** : personnaliser l'apparence de la fenêtre (titre, dimensions, style de décoration).
 
 **Ce que vous allez découvrir** :
 - Les propriétés du `Stage` : `setTitle`, `setWidth`, `setHeight`, `setResizable`
