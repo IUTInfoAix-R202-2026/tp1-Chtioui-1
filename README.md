@@ -531,6 +531,8 @@ git pull
 
 Vérifiez votre score sur l'onglet **Actions** de votre dépôt GitHub. Il devrait avoir augmenté.
 
+> 💡 **Astuce** : si vous ne savez plus où vous en êtes, demandez à Copilot Chat : `Quelle est la prochaine étape ?` Il analysera l'état de vos tests et de votre branche Git pour vous guider.
+
 ---
 
 ## Exercice 3 - Première Scene avec un Label
