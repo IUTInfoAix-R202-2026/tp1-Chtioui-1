@@ -666,7 +666,6 @@ Quand on construit une interface, la première étape est de se demander : **que
 | [`VBox`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/VBox.html) | Les composants sont empilés **verticalement** |
 | [`HBox`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/HBox.html) | Les composants sont alignés **horizontalement** |
 | [`GridPane`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/GridPane.html) | Les composants forment une **grille** avec des lignes et colonnes alignées |
-| [`StackPane`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/StackPane.html) | Les composants sont **superposés** les uns sur les autres |
 
 ### Maquette à reproduire
 
