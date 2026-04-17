@@ -30,11 +30,11 @@ Les exercices de ce TP sont organisés en progression : chaque exercice vous fai
 
 | Niveau Bloom | Exercices | Vous serez capable de… | Compétence BUT |
 |---|---|---|---|
-| **Comprendre** | 1–2 | Expliquer le rôle de `Application`, `Stage` et du cycle de lancement JavaFX. Personnaliser une fenêtre (titre, dimensions, style). | AC11.02 |
-| **Appliquer** | 3–4 | Construire une interface graphique en combinant conteneurs (`BorderPane`, `GridPane`, `HBox`) et composants (`Label`, `TextField`, `MenuBar`). | AC11.04 |
-| **Analyser / Créer** | 5–6 | Concevoir une application interactive complète avec écouteurs d'événements, compteurs indépendants et feedback visuel. | AC11.04, AC15.06 |
+| **Comprendre** | 1–2 | Expliquer le rôle de `Application`, `Stage` et du cycle de lancement JavaFX. Personnaliser une fenêtre (titre, dimensions, style). | C1 AC2 |
+| **Appliquer** | 3–4 | Construire une interface graphique en combinant conteneurs (`BorderPane`, `GridPane`, `HBox`) et composants (`Label`, `TextField`, `MenuBar`). | C1 AC4 |
+| **Analyser / Créer** | 5–6 | Concevoir une application interactive complète avec écouteurs d'événements, compteurs indépendants et feedback visuel. | C1 AC4, C5 AC1 |
 
-**Tout au long du TP**, vous développerez également votre maîtrise de l'écosystème de développement (**AC16.01**) : GitHub Classroom, Codespace, Maven, et le workflow professionnel branche → Pull Request → review.
+**Tout au long du TP**, vous développerez également votre maîtrise de l'écosystème de développement (**C6 AC1**) : GitHub Classroom, Codespace, Maven, et le workflow professionnel branche → Pull Request → review.
 
 ### Pourquoi cette démarche ?
 
