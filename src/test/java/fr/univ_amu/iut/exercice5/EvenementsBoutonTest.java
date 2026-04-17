@@ -82,9 +82,10 @@ class EvenementsBoutonTest {
   @Disabled("Retire cette annotation pour activer le test")
   @Test
   void troisClicsAffichent3Clics(FxRobot robot) {
-    robot.clickOn("#bouton-clique-moi");
-    robot.clickOn("#bouton-clique-moi");
-    robot.clickOn("#bouton-clique-moi");
+    Button bouton = robot.lookup("#bouton-clique-moi").queryAs(Button.class);
+    robot.interact(bouton::fire);
+    robot.interact(bouton::fire);
+    robot.interact(bouton::fire);
 
     Label compteur = robot.lookup("#compteur").queryAs(Label.class);
     assertThat(compteur.getText()).isEqualTo("3 clics");

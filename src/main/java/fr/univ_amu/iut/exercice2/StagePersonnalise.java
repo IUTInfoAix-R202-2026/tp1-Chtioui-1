@@ -17,11 +17,11 @@ public class StagePersonnalise extends Application {
   public void start(Stage primaryStage) {
     // TODO exercice 2 : personnaliser le Stage.
     //
-    // Les tests attendent, dans l'ordre :
+    // Les tests attendent, dans l'ordre conseillé :
     //   1. setTitle("Ma fenêtre personnalisée")
     //   2. setWidth(500) et setHeight(300)
     //   3. setResizable(false)
-    //   4. initStyle(StageStyle.UNDECORATED)   ← bonus, à activer en dernier
+    //   4. initStyle(StageStyle.UNDECORATED)   ← à appeler avant show()
     //
     // Active les tests un à un (retire @Disabled) et implémente au fur et
     // à mesure. N'oublie pas d'appeler show() à la fin.

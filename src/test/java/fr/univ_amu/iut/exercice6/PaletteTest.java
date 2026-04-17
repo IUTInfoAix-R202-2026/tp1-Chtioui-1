@@ -84,7 +84,8 @@ class PaletteTest {
   @Disabled("Retire cette annotation pour activer le test")
   @Test
   void cliquerRougeMetLaZoneEnRouge(FxRobot robot) {
-    robot.clickOn("#btn-rouge");
+    Button btnRouge = robot.lookup("#btn-rouge").queryAs(Button.class);
+    robot.interact(btnRouge::fire);
     Pane zone = robot.lookup("#zone").queryAs(Pane.class);
     assertThat(zone.getStyle())
         .as("la zone doit contenir une règle background-color rouge après un clic")
@@ -96,7 +97,8 @@ class PaletteTest {
   @Disabled("Retire cette annotation pour activer le test")
   @Test
   void cliquerVertMetLaZoneEnVert(FxRobot robot) {
-    robot.clickOn("#btn-vert");
+    Button btnVert = robot.lookup("#btn-vert").queryAs(Button.class);
+    robot.interact(btnVert::fire);
     Pane zone = robot.lookup("#zone").queryAs(Pane.class);
     assertThat(zone.getStyle())
         .as("la zone doit contenir une règle background-color verte après un clic")
@@ -108,7 +110,8 @@ class PaletteTest {
   @Disabled("Retire cette annotation pour activer le test")
   @Test
   void cliquerBleuMetLaZoneEnBleu(FxRobot robot) {
-    robot.clickOn("#btn-bleu");
+    Button btnBleu = robot.lookup("#btn-bleu").queryAs(Button.class);
+    robot.interact(btnBleu::fire);
     Pane zone = robot.lookup("#zone").queryAs(Pane.class);
     assertThat(zone.getStyle())
         .as("la zone doit contenir une règle background-color bleue après un clic")
@@ -120,8 +123,9 @@ class PaletteTest {
   @Disabled("Retire cette annotation pour activer le test")
   @Test
   void cliquerIncrementeLeCompteurCorrespondant(FxRobot robot) {
-    robot.clickOn("#btn-vert");
-    robot.clickOn("#btn-vert");
+    Button btnVert = robot.lookup("#btn-vert").queryAs(Button.class);
+    robot.interact(btnVert::fire);
+    robot.interact(btnVert::fire);
 
     Label compteurs = robot.lookup("#compteurs").queryAs(Label.class);
     assertThat(compteurs.getText())
@@ -134,9 +138,11 @@ class PaletteTest {
   @Disabled("Retire cette annotation pour activer le test")
   @Test
   void lesCompteursSontIndependants(FxRobot robot) {
-    robot.clickOn("#btn-rouge");
-    robot.clickOn("#btn-rouge");
-    robot.clickOn("#btn-bleu");
+    Button btnRouge = robot.lookup("#btn-rouge").queryAs(Button.class);
+    Button btnBleu = robot.lookup("#btn-bleu").queryAs(Button.class);
+    robot.interact(btnRouge::fire);
+    robot.interact(btnRouge::fire);
+    robot.interact(btnBleu::fire);
 
     Label compteurs = robot.lookup("#compteurs").queryAs(Label.class);
     assertThat(compteurs.getText()).as("Rouge doit valoir 2").contains("Rouge: 2");

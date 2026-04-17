@@ -19,8 +19,11 @@ class StagePersonnaliseTest {
 
   @Start
   void start(Stage stage) throws Exception {
-    this.stage = stage;
-    new StagePersonnalise().start(stage);
+    // On crée un Stage neuf car initStyle() ne peut pas être appelé
+    // sur un Stage qui a déjà été affiché (le primary Stage de TestFX
+    // peut l'avoir été lors d'un test précédent).
+    this.stage = new Stage();
+    new StagePersonnalise().start(this.stage);
   }
 
   @Disabled("Retire cette annotation pour activer le test")
