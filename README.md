@@ -352,7 +352,8 @@ Le Codespace embarque un affichage graphique virtuel accessible via **VNC**. Pou
 1. Dans VS Code, cliquez sur l'onglet **"Ports"** (en bas, à côté du terminal).
 2. Repérez le port **6080** (labellé "desktop" ou "VNC").
 3. Cliquez sur l'icône 🌐 (globe) à droite du port 6080 pour l'ouvrir dans un nouvel onglet du navigateur.
-4. Un bureau virtuel s'affiche. Laissez cet onglet ouvert.
+4. Dans le nouvel onglet, cliquez sur le bouton "🔗 Connecter"
+5. Un bureau virtuel s'affiche. Laissez cet onglet ouvert.
 
 ![Onglet Ports dans VS Code - cliquez sur l'icône globe du port 6080](src/main/resources/assets/codespace_onglet_port.png)
 
