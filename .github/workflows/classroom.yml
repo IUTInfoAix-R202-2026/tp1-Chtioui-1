@@ -145,7 +145,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest laFenetreEstVisible
           timeout: 5
-          max-score: 3
+          max-score: 1
 
       - name: "exercice4 : leRootEstUnBorderPane"
         id: exercice4_leRootEstUnBorderPane
@@ -155,7 +155,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest leRootEstUnBorderPane
           timeout: 5
-          max-score: 3
+          max-score: 1
 
       - name: "exercice4 : leMenuBarEstEnHaut"
         id: exercice4_leMenuBarEstEnHaut
@@ -165,7 +165,47 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest leMenuBarEstEnHaut
           timeout: 5
-          max-score: 3
+          max-score: 1
+
+      - name: "exercice4 : leMenuBarContientDeuxMenus"
+        id: exercice4_leMenuBarContientDeuxMenus
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice4 : leMenuBarContientDeuxMenus"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest leMenuBarContientDeuxMenus
+          timeout: 5
+          max-score: 1
+
+      - name: "exercice4 : lesMenusOntLesBonsNoms"
+        id: exercice4_lesMenusOntLesBonsNoms
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice4 : lesMenusOntLesBonsNoms"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest lesMenusOntLesBonsNoms
+          timeout: 5
+          max-score: 1
+
+      - name: "exercice4 : leGridPaneEstAuCentre"
+        id: exercice4_leGridPaneEstAuCentre
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice4 : leGridPaneEstAuCentre"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest leGridPaneEstAuCentre
+          timeout: 5
+          max-score: 1
+
+      - name: "exercice4 : lesLabelsNomEtEmailExistent"
+        id: exercice4_lesLabelsNomEtEmailExistent
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice4 : lesLabelsNomEtEmailExistent"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest lesLabelsNomEtEmailExistent
+          timeout: 5
+          max-score: 1
 
       - name: "exercice4 : lesDeuxChampsDeSaisieExistent"
         id: exercice4_lesDeuxChampsDeSaisieExistent
@@ -175,17 +215,37 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest lesDeuxChampsDeSaisieExistent
           timeout: 5
-          max-score: 3
+          max-score: 1
 
-      - name: "exercice4 : lesBoutonsValiderEtAnnulerExistent"
-        id: exercice4_lesBoutonsValiderEtAnnulerExistent
+      - name: "exercice4 : leHBoxEstEnBas"
+        id: exercice4_leHBoxEstEnBas
         uses: IUTInfoAix-R202/autograding-command-grader@main
         with:
-          test-name: "exercice4 : lesBoutonsValiderEtAnnulerExistent"
+          test-name: "exercice4 : leHBoxEstEnBas"
           setup-command: ""
-          command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest lesBoutonsValiderEtAnnulerExistent
+          command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest leHBoxEstEnBas
           timeout: 5
-          max-score: 3
+          max-score: 1
+
+      - name: "exercice4 : leBoutonValiderExiste"
+        id: exercice4_leBoutonValiderExiste
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice4 : leBoutonValiderExiste"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest leBoutonValiderExiste
+          timeout: 5
+          max-score: 1
+
+      - name: "exercice4 : leBoutonAnnulerExiste"
+        id: exercice4_leBoutonAnnulerExiste
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice4 : leBoutonAnnulerExiste"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest leBoutonAnnulerExiste
+          timeout: 5
+          max-score: 5
 
       - name: "exercice5 : handleIncrementeLeCompteur"
         id: exercice5_handleIncrementeLeCompteur
@@ -265,8 +325,14 @@ jobs:
           EXERCICE4_LAFENETREESTVISIBLE_RESULTS: "${{ steps.exercice4_laFenetreEstVisible.outputs.result }}"
           EXERCICE4_LEROOTESTUNBORDERPANE_RESULTS: "${{ steps.exercice4_leRootEstUnBorderPane.outputs.result }}"
           EXERCICE4_LEMENUBARESTENHAUT_RESULTS: "${{ steps.exercice4_leMenuBarEstEnHaut.outputs.result }}"
+          EXERCICE4_LEMENUBARCONTIENTDEUXMENUS_RESULTS: "${{ steps.exercice4_leMenuBarContientDeuxMenus.outputs.result }}"
+          EXERCICE4_LESMENUSONTLESBONSNOMS_RESULTS: "${{ steps.exercice4_lesMenusOntLesBonsNoms.outputs.result }}"
+          EXERCICE4_LEGRIDPANEESTAUCENTRE_RESULTS: "${{ steps.exercice4_leGridPaneEstAuCentre.outputs.result }}"
+          EXERCICE4_LESLABELSNOMETEMAILEXISTENT_RESULTS: "${{ steps.exercice4_lesLabelsNomEtEmailExistent.outputs.result }}"
           EXERCICE4_LESDEUXCHAMPSDESAISIEEXISTENT_RESULTS: "${{ steps.exercice4_lesDeuxChampsDeSaisieExistent.outputs.result }}"
-          EXERCICE4_LESBOUTONSVALIDERETANNULEREXISTENT_RESULTS: "${{ steps.exercice4_lesBoutonsValiderEtAnnulerExistent.outputs.result }}"
+          EXERCICE4_LEHBOXESTENBAS_RESULTS: "${{ steps.exercice4_leHBoxEstEnBas.outputs.result }}"
+          EXERCICE4_LEBOUTONVALIDEREXISTE_RESULTS: "${{ steps.exercice4_leBoutonValiderExiste.outputs.result }}"
+          EXERCICE4_LEBOUTONANNULEREXISTE_RESULTS: "${{ steps.exercice4_leBoutonAnnulerExiste.outputs.result }}"
           EXERCICE5_HANDLEINCREMENTELECOMPTEUR_RESULTS: "${{ steps.exercice5_handleIncrementeLeCompteur.outputs.result }}"
           EXERCICE5_TROISCLICSAFFICHENT3CLICS_RESULTS: "${{ steps.exercice5_troisClicsAffichent3Clics.outputs.result }}"
           EXERCICE6_LESTROISBOUTONSEXISTENT_RESULTS: "${{ steps.exercice6_lesTroisBoutonsExistent.outputs.result }}"
@@ -274,5 +340,5 @@ jobs:
           EXERCICE6_CLIQUERINCREMENCELECOMPTEURCORRESPONDANT_RESULTS: "${{ steps.exercice6_cliquerIncremenceLeCompteurCorrespondant.outputs.result }}"
           EXERCICE6_LESCOMPTEURSSONTINDEPENDANTS_RESULTS: "${{ steps.exercice6_lesCompteursSontIndependants.outputs.result }}"
         with:
-          runners: compilation,exercice1_laFenetreEstVisible,exercice2_laFenetreEstVisible,exercice2_leTitreEstDefini,exercice2_lesDimensionsSontDefinies,exercice2_laFenetreNestPasRedimensionnable,exercice2_leStyleEstUndecorated,exercice3_laFenetreEstVisible,exercice3_laSceneExiste,exercice3_leLabelEstAffiche,exercice3_leLabelEstAuCentreDuBorderPane,exercice4_laFenetreEstVisible,exercice4_leRootEstUnBorderPane,exercice4_leMenuBarEstEnHaut,exercice4_lesDeuxChampsDeSaisieExistent,exercice4_lesBoutonsValiderEtAnnulerExistent,exercice5_handleIncrementeLeCompteur,exercice5_troisClicsAffichent3Clics,exercice6_lesTroisBoutonsExistent,exercice6_cliquerRougeMetLaZoneEnRouge,exercice6_cliquerIncremenceLeCompteurCorrespondant,exercice6_lesCompteursSontIndependants
+          runners: compilation,exercice1_laFenetreEstVisible,exercice2_laFenetreEstVisible,exercice2_leTitreEstDefini,exercice2_lesDimensionsSontDefinies,exercice2_laFenetreNestPasRedimensionnable,exercice2_leStyleEstUndecorated,exercice3_laFenetreEstVisible,exercice3_laSceneExiste,exercice3_leLabelEstAffiche,exercice3_leLabelEstAuCentreDuBorderPane,exercice4_laFenetreEstVisible,exercice4_leRootEstUnBorderPane,exercice4_leMenuBarEstEnHaut,exercice4_leMenuBarContientDeuxMenus,exercice4_lesMenusOntLesBonsNoms,exercice4_leGridPaneEstAuCentre,exercice4_lesLabelsNomEtEmailExistent,exercice4_lesDeuxChampsDeSaisieExistent,exercice4_leHBoxEstEnBas,exercice4_leBoutonValiderExiste,exercice4_leBoutonAnnulerExiste,exercice5_handleIncrementeLeCompteur,exercice5_troisClicsAffichent3Clics,exercice6_lesTroisBoutonsExistent,exercice6_cliquerRougeMetLaZoneEnRouge,exercice6_cliquerIncremenceLeCompteurCorrespondant,exercice6_lesCompteursSontIndependants
       #@@@AUTOGRADING-END@@@

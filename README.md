@@ -705,12 +705,7 @@ graph BT
    src/test/java/fr/univ_amu/iut/exercice4/MiseEnPageTest.java
    ```
 
-4. Cet exercice contient **5 tests** :
-   - `laFenetreEstVisible` : le Stage doit être affiché
-   - `leRootEstUnBorderPane` : la racine de la Scene doit être un BorderPane
-   - `leMenuBarEstEnHaut` : la zone `top` du BorderPane doit contenir un MenuBar
-   - `lesDeuxChampsDeSaisieExistent` : au moins 2 TextField doivent être présents
-   - `lesBoutonsValiderEtAnnulerExistent` : deux boutons avec les textes exacts `Valider` et `Annuler`
+4. Cet exercice contient **11 tests** découpés en petits pas. Chaque test vous fait ajouter un seul élément à l'interface. Les commentaires dans le fichier de test indiquent l'étape correspondante.
 
 ### Travail à faire
 
@@ -721,21 +716,26 @@ git checkout main
 git checkout -b exercice4
 ```
 
-Appliquez la [boucle de travail](#boucle-de-travail-pour-chaque-test) : activez et implémentez les tests **un par un**, dans l'ordre.
+Appliquez la [boucle de travail](#boucle-de-travail-pour-chaque-test) : activez et implémentez les tests **un par un**, dans l'ordre :
 
-**Conseils pour la construction** :
-
-1. Commencez par créer le `BorderPane` racine, une `Scene`, et `show()` (les 2 premiers tests).
-2. Pour le `MenuBar` : créez un `MenuBar`, ajoutez-y deux `Menu` ("Fichier" et "Aide"), puis placez-le dans `borderPane.setTop(menuBar)`.
-3. Pour le `GridPane` : créez un `GridPane`, puis utilisez `gridPane.add(composant, colonne, ligne)` pour placer les labels et les TextField. Colonne 0 = les labels ("Nom :", "Email :"), colonne 1 = les TextField.
-4. Pour le `HBox` : créez un `HBox`, ajoutez-y deux `Button` ("Valider" et "Annuler"), puis placez-le dans `borderPane.setBottom(hbox)`.
+1. **`laFenetreEstVisible`** : appelez `show()`.
+2. **`leRootEstUnBorderPane`** : créez un `BorderPane`, une `Scene`, et attachez-la au Stage avec `setScene()`.
+3. **`leMenuBarEstEnHaut`** : créez un `MenuBar` et placez-le dans `borderPane.setTop()`.
+4. **`leMenuBarContientDeuxMenus`** : ajoutez deux `Menu` au MenuBar avec `menuBar.getMenus().addAll(...)`.
+5. **`lesMenusOntLesBonsNoms`** : les menus doivent s'appeler exactement `"Fichier"` et `"Aide"`.
+6. **`leGridPaneEstAuCentre`** : créez un `GridPane` et placez-le dans `borderPane.setCenter()`.
+7. **`lesLabelsNomEtEmailExistent`** : ajoutez deux `Label` ("Nom :" et "Email :") dans le GridPane avec `gridPane.add(label, colonne, ligne)`.
+8. **`lesDeuxChampsDeSaisieExistent`** : ajoutez deux `TextField` dans le GridPane (colonne 1, lignes 0 et 1).
+9. **`leHBoxEstEnBas`** : créez un `HBox` et placez-le dans `borderPane.setBottom()`.
+10. **`leBoutonValiderExiste`** : ajoutez un `Button` "Valider" dans le HBox.
+11. **`leBoutonAnnulerExiste`** : ajoutez un `Button` "Annuler" dans le HBox.
 
 > [!TIP]
 > Pour voir votre fenêtre dans le navigateur, utilisez le VNC comme expliqué dans l'[exercice 1](#voir-votre-fenêtre-avec-vnc).
 
 ### Finaliser l'exercice
 
-Quand les 5 tests sont verts :
+Quand les 11 tests sont verts :
 
 ```bash
 git add .
