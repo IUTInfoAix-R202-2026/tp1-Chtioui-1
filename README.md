@@ -568,17 +568,17 @@ On construit de l'intérieur vers l'extérieur :
 
 Le `BorderPane` organise ses enfants dans 5 zones :
 
-<table>
+<table border="2" cellpadding="10" cellspacing="0">
   <tr>
-    <td colspan="3" align="center" height="80"><b>top</b></td>
+    <td colspan="3" align="center" height="80" bgcolor="#d0d0d0"><b>top</b></td>
   </tr>
   <tr>
-    <td align="center" width="200" height="180"><b>left</b></td>
-    <td align="center" width="500" height="180"><b>✦ center ✦</b></td>
-    <td align="center" width="200" height="180"><b>right</b></td>
+    <td align="center" width="200" height="180" bgcolor="#d0d0d0"><b>left</b></td>
+    <td align="center" width="500" height="180" bgcolor="#ffcc80"><b>✦ center ✦</b></td>
+    <td align="center" width="200" height="180" bgcolor="#d0d0d0"><b>right</b></td>
   </tr>
   <tr>
-    <td colspan="3" align="center" height="80"><b>bottom</b></td>
+    <td colspan="3" align="center" height="80" bgcolor="#d0d0d0"><b>bottom</b></td>
   </tr>
 </table>
 
