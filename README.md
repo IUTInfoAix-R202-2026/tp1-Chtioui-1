@@ -130,7 +130,33 @@ Si c'est le cas, tout est prêt. Le seul test actif (`AppTest`) passe, et les 21
 
 ---
 
-## Commandes essentielles
+## Rendu du travail et évaluation
+
+### Comment vous êtes évalués
+
+L'évaluation de ce TP est **entièrement automatique** : à chaque fois que vous poussez (`push`) votre code sur GitHub, un système d'autograding exécute tous vos tests et calcule une note sur 100 points.
+
+- **10 points** sont attribués si le projet **compile** correctement
+- **90 points** sont répartis entre les différents **tests des exercices** (chaque test vaut un certain nombre de points)
+- Un test `@Disabled` (non encore activé) rapporte **0 point** — c'est normal
+- Un test activé et **qui passe** rapporte ses points
+- Un test activé et **qui échoue** rapporte 0 point
+
+Votre note augmente progressivement au fil de votre avancement. Il n'y a pas de date limite brutale : chaque push met à jour votre score.
+
+### Consulter votre note actuelle
+
+Après chaque `push`, rendez-vous sur la page de votre dépôt GitHub → onglet **"Actions"** → dernier run du workflow **"GitHub Classroom Workflow"**. Le score apparaît dans le résumé :
+
+```
+Points 25/100
+```
+
+Vous pouvez aussi voir le détail test par test pour savoir exactement quels exercices sont validés et lesquels restent à faire.
+
+### Commandes essentielles
+
+Toutes les commandes passent par le **Maven Wrapper** (`./mvnw`) — aucune installation de Maven n'est nécessaire.
 
 | Commande | Effet |
 |----------|-------|
@@ -142,21 +168,71 @@ Si c'est le cas, tout est prêt. Le seul test actif (`AppTest`) passe, et les 21
 
 > Le code est aussi formaté **automatiquement** avant chaque commit via un hook pre-commit invisible. Il n'est pas nécessaire de lancer `spotless:apply` à la main, sauf pour vérifier visuellement le formatage avant un commit.
 
----
+### Workflow de développement — un cycle par exercice
 
-## Workflow de développement
+Chaque exercice suit le même cycle. Cette démarche structurée vous aide à travailler de manière **méthodique et professionnelle** : c'est exactement le workflow que vous utiliserez en entreprise.
 
-Pour chaque exercice, suivez ce cycle :
+**1. Créer une branche pour l'exercice**
 
-1. **Lire** l'énoncé de l'exercice
-2. **Activer** les tests correspondants (supprimer `@Disabled`)
-3. **Implémenter** le code pour faire passer les tests
-4. **Vérifier** localement : `./mvnw verify`
-5. **Lancer l'application** : `./mvnw javafx:run`
-6. **Commit** : `git add . && git commit -m "Exercice N terminé"`
-7. **Push** : `git push`
+```bash
+git checkout -b exerciceN
+```
 
-Vérifiez que les tests passent sur GitHub Actions (badge vert).
+**2. Activer le premier test** — ouvrez le fichier de test correspondant et retirez l'annotation `@Disabled` du premier test.
+
+**3. Vérifier que le test est rouge**
+
+```bash
+./mvnw test
+```
+
+Le test doit échouer — c'est normal et attendu. Le message d'erreur vous indique ce que le test attend.
+
+**4. Implémenter le minimum** pour faire passer ce test au vert. Pas plus que nécessaire.
+
+**5. Vérifier que le test passe**
+
+```bash
+./mvnw verify
+```
+
+**6. Lancer l'application** pour voir le résultat visuellement :
+
+```bash
+./mvnw javafx:run
+```
+
+Ou via `Ctrl+Shift+B` dans VS Code.
+
+**7. Recommencer** — activez le test suivant (étapes 2 à 6) jusqu'à ce que tous les tests de l'exercice soient verts.
+
+**8. Finaliser l'exercice** — quand tous les tests passent :
+
+```bash
+git add .
+git commit -m "Exercice N terminé"
+git push -u origin exerciceN
+```
+
+**9. Créer une Pull Request** pour voir votre travail et recevoir une review automatique :
+
+```bash
+gh pr create --title "Exercice N terminé" --body "Tous les tests passent."
+```
+
+Ouvrez la PR dans le navigateur (`gh pr view --web`) pour consulter le diff, les checks CI, le score autograding et les commentaires de la review Copilot.
+
+**10. Merger et passer à la suite** :
+
+```bash
+gh pr merge --rebase --delete-branch
+git checkout main
+git pull
+```
+
+Votre score sur GitHub Actions augmente à chaque exercice terminé. Vous pouvez maintenant passer à l'exercice suivant en reprenant à l'étape 1.
+
+> **Copilot Chat** est là pour vous accompagner à chaque étape. N'hésitez pas à lui poser des questions — il vous guidera sans donner la solution directement.
 
 ---
 
