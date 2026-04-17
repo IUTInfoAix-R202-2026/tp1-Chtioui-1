@@ -570,15 +570,15 @@ Le `BorderPane` organise ses enfants dans 5 zones :
 
 <table>
   <tr>
-    <td colspan="3" align="center" height="60"><b>top</b></td>
+    <td colspan="3" align="center" height="80"><b>top</b></td>
   </tr>
   <tr>
-    <td align="center" width="200" height="120"><b>left</b></td>
-    <td align="center" width="500" height="120"><b>✦ center ✦</b></td>
-    <td align="center" width="200" height="120"><b>right</b></td>
+    <td align="center" width="200" height="180"><b>left</b></td>
+    <td align="center" width="500" height="180"><b>✦ center ✦</b></td>
+    <td align="center" width="200" height="180"><b>right</b></td>
   </tr>
   <tr>
-    <td colspan="3" align="center" height="60"><b>bottom</b></td>
+    <td colspan="3" align="center" height="80"><b>bottom</b></td>
   </tr>
 </table>
 
