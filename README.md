@@ -70,6 +70,7 @@ Ce TP1 pose les premières briques : créer une fenêtre, organiser des composan
 
 L'ensemble du TP se fait sur **GitHub Codespaces** : aucune installation locale n'est nécessaire. L'environnement (Java 25, JavaFX 25, Maven, Git, Copilot Chat) est pré-configuré et prêt à l'emploi dès l'ouverture du Codespace.
 
+> [!NOTE]
 > Pour une installation locale (facultative), voir la section [Dépannage](#dépannage) en fin de document.
 
 ### Documentation de référence
@@ -114,7 +115,8 @@ Une fois sur la page de votre dépôt :
 
 ![VS Code dans le navigateur après ouverture du Codespace](src/main/resources/assets/codespace_vscode.png)
 
-> **Important** : le Codespace est **personnel et persistant**. Quand vous fermez l'onglet, votre travail est sauvegardé. Pour reprendre, retournez sur votre dépôt GitHub → **"Code"** → **"Codespaces"** → cliquez sur le Codespace existant (ne créez pas un nouveau à chaque fois).
+> [!IMPORTANT]
+> Le Codespace est **personnel et persistant**. Quand vous fermez l'onglet, votre travail est sauvegardé. Pour reprendre, retournez sur votre dépôt GitHub → **"Code"** → **"Codespaces"** → cliquez sur le Codespace existant (ne créez pas un nouveau à chaque fois).
 
 ### Vérification rapide
 
@@ -176,6 +178,7 @@ Dans ce projet, Maven est embarqué via un **Maven Wrapper** (`./mvnw`) : un scr
 | `./mvnw clean` | Supprime les artefacts (`target/`) |
 | `./mvnw spotless:apply` | Formate le code Java (Google Java Style) |
 
+> [!NOTE]
 > Le code est aussi formaté **automatiquement** avant chaque commit via un hook pre-commit invisible. Il n'est pas nécessaire de lancer `spotless:apply` à la main, sauf pour vérifier visuellement le formatage avant un commit.
 
 ### Workflow de développement - un cycle par exercice
@@ -242,6 +245,7 @@ git pull
 
 Votre score sur GitHub Actions augmente à chaque exercice terminé. Vous pouvez maintenant passer à l'exercice suivant en reprenant à l'étape 1.
 
+> [!TIP]
 > **Copilot Chat** est là pour vous accompagner à chaque étape. N'hésitez pas à lui poser des questions - il vous guidera sans donner la solution directement.
 
 ---
@@ -486,7 +490,8 @@ Pour les exercices suivants, vous pouvez utiliser Copilot Chat dès que vous blo
 
 Quand **tous les tests de l'exercice** sont verts, finalisez l'exercice (commit, push, PR, merge - voir les étapes 8 à 10 du [Workflow de développement](#workflow-de-développement--un-cycle-par-exercice)).
 
-> 💡 Pour voir votre fenêtre dans le navigateur, utilisez le VNC comme expliqué dans l'[exercice 1](#voir-votre-fenêtre-avec-vnc).
+> [!TIP]
+> Pour voir votre fenêtre dans le navigateur, utilisez le VNC comme expliqué dans l'[exercice 1](#voir-votre-fenêtre-avec-vnc).
 
 ### Travail à faire
 
@@ -507,7 +512,8 @@ Puis activez et implémentez les tests **un par un**, dans l'ordre :
 4. **`laFenetreNestPasRedimensionnable`** - la fenêtre ne doit pas pouvoir être redimensionnée. Consultez `setResizable()`.
 5. **`leStyleEstUndecorated`** - la fenêtre doit avoir le style `StageStyle.UNDECORATED` (sans barre de titre ni bordures). Consultez `initStyle()`.
 
-> **Attention** : `initStyle()` doit être appelé **avant** `show()`, sinon JavaFX lève une exception. L'ordre des instructions dans `start()` compte.
+> [!WARNING]
+> `initStyle()` doit être appelé **avant** `show()`, sinon JavaFX lève une exception. L'ordre des instructions dans `start()` compte.
 
 ### Finaliser l'exercice
 
@@ -531,7 +537,8 @@ git pull
 
 Vérifiez votre score sur l'onglet **Actions** de votre dépôt GitHub. Il devrait avoir augmenté.
 
-> 💡 **Astuce** : si vous ne savez plus où vous en êtes, demandez à Copilot Chat : `Quelle est la prochaine étape ?` Il analysera l'état de vos tests et de votre branche Git pour vous guider.
+> [!TIP]
+> Si vous ne savez plus où vous en êtes, demandez à Copilot Chat : `Quelle est la prochaine étape ?` Il analysera l'état de vos tests et de votre branche Git pour vous guider.
 
 ---
 
@@ -608,7 +615,8 @@ Appliquez la [boucle de travail](#boucle-de-travail-pour-chaque-test) : activez 
 3. **`leLabelEstAffiche`** : créez un `Label` avec le texte exact `"Bonjour, JavaFX !"` et placez-le dans le BorderPane. Consultez la [Javadoc de Label](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/Label.html).
 4. **`leLabelEstAuCentreDuBorderPane`** : utilisez la méthode `setCenter()` du BorderPane pour positionner le Label au centre. Consultez la [Javadoc de BorderPane](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/BorderPane.html).
 
-> 💡 Pour voir votre fenêtre dans le navigateur, utilisez le VNC comme expliqué dans l'[exercice 1](#voir-votre-fenêtre-avec-vnc).
+> [!TIP]
+> Pour voir votre fenêtre dans le navigateur, utilisez le VNC comme expliqué dans l'[exercice 1](#voir-votre-fenêtre-avec-vnc).
 
 ### Finaliser l'exercice
 
@@ -632,7 +640,8 @@ git pull
 
 Vérifiez votre score sur l'onglet **Actions**. Il devrait avoir augmenté.
 
-> 💡 Si vous ne savez plus où vous en êtes, demandez à Copilot Chat : `Quelle est la prochaine étape ?`
+> [!TIP]
+> Si vous ne savez plus où vous en êtes, demandez à Copilot Chat : `Quelle est la prochaine étape ?`
 
 ---
 
@@ -745,7 +754,8 @@ Appliquez la [boucle de travail](#boucle-de-travail-pour-chaque-test) : activez 
 3. Pour le `GridPane` : créez un `GridPane`, puis utilisez `gridPane.add(composant, colonne, ligne)` pour placer les labels et les TextField. Colonne 0 = les labels ("Nom :", "Email :"), colonne 1 = les TextField.
 4. Pour le `HBox` : créez un `HBox`, ajoutez-y deux `Button` ("Valider" et "Annuler"), puis placez-le dans `borderPane.setBottom(hbox)`.
 
-> 💡 Pour voir votre fenêtre dans le navigateur, utilisez le VNC comme expliqué dans l'[exercice 1](#voir-votre-fenêtre-avec-vnc).
+> [!TIP]
+> Pour voir votre fenêtre dans le navigateur, utilisez le VNC comme expliqué dans l'[exercice 1](#voir-votre-fenêtre-avec-vnc).
 
 ### Finaliser l'exercice
 
@@ -769,7 +779,8 @@ git pull
 
 Vérifiez votre score sur l'onglet **Actions**.
 
-> 💡 Si vous ne savez plus où vous en êtes, demandez à Copilot Chat : `Quelle est la prochaine étape ?`
+> [!TIP]
+> Si vous ne savez plus où vous en êtes, demandez à Copilot Chat : `Quelle est la prochaine étape ?`
 
 ---
 
