@@ -1,9 +1,8 @@
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=23674253)
 # <img src="https://raw.githubusercontent.com/IUTInfoAix-R510/Syllabus/main/assets/logo.png" alt="class logo" class="logo"/> R2.02 - Développement d'applications avec IHM
 
-### IUT d’Aix-Marseille – Département Informatique Aix-en-Provence
+### IUT d'Aix-Marseille - Département Informatique Aix-en-Provence
 
-* **Ressource:** [R2.02](https://cache.media.enseignementsup-recherche.gouv.fr/file/SPE4-MESRI-17-6-2021/35/5/Annexe_17_INFO_BUT_annee_1_1411355.pdf)
+* **Ressource:** [R2.02](https://cache.media.education.gouv.fr/file/SP4-MESRI-26-5-2022/14/6/spe617_annexe15_1426146.pdf)
 
 * **Responsables:**
 
@@ -29,13 +28,13 @@
 
 Les exercices de ce TP sont organisés en progression : chaque exercice vous fait monter d'un cran dans la maîtrise de JavaFX. Cette progression suit la **taxonomie de Bloom**, un modèle pédagogique qui décrit les niveaux de maîtrise d'un savoir-faire - du plus simple (comprendre un concept) au plus complexe (créer une application complète).
 
-| Niveau Bloom | Exercices | Vous serez capable de… | Compétence BUT |
+| Niveau Bloom | Exercices | Vous serez capable de... | Compétence BUT |
 |---|---|---|---|
-| **Comprendre** | 1–2 | Expliquer le rôle de `Application`, `Stage` et du cycle de lancement JavaFX. Personnaliser une fenêtre (titre, dimensions, style). | C1 AC2 |
-| **Appliquer** | 3–4 | Construire une interface graphique en combinant conteneurs (`BorderPane`, `GridPane`, `HBox`) et composants (`Label`, `TextField`, `MenuBar`). | C1 AC4 |
-| **Analyser / Créer** | 5–6 | Concevoir une application interactive complète avec écouteurs d'événements, compteurs indépendants et feedback visuel. | C1 AC4, C5 AC1 |
+| **Comprendre** | 1-2 | Expliquer le rôle de `Application`, `Stage` et du cycle de lancement JavaFX. Personnaliser une fenêtre (titre, dimensions, style). | AC11.02 |
+| **Appliquer** | 3-4 | Construire une interface graphique en combinant conteneurs (`BorderPane`, `GridPane`, `HBox`) et composants (`Label`, `TextField`, `MenuBar`). | AC11.04 |
+| **Analyser / Créer** | 5-6 | Concevoir une application interactive complète avec écouteurs d'événements, compteurs indépendants et feedback visuel. | AC11.04 |
 
-**Tout au long du TP**, vous développerez également votre maîtrise de l'écosystème de développement (**C6 AC1**) : GitHub Classroom, Codespace, Maven, et le workflow professionnel branche → Pull Request → review.
+**Tout au long du TP**, vous pratiquez aussi le **workflow professionnel** (GitHub Classroom, Codespace, Maven, branche → Pull Request → review). Ces compétences sont formellement développées et évaluées en **R2.03 (Qualité de développement)**, module couplé à R2.02 par la SAÉ 2.01 commune.
 
 ### Pourquoi cette démarche ?
 
@@ -92,7 +91,7 @@ La mise en place se fait en deux étapes : accepter le devoir sur GitHub Classro
    👉 **https://classroom.github.com/a/9gAbmj0v**
 
 2. Si c'est votre première utilisation de GitHub Classroom, autorisez l'accès à votre compte GitHub.
-3. Sélectionnez votre nom dans la liste des étudiants (si elle apparaît) pour associer votre compte GitHub à votre identité dans le cours.
+3. Sélectionnez votre nom dans la liste de la promo (si elle apparaît) pour associer votre compte GitHub à votre identité dans le cours.
 4. Cliquez sur **"Accept this assignment"**.
 5. Attendez quelques secondes - GitHub crée automatiquement un dépôt à votre nom : `IUTInfoAix-R202-2026/tp1-votreLogin`.
 6. Cliquez sur le lien du dépôt créé pour y accéder.
@@ -133,11 +132,11 @@ Puis lancez :
 
 Vous devriez voir un résultat du type :
 ```
-Tests run: 41, Failures: 0, Errors: 0, Skipped: 40
+Tests run: 77, Failures: 0, Errors: 0, Skipped: 76
 BUILD SUCCESS
 ```
 
-Si c'est le cas, tout est prêt. Le seul test actif (`AppTest`) passe, et les 40 tests d'exercices sont en attente (`Skipped`) - c'est normal, ils seront activés au fil de votre progression.
+Si c'est le cas, tout est prêt. Le seul test actif (`AppTest`) passe, et les 76 tests d'exercices sont en attente (`Skipped`) - c'est normal, ils seront activés au fil de votre progression.
 
 ---
 
@@ -145,29 +144,29 @@ Si c'est le cas, tout est prêt. Le seul test actif (`AppTest`) passe, et les 40
 
 ### Comment vous êtes évalués
 
-L'évaluation de ce TP est **entièrement automatique** : à chaque fois que vous poussez (`push`) votre code sur GitHub, un système d'autograding exécute tous vos tests et calcule une note sur 100 points.
+L'évaluation de ce TP est **entièrement automatique** : à chaque fois que vous poussez (`push`) votre code sur GitHub, un système d'autograding exécute tous vos tests et calcule un score sur **1000 points**.
 
-- **10 points** sont attribués si le projet **compile** correctement
-- **90 points** sont répartis entre les différents **tests des exercices** (chaque test vaut un certain nombre de points)
+- **100 points** sont attribués si le projet **compile** correctement
+- **900 points** sont répartis entre les différents **tests des exercices** (chaque test vaut au moins 1 point)
 - Un test `@Disabled` (non encore activé) rapporte **0 point** - c'est normal
 - Un test activé et **qui passe** rapporte ses points
 - Un test activé et **qui échoue** rapporte 0 point
 
-Votre note augmente progressivement au fil de votre avancement. Il n'y a pas de date limite brutale : chaque push met à jour votre score.
+Le score est **affiché brut sur 1000 par Classroom** (ex : `Points 250/1000`) et **ramené sur 20** au calcul final en divisant par 50. Votre note augmente progressivement au fil de votre avancement ; il n'y a pas de date limite brutale : chaque push met à jour votre score.
 
 ### Consulter votre note actuelle
 
 Après chaque `push`, rendez-vous sur la page de votre dépôt GitHub → onglet **"Actions"** → dernier run du workflow **"GitHub Classroom Workflow"**. Le score apparaît dans le résumé :
 
 ```
-Points 25/100
+Points 250/1000
 ```
 
 Vous pouvez aussi voir le détail test par test pour savoir exactement quels exercices sont validés et lesquels restent à faire.
 
 ### Commandes essentielles
 
-**Maven** est un outil de construction de projets Java utilisé dans la majorité des projets professionnels. Il gère automatiquement la compilation du code, le téléchargement des bibliothèques nécessaires (JavaFX, JUnit, TestFX…), l'exécution des tests et le packaging de l'application. Plutôt que de lancer `javac` et `java` à la main avec des dizaines d'options, une seule commande Maven suffit.
+**Maven** est un outil de construction de projets Java utilisé dans la majorité des projets professionnels. Il gère automatiquement la compilation du code, le téléchargement des bibliothèques nécessaires (JavaFX, JUnit, TestFX...), l'exécution des tests et le packaging de l'application. Plutôt que de lancer `javac` et `java` à la main avec des dizaines d'options, une seule commande Maven suffit.
 
 Dans ce projet, Maven est embarqué via un **Maven Wrapper** (`./mvnw`) : un script qui télécharge et utilise automatiquement la bonne version de Maven. Aucune installation n'est nécessaire : la première exécution prend quelques secondes de plus (téléchargement), puis tout est instantané.
 
@@ -175,7 +174,7 @@ Dans ce projet, Maven est embarqué via un **Maven Wrapper** (`./mvnw`) : un scr
 |----------|-------|
 | `./mvnw javafx:run` | Lance l'application JavaFX |
 | `./mvnw test` | Exécute les tests unitaires |
-| `./mvnw verify` | Compile, teste et valide tout le projet |
+| `./mvnw clean test` | Rebuild propre (supprime `target/` puis relance les tests) |
 | `./mvnw clean` | Supprime les artefacts (`target/`) |
 | `./mvnw spotless:apply` | Formate le code Java (Google Java Style) |
 
@@ -207,7 +206,7 @@ Le test doit échouer - c'est normal et attendu. Le message d'erreur vous indiqu
 **5. Vérifier que le test passe**
 
 ```bash
-./mvnw verify
+./mvnw test
 ```
 
 **6. Lancer l'application** pour voir le résultat visuellement :
@@ -240,8 +239,6 @@ Ouvrez la PR dans le navigateur (`gh pr view --web`) pour consulter le diff, les
 
 ```bash
 gh pr merge --rebase --delete-branch
-git checkout main
-git pull
 ```
 
 Votre score sur GitHub Actions augmente à chaque exercice terminé. Vous pouvez maintenant passer à l'exercice suivant en reprenant à l'étape 1.
@@ -255,13 +252,13 @@ Votre score sur GitHub Actions augmente à chaque exercice terminé. Vous pouvez
 
 Vous avez le droit d'utiliser **Copilot Chat** (panneau latéral dans VS Code) quand vous bloquez sur un exercice. Il est configuré spécifiquement pour ce TP : il ne donnera pas la solution directement, mais vous guidera par étapes : d'abord une explication du concept, puis un pointeur vers la documentation, et seulement en dernier recours un minimum de code.
 
-**Copilot Chat n'est pas un raccourci, c'est un tuteur.** Il vous aide à comprendre, pas à copier-coller. L'objectif est que vous soyez capable d'écrire ce code **seul(e)** à la fin de la séance.
+**Copilot Chat n'est pas un raccourci, c'est un tuteur.** Il vous aide à comprendre, pas à copier-coller. L'objectif est que vous soyez capable d'écrire ce code **en autonomie** à la fin de la séance.
 
 **Pourquoi c'est important** : l'évaluation de ce module se fera **sur papier, sans aucun outil d'assistance**. Il est donc essentiel que vous construisiez vos automatismes en écrivant le code vous-même. Copilot Chat est un filet de sécurité pour débloquer, pas un substitut à la réflexion.
 
-**Conseil pratique** : sur les premiers exercices (1–3), n'hésitez pas à demander de l'aide pour vous familiariser avec JavaFX et le workflow. Sur les exercices avancés (4–6), essayez d'aller le plus loin possible par vous-même avant de solliciter l'assistant. C'est cette progression vers l'autonomie qui vous préparera le mieux aux évaluations.
+**Conseil pratique** : sur les premiers exercices (1-3), n'hésitez pas à demander de l'aide pour vous familiariser avec JavaFX et le workflow. Sur les exercices avancés (4-6), essayez d'aller le plus loin possible par vous-même avant de solliciter l'assistant. C'est cette progression vers l'autonomie qui vous préparera le mieux aux évaluations.
 
-Le TP est découpé en **6 exercices** à faire dans l'ordre. Chaque exercice vit dans son propre sous-paquet `fr.univ_amu.iut.exerciceN/` (code et tests en miroir). L'exercice 1 est très guidé pas à pas pour vous familiariser avec l'environnement. À partir de l'exercice 2, une boucle de travail systématique est introduite que vous appliquerez pour tous les exercices suivants.
+Le TP est découpé en **6 exercices** à faire dans l'ordre, plus **2 exercices bonus** pour ceux qui terminent en avance. Chaque exercice vit dans son propre sous-paquet (code et tests en miroir). L'exercice 1 est très guidé pas à pas pour vous familiariser avec l'environnement. À partir de l'exercice 2, une boucle de travail systématique est introduite que vous appliquerez pour tous les exercices suivants. Les exercices bonus ne comptent pas dans la note mais permettent de se confronter à des concepts plus avancés (animations, mini-jeu).
 
 ---
 
@@ -388,13 +385,11 @@ Quand vous avez consulté la PR, mergez-la et revenez sur `main` :
 
 ```bash
 gh pr merge --rebase --delete-branch
-git checkout main
-git pull
 ```
 
 Votre exercice 1 est maintenant intégré dans `main`.
 
-Vérifiez que votre note a augmenté : rendez-vous sur votre dépôt GitHub → onglet **"Actions"** → dernier run du workflow **"GitHub Classroom Workflow"**. Votre score devrait être passé de 10/100 à 25/100 (10 points de compilation + 15 points pour l'exercice 1).
+Vérifiez que votre note a augmenté : rendez-vous sur votre dépôt GitHub → onglet **"Actions"** → dernier run du workflow **"GitHub Classroom Workflow"**. Votre score devrait être passé de 100/1000 à 250/1000 (100 points de compilation + 150 points pour l'exercice 1).
 
 ### Voir votre fenêtre avec VNC
 
@@ -485,7 +480,7 @@ Pour les exercices suivants, vous pouvez utiliser Copilot Chat dès que vous blo
 4. **Implémentez** le minimum de code pour faire passer le test au vert.
 5. **Relancez** les tests pour vérifier :
    ```bash
-   ./mvnw verify
+   ./mvnw test
    ```
 6. **Passez** au test suivant (retour à l'étape 1).
 
@@ -510,8 +505,9 @@ Puis activez et implémentez les tests **un par un**, dans l'ordre :
 1. **`laFenetreEstVisible`** - le Stage doit être affiché (pensez à `show()`, comme dans l'exercice 1).
 2. **`leTitreEstDefini`** - le titre de la fenêtre doit être exactement `"Ma fenêtre personnalisée"`. Consultez la méthode `setTitle()` de `Stage`.
 3. **`lesDimensionsSontDefinies`** - la fenêtre doit faire 500 pixels de large et 300 pixels de haut. Consultez `setWidth()` et `setHeight()`.
-4. **`laFenetreNestPasRedimensionnable`** - la fenêtre ne doit pas pouvoir être redimensionnée. Consultez `setResizable()`.
-5. **`leStyleEstUndecorated`** - la fenêtre doit avoir le style `StageStyle.UNDECORATED` (sans barre de titre ni bordures). Consultez `initStyle()`.
+4. **`leStyleEstUndecorated`** - la fenêtre doit avoir le style `StageStyle.UNDECORATED` (sans barre de titre ni bordures). Consultez `initStyle()`.
+5. **`laFenetreNestPasRedimensionnable`** - la fenêtre ne doit pas pouvoir être redimensionnée. Consultez `setResizable()`.
+
 
 > [!WARNING]
 > `initStyle()` doit être appelé **avant** `show()`, sinon JavaFX lève une exception. L'ordre des instructions dans `start()` compte.
@@ -532,8 +528,6 @@ Consultez la PR (diff, CI, review Copilot), puis mergez et revenez sur `main` :
 
 ```bash
 gh pr merge --rebase --delete-branch
-git checkout main
-git pull
 ```
 
 Vérifiez votre score sur l'onglet **Actions** de votre dépôt GitHub. Il devrait avoir augmenté.
@@ -554,7 +548,11 @@ Vérifiez votre score sur l'onglet **Actions** de votre dépôt GitHub. Il devra
 
 ### Comment JavaFX organise l'affichage
 
-Dans JavaFX, l'affichage suit une hiérarchie d'objets imbriqués. On appelle cela le **graphe de scène** (scene graph) :
+Comme vu en [CM1 (slide 30)](https://iutinfoaix-r202.github.io/cours/cm1-fondations-ihm.html#30), JavaFX utilise la **métaphore du théâtre** : le `Stage` est la fenêtre (le théâtre), la `Scene` est le contenu affiché (le décor), et les `Nodes` sont les éléments graphiques (les acteurs sur scène).
+
+![La métaphore du théâtre](src/main/resources/assets/metaphore_theatre.svg)
+
+Cette métaphore se traduit par une hiérarchie d'objets imbriqués appelée **graphe de scène** (scene graph) :
 
 ```mermaid
 graph BT
@@ -639,8 +637,6 @@ Consultez la PR, puis mergez :
 
 ```bash
 gh pr merge --rebase --delete-branch
-git checkout main
-git pull
 ```
 
 Vérifiez votre score sur l'onglet **Actions**. Il devrait avoir augmenté.
@@ -663,7 +659,11 @@ Vérifiez votre score sur l'onglet **Actions**. Il devrait avoir augmenté.
 
 ### Comment décomposer une interface en conteneurs
 
-Quand on construit une interface, la première étape est de se demander : **quel conteneur utiliser pour chaque zone ?** Voici un guide :
+Quand on construit une interface, la première étape est de se demander : **quel conteneur utiliser pour chaque zone ?** Le choix n'est pas arbitraire : il repose sur des **principes de perception visuelle** (Gestalt, vus en [CM1 (slide 47)](https://iutinfoaix-r202.github.io/cours/cm1-fondations-ihm.html#47)) :
+- **Proximité** : les éléments proches sont perçus comme un groupe → regrouper dans un même conteneur
+- **Alignement** : les éléments alignés sont perçus comme ordonnés → utiliser `GridPane` pour les formulaires
+
+Voici un guide :
 
 | Conteneur | Quand l'utiliser |
 |---|---|
@@ -754,8 +754,6 @@ Consultez la PR, puis mergez :
 
 ```bash
 gh pr merge --rebase --delete-branch
-git checkout main
-git pull
 ```
 
 Vérifiez votre score sur l'onglet **Actions**.
@@ -776,7 +774,7 @@ Vérifiez votre score sur l'onglet **Actions**.
 
 ### Maquette de l'IHM attendue
 
-![Maquette de l'exercice 5 — bouton et compteur](src/main/resources/assets/maquette_evenements_bouton.svg)
+![Maquette de l'exercice 5 - bouton et compteur](src/main/resources/assets/maquette_evenements_bouton.svg)
 
 L'interface est simple : un bouton "Clique-moi" et un label qui affiche le nombre de clics. Le tout est empilé verticalement dans un `VBox`.
 
@@ -797,6 +795,8 @@ graph BT
 ```
 
 ### Comment fonctionne un événement
+
+Ce mécanisme s'appelle le **pattern Observer** (vu en [CM1 (slide 51)](https://iutinfoaix-r202.github.io/cours/cm1-fondations-ihm.html#51)) : le bouton (l'observable) ne sait pas ce que fera le handler (l'observateur). Il se contente de le notifier. C'est un principe fondamental de **séparation des préoccupations** : chaque composant a une seule responsabilité.
 
 Quand l'utilisateur clique sur le bouton, JavaFX déclenche une chaîne d'appels :
 
@@ -832,7 +832,7 @@ La classe `Compteur` est un simple compteur avec `getValeur()` et `incrementer()
 
 ### Trois styles d'écouteur, tous équivalents
 
-En Java, quand on veut réagir à un événement (un clic, une frappe clavier…), on passe un objet qui implémente l'interface [`EventHandler<ActionEvent>`](https://openjfx.io/javadoc/25/javafx.base/javafx/event/EventHandler.html). JavaFX accepte **trois écritures différentes** pour définir cet objet. Elles produisent le même résultat, mais n'ont pas la même verbosité.
+En Java, quand on veut réagir à un événement (un clic, une frappe clavier...), on passe un objet qui implémente l'interface [`EventHandler<ActionEvent>`](https://openjfx.io/javadoc/25/javafx.base/javafx/event/EventHandler.html). JavaFX accepte **trois écritures différentes** pour définir cet objet. Elles produisent le même résultat, mais n'ont pas la même verbosité.
 
 Le starter code de [`EvenementsBouton.java`](src/main/java/fr/univ_amu/iut/exercice5/EvenementsBouton.java) montre les trois styles en commentaires. Vous en activez un, vous vérifiez que ça marche, puis vous pouvez essayer les autres pour les comparer.
 
@@ -942,8 +942,6 @@ Consultez la PR, puis mergez :
 
 ```bash
 gh pr merge --rebase --delete-branch
-git checkout main
-git pull
 ```
 
 Vérifiez votre score sur l'onglet **Actions**. Il devrait avoir augmenté.
@@ -955,7 +953,7 @@ Vérifiez votre score sur l'onglet **Actions**. Il devrait avoir augmenté.
 
 ## Exercice 6 - Palette de couleurs (capstone)
 
-**Objectif** : **synthèse** - cet exercice mobilise l'ensemble des concepts vus jusqu'ici (layouts, composants, événements, mise à jour de labels) dans une petite application autonome. C'est le dernier exercice du TP.
+**Objectif** : **synthèse** - cet exercice mobilise l'ensemble des concepts vus jusqu'ici (layouts, composants, événements, mise à jour de labels) dans une petite application autonome. C'est le dernier exercice du TP. Il illustre aussi l'heuristique de [Nielsen #1](https://iutinfoaix-r202.github.io/cours/cm1-fondations-ihm.html#18) (**visibilité de l'état du système**) : chaque clic produit un feedback immédiat (la couleur change, le compteur se met à jour).
 
 **Ce que vous allez mobiliser** :
 - [`BorderPane`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/BorderPane.html) et [`HBox`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/layout/HBox.html) pour la mise en page
@@ -980,7 +978,7 @@ graph TD
     S -->|"racine"| BP["📦 <b>BorderPane</b>"]
     BP -->|"setTop()"| H["➡️ <b>HBox</b>"]
     BP -->|"setCenter()"| Z["🎨 <b>Pane</b><br/>zone de couleur"]
-    BP -->|"setBottom()"| L["🏷️ <b>Label</b><br/>&quot;Rouge: 0 …&quot;"]
+    BP -->|"setBottom()"| L["🏷️ <b>Label</b><br/>&quot;Rouge: 0 ...&quot;"]
     H --- BR["🔴 <b>Button</b><br/>&quot;Rouge&quot;"]
     H --- BV["🟢 <b>Button</b><br/>&quot;Vert&quot;"]
     H --- BB["🔵 <b>Button</b><br/>&quot;Bleu&quot;"]
@@ -1070,7 +1068,7 @@ Quand les 10 tests sont verts :
 git add .
 git commit -m "Exercice 6 terminé"
 git push -u origin exercice6
-gh pr create --title "Exercice 6 terminé" --body "Les 10 tests passent. TP1 terminé !"
+gh pr create --title "Exercice 6 terminé" --body "Les 10 tests passent. TP1 terminé."
 gh pr view --web
 ```
 
@@ -1078,19 +1076,408 @@ Consultez la PR, puis mergez :
 
 ```bash
 gh pr merge --rebase --delete-branch
-git checkout main
-git pull
 ```
 
-Vérifiez votre score sur l'onglet **Actions**. Si tous les exercices sont terminés, votre score devrait être de **100/100**. Bravo, le TP1 est terminé !
+Vérifiez votre score sur l'onglet **Actions**. Si tous les exercices sont terminés, votre score devrait être de **1000/1000** (soit 20/20 une fois ramené sur 20). Bravo, le TP1 est terminé !
+
+---
+
+## Exercices bonus
+
+> [!NOTE]
+> Les exercices bonus **ne comptent pas dans la note**. Ils sont là pour celles et ceux qui terminent les 6 exercices en avance et souhaitent explorer des concepts plus avancés. Les tests fonctionnent exactement comme ceux des exercices principaux (baby steps, `@Disabled` à retirer). Le workflow Git (branche → PR → merge) reste le même.
+
+## Bonus 7 - Balle rebondissante
+
+**Objectif** : découvrir les **animations** JavaFX. Une balle rebondit verticalement dans un panneau. Quatre boutons contrôlent l'animation, et un slider ajuste la vitesse en temps réel.
+
+**Ce que vous allez découvrir** :
+- [`TranslateTransition`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/animation/TranslateTransition.html) : une animation qui déplace un noeud le long d'un axe
+- [`Animation`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/animation/Animation.html) : `playFromStart()`, `pause()`, `play()`, `stop()` pour contrôler une animation
+- `autoReverse` et `cycleCount(INDEFINITE)` : faire rebondir indéfiniment
+- [`Slider`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/Slider.html) : un curseur linéaire avec `valueProperty()` pour écouter les changements de valeur
+
+### Maquette de l'IHM attendue
+
+![Maquette de la balle rebondissante](src/main/resources/assets/maquette_balle_rebondissante.svg)
+
+L'interface se décompose verticalement dans un `VBox` :
+- En haut : un `HBox` avec 4 boutons de contrôle
+- Au milieu : un `Slider` de vitesse (0.1x à 5x)
+- En bas : un `Pane` contenant un `Circle` rouge qui rebondit entre `fromY=10` et `toY=400`
+
+### Comment fonctionne une animation JavaFX
+
+Une [`TranslateTransition`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/animation/TranslateTransition.html) déplace un noeud (ici le cercle) en modifiant sa propriété `translateY` au fil du temps :
+
+```mermaid
+sequenceDiagram
+    participant U as 👤 Utilisateur
+    participant B as Button Démarrer
+    participant T as TranslateTransition
+    participant C as Circle (balle)
+
+    U->>B: clic
+    B->>T: playFromStart()
+    loop toutes les N ms
+        T->>C: setTranslateY(y)
+        Note right of C: y varie de 10 à 400<br/>puis de 400 à 10 (autoReverse)
+    end
+    U->>B: clic Pause
+    B->>T: pause()
+    Note right of T: l'animation se fige
+```
+
+La propriété `rate` de la transition contrôle la vitesse : `rate=1` est la vitesse normale, `rate=2` est deux fois plus rapide, `rate=0.5` deux fois plus lent. Le slider ajuste cette propriété en temps réel.
+
+**Créer une animation en 5 lignes** :
+
+```java
+TranslateTransition transition = new TranslateTransition(Duration.millis(1000), cercle);
+transition.setFromY(10);        // position de départ
+transition.setToY(400);         // position d'arrivée
+transition.setAutoReverse(true); // revient en arrière automatiquement
+transition.setCycleCount(Animation.INDEFINITE); // boucle infinie
+```
+
+Pour la lancer : `transition.playFromStart()`. Pour la contrôler : `pause()`, `play()` (reprend), `stop()`.
+
+**Écouter les changements du Slider** :
+
+Dans les exercices précédents, vous avez utilisé `setOnAction()` pour réagir à un clic sur un bouton. Pour un `Slider`, c'est différent : la valeur change en continu quand l'utilisateur fait glisser le curseur. On écoute la **propriété** `value` via un listener :
+
+```java
+slider.valueProperty().addListener((observable, ancienneValeur, nouvelleValeur) -> {
+    transition.setRate(nouvelleValeur.doubleValue());
+});
+```
+
+Ce code est exécuté à chaque fois que la valeur du slider change. `nouvelleValeur` est un `Number` qu'on convertit en `double` avec `doubleValue()`.
+
+### Le graphe de scène
+
+```mermaid
+graph TD
+    ST["🖼️ <b>Stage</b>"] -->|"setScene()"| S["🎬 <b>Scene</b>"]
+    S -->|"racine"| V["📦 <b>VBox</b>"]
+    V --> H["➡️ <b>HBox</b><br/>Démarrer · Pause · Reprendre · Stop"]
+    V --> SL["🎚️ <b>Slider</b><br/>0.1 - 5.0"]
+    V --> P["📦 <b>Pane</b><br/>zone d'animation"]
+    P --> C["🔴 <b>Circle</b><br/>rayon 15"]
+
+    style ST fill:#4a90d9,color:white
+    style S fill:#7bb563,color:white
+    style V fill:#e8a838,color:white
+    style H fill:#b0bec5,color:#333
+    style SL fill:#b0bec5,color:#333
+    style P fill:#b0bec5,color:#333
+    style C fill:#e74c3c,color:white
+```
+
+### Découverte du code
+
+1. Ouvrez le fichier de l'exercice :
+   ```
+   src/main/java/fr/univ_amu/iut/bonus7/BalleRebondissante.java
+   ```
+
+2. La méthode `start(Stage)` contient un TODO en 6 étapes : créer le VBox, le HBox avec 4 boutons, le Slider, le Circle, le Pane, et la TranslateTransition.
+
+3. Ouvrez le fichier de test :
+   ```
+   src/test/java/fr/univ_amu/iut/bonus7/BalleRebondissanteTest.java
+   ```
+
+4. Cet exercice contient **14 tests** découpés en étapes progressives :
+   - `laFenetreEstVisible` : le Stage doit être affiché
+   - `laSceneExiste` : le Stage doit avoir une Scene attachée
+   - `leBoutonDemarrerExiste` : un Button avec l'id `btn-start`
+   - `leBoutonPauseExiste` : un Button avec l'id `btn-pause`
+   - `leBoutonReprendreExiste` : un Button avec l'id `btn-resume`
+   - `leBoutonStopExiste` : un Button avec l'id `btn-stop`
+   - `leSliderExiste` : un Slider avec l'id `slider-vitesse`
+   - `leSliderALesBonnesLimites` : min=0.1, max=5.0
+   - `laBalleExiste` : un Circle avec l'id `balle`, rayon 15
+   - `laZoneAnimationExiste` : un Pane avec l'id `zone-animation`
+   - `demarrerLanceAnimation` : après clic sur Démarrer, la balle bouge
+   - `pauseArreteLAnimation` : après Pause, la balle se fige
+   - `reprendreContinueLAnimation` : après Reprendre, la balle rebouge
+   - `stopArreteLAnimation` : après Stop, la balle se fige
+
+### Ids attendus
+
+| Composant | Id |
+|---|---|
+| Bouton Démarrer | `btn-start` |
+| Bouton Pause | `btn-pause` |
+| Bouton Reprendre | `btn-resume` |
+| Bouton Stop | `btn-stop` |
+| Slider de vitesse | `slider-vitesse` |
+| Balle (Circle) | `balle` |
+| Zone d'animation (Pane) | `zone-animation` |
+
+### Travail à faire
+
+Créez votre branche :
+
+```bash
+git checkout main
+git checkout -b bonus7
+```
+
+Appliquez la [boucle de travail](#boucle-de-travail-pour-chaque-test) : activez et implémentez les tests **un par un**, dans l'ordre :
+
+1. **`laFenetreEstVisible`** : appelez `show()`.
+2. **`laSceneExiste`** : créez un `VBox`, une `Scene`, et attachez-la au Stage.
+3. **`leBoutonDemarrerExiste`** : créez un `Button` "Démarrer" avec l'id `btn-start`. Placez-le dans un `HBox`, ajoutez le HBox au VBox.
+4. **`leBoutonPauseExiste`** : ajoutez un Button "Pause" (id `btn-pause`) au HBox.
+5. **`leBoutonReprendreExiste`** : ajoutez un Button "Reprendre" (id `btn-resume`) au HBox.
+6. **`leBoutonStopExiste`** : ajoutez un Button "Stop" (id `btn-stop`) au HBox.
+7. **`leSliderExiste`** : créez un [`Slider`](https://openjfx.io/javadoc/25/javafx.controls/javafx/scene/control/Slider.html) avec l'id `slider-vitesse` et ajoutez-le au VBox.
+8. **`leSliderALesBonnesLimites`** : configurez le slider avec `new Slider(0.1, 5, 1)` (min, max, valeur initiale).
+9. **`laBalleExiste`** : créez un `Circle` de rayon 15, couleur rouge, avec l'id `balle`. Placez-le dans un `Pane` (id `zone-animation`) et ajoutez le Pane au VBox.
+10. **`laZoneAnimationExiste`** : si vous avez suivi l'étape précédente, ce test devrait déjà passer.
+11. **`demarrerLanceAnimation`** : créez une [`TranslateTransition`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/animation/TranslateTransition.html) de 1000ms sur le cercle, avec `fromY=10`, `toY=400`, `autoReverse=true`, `cycleCount=INDEFINITE`. Branchez le bouton Démarrer sur `transition.playFromStart()`.
+12. **`pauseArreteLAnimation`** : branchez le bouton Pause sur `transition.pause()`.
+13. **`reprendreContinueLAnimation`** : branchez le bouton Reprendre sur `transition.play()`.
+14. **`stopArreteLAnimation`** : branchez le bouton Stop sur `transition.stop()`. Ajoutez aussi un listener sur le slider : `slider.valueProperty().addListener((obs, old, val) -> transition.setRate(val.doubleValue()))`.
+
+> [!TIP]
+> Pour voir l'animation dans le navigateur, utilisez le VNC comme expliqué dans l'[exercice 1](#voir-votre-fenêtre-avec-vnc). L'effet visuel est beaucoup plus parlant qu'un simple test vert !
+
+### Finaliser l'exercice
+
+Quand les 14 tests sont verts :
+
+```bash
+git add .
+git commit -m "Bonus 7 terminé"
+git push -u origin bonus7
+gh pr create --title "Bonus 7 terminé" --body "Les 14 tests passent."
+gh pr view --web
+```
+
+Consultez la PR, puis mergez :
+
+```bash
+gh pr merge --rebase --delete-branch
+```
+
+---
+
+## Bonus 8 - Mini-jeu Pacman
+
+**Objectif** : **synthèse avancée** mêlant héritage, composition graphique, événements clavier et détection de collision. Un Pacman et un Fantôme se déplacent sur un plateau de jeu, chacun contrôlé par un joueur différent.
+
+**Ce que vous allez découvrir** :
+- [`Group`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/Group.html) : composer un personnage à partir de plusieurs formes (`Circle`, `Rectangle`, `Line`)
+- [`KeyEvent`](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/input/KeyEvent.html) et `setOnKeyPressed()` : réagir aux touches du clavier
+- Détection de collision avec `getBoundsInParent()`
+- Héritage et polymorphisme : `Pacman` et `Fantome` héritent de `Personnage`
+
+### Maquette du jeu
+
+![Maquette du mini-jeu Pacman](src/main/resources/assets/maquette_pacman.svg)
+
+Le plateau de jeu est un `Pane` de 640x480 pixels. Les personnages se déplacent sur une grille invisible de 20x20 pixels. Le Pacman est contrôlé par les **flèches directionnelles**, le Fantôme par les touches **Z/Q/S/D**.
+
+### Le graphe de scène
+
+```mermaid
+graph TD
+    ST["🖼️ <b>Stage</b>"] -->|"setScene()"| S["🎬 <b>Scene</b><br/>setOnKeyPressed()"]
+    S -->|"racine"| P["📦 <b>Pane</b><br/>plateau 640×480"]
+    P --> PAC["🟡 <b>Pacman</b> (Group)"]
+    P --> FAN["🔵 <b>Fantome</b> (Group)"]
+    PAC --> C1["⭕ Circle<br/>corps jaune"]
+    PAC --> L1["➖ Line<br/>bouche"]
+    FAN --> R1["▬ Rectangle<br/>bas du corps"]
+    FAN --> C2["⭕ Circle<br/>corps bleu"]
+    FAN --> OG["👁️ œil gauche<br/>+ rétine"]
+    FAN --> OD["👁️ œil droit<br/>+ rétine"]
+
+    style ST fill:#4a90d9,color:white
+    style S fill:#7bb563,color:white
+    style P fill:#1a1a2e,color:#e0e0e0
+    style PAC fill:#f1c40f,color:#333
+    style FAN fill:#3498db,color:white
+    style C1 fill:#f1c40f,color:#333
+    style L1 fill:#333,color:white
+    style R1 fill:#3498db,color:white
+    style C2 fill:#3498db,color:white
+    style OG fill:#ecf0f1,color:#333
+    style OD fill:#ecf0f1,color:#333
+```
+
+Chaque personnage est un `Group` qui contient ses formes géométriques. Le `Pane` sert de plateau de jeu, et la `Scene` capture les événements clavier via `setOnKeyPressed()`.
+
+### Architecture des classes
+
+L'exercice utilise l'**héritage** : `Pacman` et `Fantome` héritent de `Personnage`, qui hérite lui-même de `Group`.
+
+```mermaid
+classDiagram
+    Group <|-- Personnage
+    Personnage <|-- Pacman
+    Personnage <|-- Fantome
+    
+    class Personnage {
+        #String direction
+        +directionGauche()
+        +directionDroite(largeurJeu)
+        +directionBas(hauteurJeu)
+        +directionHaut()
+        +collision(autre) boolean
+    }
+    
+    class Pacman {
+        -Circle corps
+        -Line bouche
+        +directionBas(hauteurJeu)
+        +directionHaut()
+    }
+    
+    class Fantome {
+        -Circle oeilGauche, oeilDroit
+        -Circle retineGauche, retineDroite
+        +directionGauche()
+        +directionDroite(largeurJeu)
+        +directionBas(hauteurJeu)
+        +directionHaut()
+    }
+```
+
+### Ce qui est fourni vs ce qui est à compléter
+
+| Classe | Fourni | À compléter |
+|---|---|---|
+| `Personnage` | `directionGauche()`, `directionDroite()`, `collision()` | `directionBas()`, `directionHaut()` |
+| `Pacman` | Constructeur, `directionGauche()`, `directionDroite()` | `directionBas()` (bouche vers le bas), `directionHaut()` (bouche vers le haut) |
+| `Fantome` | Constructeur (corps + yeux) | Les 4 directions (appeler `super` + orienter les rétines) |
+| `JeuPacman` | Tout (assemblage + clavier) | Rien |
+
+### Comment fonctionne le déplacement avec héritage
+
+Chaque méthode de direction fait **deux choses** : déplacer le personnage, puis ajuster son apparence visuelle (orientation de la bouche ou des yeux). L'héritage permet de séparer ces responsabilités :
+
+1. **`Personnage`** (la classe parent) gère le **déplacement** : vérifier les limites du plateau, modifier `layoutX`/`layoutY`, et mettre à jour la direction courante.
+2. **`Pacman`** ou **`Fantome`** (les classes enfant) appellent `super.directionXxx()` pour déléguer le déplacement au parent, puis ajustent leur **apparence** (bouche ou yeux).
+
+Par exemple, voici comment `Pacman.directionDroite()` est implémenté (ce code est fourni, il sert de modèle pour les TODO) :
+
+```java
+@Override
+public void directionDroite(double largeurJeu) {
+    super.directionDroite(largeurJeu);  // 1. délègue le déplacement au parent
+    // 2. oriente la bouche vers la droite
+    bouche.setEndX(bouche.getStartX() + LARGEUR_MOITIE_PERSONNAGE);
+    bouche.setEndY(bouche.getStartY());
+}
+```
+
+Pour implémenter `directionBas()`, le principe est le même : appeler `super.directionBas(hauteurJeu)`, puis ajuster les coordonnées de la bouche pour qu'elle pointe vers le bas (modifier `endY` au lieu de `endX`).
+
+Pour le Fantôme, le principe est identique mais au lieu d'orienter une bouche, on déplace les **rétines** (petits cercles noirs) à l'intérieur des yeux (cercles blancs). Par exemple, pour regarder à gauche : `retineGauche.setCenterX(oeilGauche.getCenterX() - 1)`.
+
+### Découverte du code
+
+1. Commencez par `Personnage.java` :
+   ```
+   src/main/java/fr/univ_amu/iut/bonus8/Personnage.java
+   ```
+   Cette classe fournit `directionGauche()` et `directionDroite()` qui déplacent le personnage de 20 pixels et mettent à jour la direction. Les méthodes `directionBas()` et `directionHaut()` contiennent des TODO : même logique mais sur l'axe Y.
+
+2. Ouvrez `Pacman.java` :
+   ```
+   src/main/java/fr/univ_amu/iut/bonus8/Pacman.java
+   ```
+   Le Pacman est un cercle jaune avec une bouche (un trait). Les méthodes `directionGauche()` et `directionDroite()` sont implémentées : elles appellent `super` puis orientent la bouche. Les TODO sont dans `directionBas()` et `directionHaut()` : appeler `super` puis ajuster `bouche.setEndX/setEndY`.
+
+3. Ouvrez `Fantome.java` :
+   ```
+   src/main/java/fr/univ_amu/iut/bonus8/Fantome.java
+   ```
+   Le Fantôme est un cercle bleu avec un rectangle et deux yeux (cercles blancs + rétines noires). Les 4 méthodes de direction contiennent des TODO : appeler `super` puis positionner les rétines dans la direction du regard.
+
+4. Ouvrez `JeuPacman.java` :
+   ```
+   src/main/java/fr/univ_amu/iut/bonus8/JeuPacman.java
+   ```
+   Ce fichier est entièrement fourni. Il crée le plateau, place les personnages, et branche les événements clavier.
+
+5. Ouvrez les fichiers de test :
+   ```
+   src/test/java/fr/univ_amu/iut/bonus8/PersonnageTest.java
+   src/test/java/fr/univ_amu/iut/bonus8/JeuPacmanTest.java
+   ```
+
+6. Cet exercice contient **16 tests** dans deux fichiers :
+
+   **`PersonnageTest`** (12 tests unitaires) :
+   - Déplacement : `directionBasDeplace`, `directionHautDeplace`, limites haut/bas
+   - Bouche Pacman : `pacmanBouchePointeVersLeBas`, `pacmanBouchePointeVersLeHaut`
+   - Yeux Fantôme : `fantomeYeuxVersLaGauche`, `fantomeYeuxVersLaDroite`, `fantomeYeuxVersLeBas`, `fantomeYeuxVersLeHaut`
+   - Collision : `collisionDetecteeQuandSuperposition`, `pasDeCollisionQuandEloignes`
+
+   **`JeuPacmanTest`** (4 tests d'intégration) :
+   - `laFenetreEstVisible`, `lePlateauExiste`, `lePacmanExiste`, `leFantomeExiste`
+
+### Travail à faire
+
+Créez votre branche :
+
+```bash
+git checkout main
+git checkout -b bonus8
+```
+
+Appliquez la [boucle de travail](#boucle-de-travail-pour-chaque-test) en commençant par `PersonnageTest` (les fondations) puis `JeuPacmanTest` (l'assemblage) :
+
+1. **`directionBasDeplaceLePacmanVersLeBas`** : dans `Personnage.java`, implémentez `directionBas()`. Même logique que `directionDroite()` mais sur l'axe Y : vérifier que `layoutY < hauteurJeu - LARGEUR_PERSONNAGE`, puis `setLayoutY(getLayoutY() + LARGEUR_PERSONNAGE)`.
+2. **`directionHautDeplaceLePacmanVersLeHaut`** : implémentez `directionHaut()`. Vérifier que `layoutY >= LARGEUR_PERSONNAGE`, puis reculer.
+3. **`directionHautNeDepassePasLeBordSuperieur`** : devrait passer si votre `if` est correct.
+4. **`directionBasNeDepassePasLeBordInferieur`** : idem.
+5. **`pacmanBouchePointeVersLeBas`** : dans `Pacman.java`, implémentez `directionBas()`. Appelez `super.directionBas(hauteurJeu)` puis orientez la bouche vers le bas avec `bouche.setEndX(bouche.getStartX())` et `bouche.setEndY(bouche.getStartY() + LARGEUR_MOITIE_PERSONNAGE)`.
+6. **`pacmanBouchePointeVersLeHaut`** : même principe avec `setEndY(bouche.getStartY() - LARGEUR_MOITIE_PERSONNAGE)`.
+7. **`fantomeYeuxVersLaGauche`** : dans `Fantome.java`, implémentez `directionGauche()`. Appelez `super.directionGauche()` puis positionnez les rétines à gauche des yeux : `retine.setCenterX(oeil.getCenterX() - 1)`.
+8. **`fantomeYeuxVersLaDroite`** : rétines à droite : `retine.setCenterX(oeil.getCenterX() + 1)`.
+9. **`fantomeYeuxVersLeBas`** : rétines en bas : `retine.setCenterY(oeil.getCenterY() + 1)`.
+10. **`fantomeYeuxVersLeHaut`** : rétines en haut : `retine.setCenterY(oeil.getCenterY() - 1)`.
+11. **`collisionDetecteeQuandSuperposition`** : la méthode `collision()` est déjà fournie dans `Personnage`, ce test devrait passer.
+12. **`pasDeCollisionQuandEloignes`** : idem.
+13-16. **Tests `JeuPacmanTest`** : `JeuPacman.java` est entièrement fourni. Ces 4 tests devraient passer dès que les classes `Pacman` et `Fantome` compilent correctement.
+
+> [!TIP]
+> Pour tester le jeu visuellement, lancez-le via le VNC et jouez avec les flèches (Pacman) et Z/Q/S/D (Fantôme). Essayez de provoquer une collision !
+
+### Finaliser l'exercice
+
+Quand les 16 tests sont verts :
+
+```bash
+git add .
+git commit -m "Bonus 8 terminé"
+git push -u origin bonus8
+gh pr create --title "Bonus 8 terminé" --body "Les 16 tests passent."
+gh pr view --web
+```
+
+Consultez la PR, puis mergez :
+
+```bash
+gh pr merge --rebase --delete-branch
+```
 
 ---
 
 ## Ressources complémentaires
 
-- [OpenJFX - Getting Started](https://openjfx.io/openjfx-docs/)
-- [JavaFX Tutorial](https://code.makery.ch/library/javafx-tutorial/)
-- [TestFX Documentation](https://github.com/TestFX/TestFX)
+- [JavaFX 25 API Documentation](https://openjfx.io/javadoc/25/) : la référence complète de toutes les classes JavaFX
+- [OpenJFX - Getting Started](https://openjfx.io/openjfx-docs/) : guide officiel de démarrage
+- [JavaFX CSS Reference](https://openjfx.io/javadoc/25/javafx.graphics/javafx/scene/doc-files/cssref.html) : toutes les propriétés CSS utilisables avec `setStyle()` (exercices 6 et bonus 7)
+- [JavaFX Tutorial (code.makery)](https://code.makery.ch/library/javafx-tutorial/) : tutoriel progressif en français
+- [Animation JavaFX](https://openjfx.io/javadoc/25/javafx.graphics/javafx/animation/package-summary.html) : classes d'animation (`TranslateTransition`, `Timeline`, etc.) pour le bonus 7
+- [TestFX Documentation](https://github.com/TestFX/TestFX) : le framework de test utilisé dans ce TP
 
 ---
 
@@ -1116,10 +1503,33 @@ Dans un Codespace, le display virtuel est déjà configuré et ce problème ne s
 .\mvnw.cmd javafx:run
 ```
 
+**`Cannot resolve symbol` / import manquant** - si VS Code souligne une classe en rouge (par exemple `Scene`, `BorderPane`, `Label`), c'est qu'il manque l'import correspondant. Placez le curseur sur le mot souligné et appuyez sur `Ctrl+.` (point) pour voir les suggestions d'import. Choisissez toujours l'import qui commence par `javafx.` (pas `java.awt.` ni `javax.`).
+
+**J'ai créé ma branche depuis la mauvaise branche** - si vous avez fait `git checkout -b exercice3` alors que vous étiez sur `exercice2` au lieu de `main`, pas de panique :
+```bash
+git checkout main
+git branch -D exercice3           # supprime la branche locale
+git checkout -b exercice3         # recrée depuis main
+```
+
+**Le port 6080 (VNC) n'apparaît pas dans l'onglet Ports** - le serveur VNC met quelques secondes à démarrer après l'ouverture du Codespace. Attendez 10 secondes puis rafraîchissez l'onglet Ports. Si le port n'apparaît toujours pas, ouvrez un terminal et lancez `./mvnw javafx:run` : le port devrait alors apparaître automatiquement.
+
+**La fenêtre VNC est vide ou noire** - la fenêtre JavaFX s'ouvre peut-être derrière le bureau. Cliquez sur la barre des tâches dans le VNC (en bas) pour voir si une fenêtre est réduite. Vous pouvez aussi fermer l'application (`Ctrl+C` dans le terminal) et la relancer.
+
+**Conflit lors du merge de la PR** - si GitHub affiche "This branch has conflicts", c'est probablement que vous avez modifié un fichier sur `main` directement. La solution la plus simple :
+```bash
+git checkout main
+git pull
+git checkout exerciceN
+git rebase main
+# résolvez les conflits si nécessaire, puis :
+git push --force-with-lease
+```
+En cas de doute, demandez à Copilot Chat : `J'ai un conflit Git, comment le résoudre ?`
+
 ---
 
-<details>
-<summary>📦 Installation locale (facultative) - pour travailler en dehors du Codespace</summary>
+### 📦 Installation locale (facultative) - pour travailler en dehors du Codespace
 
 **Sur les machines de l'IUT** (Linux, SDKMAN pré-installé) :
 
@@ -1144,8 +1554,6 @@ Alternative Windows : installateur GUI sur [azul.com/downloads](https://www.azul
 java -version
 # doit afficher "openjdk version \"25.0.x\"" ou similaire
 ```
-
-</details>
 
 ---
 

@@ -4,7 +4,14 @@
 # détectés. Ne pas éditer à la main le bloc entre marqueurs.
 name: GitHub Classroom Workflow
 
-on: [push]
+# Le calcul de note ne tourne que sur main : un exercice n'est livré qu'au
+# moment du merge. Les pushes sur les feature branches (exerciceN) restent
+# couverts par maven.yml (compilation + tests), qui suffit pour le feedback
+# pédagogique. workflow_dispatch reste dispo pour un regrade manuel.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -17,6 +24,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          # Historique complet pour que `git diff $BEFORE..HEAD` fonctionne
+          # dans le step de scope (sans ça, on tomberait sur ALL à chaque push).
+          fetch-depth: 0
 
       - name: Set up JDK 25 with JavaFX
         uses: actions/setup-java@v5
@@ -35,7 +46,91 @@ jobs:
           setup-command: ""
           command: ./mvnw -B -q compile
           timeout: 5
-          max-score: 10
+          max-score: 100
+
+      - name: Restaurer le cache des rapports Surefire
+        id: surefire_cache
+        uses: actions/cache/restore@v5
+        with:
+          path: target/surefire-reports
+          key: surefire-${{ github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            surefire-${{ github.ref_name }}-
+            surefire-main-
+
+      - name: Détecter les exercices impactés
+        id: scope
+        run: |
+          set +e
+          BEFORE="${{ github.event.before }}"
+          # Cache vide (premier run, expiration GHA) -> regrade complet sinon les
+          # XMLs absents donneraient un score 0 à tout le monde.
+          if [ ! -d target/surefire-reports ] || [ -z "$(ls -A target/surefire-reports 2>/dev/null)" ]; then
+            echo "filter=ALL" >> "$GITHUB_OUTPUT"
+            echo "reason=cache des rapports absent ou expiré" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Premier push sur la branche, ou commit base introuvable -> tout regrader
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            echo "filter=ALL" >> "$GITHUB_OUTPUT"
+            echo "reason=premier push sur la branche ou commit base introuvable" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Fichiers globaux : invalident le cache (regrade complet)
+          if git diff --name-only "$BEFORE" HEAD -- \
+              pom.xml \
+              '.github/workflows/**' \
+              '*.sh' \
+              'src/main/java/fr/univ_amu/iut/App.java' \
+              'src/main/java/fr/univ_amu/iut/module-info.java' \
+              'src/test/java/fr/univ_amu/iut/AppTest.java' \
+              | grep -q .; then
+            echo "filter=ALL" >> "$GITHUB_OUTPUT"
+            echo "reason=fichier global modifié (pom.xml / App / workflows / scripts)" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Détection fine : paquets exerciceN / bonusN modifiés
+          pkgs=$(git diff --name-only "$BEFORE" HEAD -- \
+              'src/main/java/fr/univ_amu/iut/exercice*/**' \
+              'src/test/java/fr/univ_amu/iut/exercice*/**' \
+              'src/main/java/fr/univ_amu/iut/bonus*/**' \
+              'src/test/java/fr/univ_amu/iut/bonus*/**' \
+              | grep -oE 'fr/univ_amu/iut/(exercice[0-9]+|bonus[0-9]+)' \
+              | sort -u | tr '/' '.')
+          if [ -z "$pkgs" ]; then
+            echo "filter=NONE" >> "$GITHUB_OUTPUT"
+            echo "reason=aucune source d'exercice modifiée (mvnw test sauté, scores restaurés du cache)" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Énumère les classes de test des paquets impactés (FQCN explicites)
+          classes=""
+          for pkg in $pkgs; do
+            pkg_dir="src/test/java/$(echo "$pkg" | tr '.' '/')"
+            while IFS= read -r f; do
+              cls=$(basename "$f" .java)
+              classes="${classes}${classes:+,}${pkg}.${cls}"
+            done < <(find "$pkg_dir" -type f -name '*.java' 2>/dev/null)
+          done
+          if [ -z "$classes" ]; then
+            echo "filter=NONE" >> "$GITHUB_OUTPUT"
+            echo "reason=paquets modifiés mais aucune classe de test trouvée" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "filter=$classes" >> "$GITHUB_OUTPUT"
+          echo "reason=paquets impactés : $(echo $pkgs | tr '\\n' ' ')" >> "$GITHUB_OUTPUT"
+
+      - name: Lancer les tests impactés
+        id: run_tests
+        if: steps.scope.outputs.filter != 'NONE'
+        continue-on-error: true
+        run: |
+          echo "Scope : ${{ steps.scope.outputs.reason }}"
+          if [ "${{ steps.scope.outputs.filter }}" = "ALL" ]; then
+            xvfb-run --auto-servernum ./mvnw -B test -DfailIfNoTests=false
+          else
+            xvfb-run --auto-servernum ./mvnw -B test -Dtest='${{ steps.scope.outputs.filter }}' -DfailIfNoTests=false
+          fi
+
 
       - name: "exercice1 : laFenetreEstVisible"
         id: exercice1_laFenetreEstVisible
@@ -45,7 +140,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice1.PremiereFenetreTest laFenetreEstVisible
           timeout: 5
-          max-score: 15
+          max-score: 150
 
       - name: "exercice2 : laFenetreEstVisible"
         id: exercice2_laFenetreEstVisible
@@ -55,37 +150,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice2.StagePersonnaliseTest laFenetreEstVisible
           timeout: 5
-          max-score: 3
-
-      - name: "exercice2 : leTitreEstDefini"
-        id: exercice2_leTitreEstDefini
-        uses: IUTInfoAix-R202/autograding-command-grader@main
-        with:
-          test-name: "exercice2 : leTitreEstDefini"
-          setup-command: ""
-          command: ./grade-test.sh fr.univ_amu.iut.exercice2.StagePersonnaliseTest leTitreEstDefini
-          timeout: 5
-          max-score: 3
-
-      - name: "exercice2 : lesDimensionsSontDefinies"
-        id: exercice2_lesDimensionsSontDefinies
-        uses: IUTInfoAix-R202/autograding-command-grader@main
-        with:
-          test-name: "exercice2 : lesDimensionsSontDefinies"
-          setup-command: ""
-          command: ./grade-test.sh fr.univ_amu.iut.exercice2.StagePersonnaliseTest lesDimensionsSontDefinies
-          timeout: 5
-          max-score: 3
-
-      - name: "exercice2 : laFenetreNestPasRedimensionnable"
-        id: exercice2_laFenetreNestPasRedimensionnable
-        uses: IUTInfoAix-R202/autograding-command-grader@main
-        with:
-          test-name: "exercice2 : laFenetreNestPasRedimensionnable"
-          setup-command: ""
-          command: ./grade-test.sh fr.univ_amu.iut.exercice2.StagePersonnaliseTest laFenetreNestPasRedimensionnable
-          timeout: 5
-          max-score: 3
+          max-score: 30
 
       - name: "exercice2 : leStyleEstUndecorated"
         id: exercice2_leStyleEstUndecorated
@@ -95,7 +160,37 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice2.StagePersonnaliseTest leStyleEstUndecorated
           timeout: 5
-          max-score: 3
+          max-score: 30
+
+      - name: "exercice2 : leTitreEstDefini"
+        id: exercice2_leTitreEstDefini
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice2 : leTitreEstDefini"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice2.StagePersonnaliseTest leTitreEstDefini
+          timeout: 5
+          max-score: 30
+
+      - name: "exercice2 : lesDimensionsSontDefinies"
+        id: exercice2_lesDimensionsSontDefinies
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice2 : lesDimensionsSontDefinies"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice2.StagePersonnaliseTest lesDimensionsSontDefinies
+          timeout: 5
+          max-score: 30
+
+      - name: "exercice2 : laFenetreNestPasRedimensionnable"
+        id: exercice2_laFenetreNestPasRedimensionnable
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice2 : laFenetreNestPasRedimensionnable"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice2.StagePersonnaliseTest laFenetreNestPasRedimensionnable
+          timeout: 5
+          max-score: 30
 
       - name: "exercice3 : laFenetreEstVisible"
         id: exercice3_laFenetreEstVisible
@@ -105,7 +200,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest laFenetreEstVisible
           timeout: 5
-          max-score: 2
+          max-score: 25
 
       - name: "exercice3 : laSceneExiste"
         id: exercice3_laSceneExiste
@@ -115,7 +210,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest laSceneExiste
           timeout: 5
-          max-score: 2
+          max-score: 25
 
       - name: "exercice3 : leRootEstUnBorderPane"
         id: exercice3_leRootEstUnBorderPane
@@ -125,7 +220,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest leRootEstUnBorderPane
           timeout: 5
-          max-score: 2
+          max-score: 25
 
       - name: "exercice3 : unLabelEstPresent"
         id: exercice3_unLabelEstPresent
@@ -135,7 +230,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest unLabelEstPresent
           timeout: 5
-          max-score: 2
+          max-score: 25
 
       - name: "exercice3 : leLabelAfficheLeBonTexte"
         id: exercice3_leLabelAfficheLeBonTexte
@@ -145,7 +240,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest leLabelAfficheLeBonTexte
           timeout: 5
-          max-score: 2
+          max-score: 25
 
       - name: "exercice3 : leLabelEstAuCentreDuBorderPane"
         id: exercice3_leLabelEstAuCentreDuBorderPane
@@ -155,7 +250,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice3.PremiereSceneTest leLabelEstAuCentreDuBorderPane
           timeout: 5
-          max-score: 5
+          max-score: 25
 
       - name: "exercice4 : laFenetreEstVisible"
         id: exercice4_laFenetreEstVisible
@@ -165,7 +260,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest laFenetreEstVisible
           timeout: 5
-          max-score: 1
+          max-score: 14
 
       - name: "exercice4 : leRootEstUnBorderPane"
         id: exercice4_leRootEstUnBorderPane
@@ -175,7 +270,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest leRootEstUnBorderPane
           timeout: 5
-          max-score: 1
+          max-score: 14
 
       - name: "exercice4 : leMenuBarEstEnHaut"
         id: exercice4_leMenuBarEstEnHaut
@@ -185,7 +280,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest leMenuBarEstEnHaut
           timeout: 5
-          max-score: 1
+          max-score: 14
 
       - name: "exercice4 : leMenuBarContientDeuxMenus"
         id: exercice4_leMenuBarContientDeuxMenus
@@ -195,7 +290,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest leMenuBarContientDeuxMenus
           timeout: 5
-          max-score: 1
+          max-score: 14
 
       - name: "exercice4 : lesMenusOntLesBonsNoms"
         id: exercice4_lesMenusOntLesBonsNoms
@@ -205,7 +300,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest lesMenusOntLesBonsNoms
           timeout: 5
-          max-score: 1
+          max-score: 14
 
       - name: "exercice4 : leGridPaneEstAuCentre"
         id: exercice4_leGridPaneEstAuCentre
@@ -215,7 +310,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest leGridPaneEstAuCentre
           timeout: 5
-          max-score: 1
+          max-score: 14
 
       - name: "exercice4 : lesLabelsNomEtEmailExistent"
         id: exercice4_lesLabelsNomEtEmailExistent
@@ -225,7 +320,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest lesLabelsNomEtEmailExistent
           timeout: 5
-          max-score: 1
+          max-score: 14
 
       - name: "exercice4 : lesDeuxChampsDeSaisieExistent"
         id: exercice4_lesDeuxChampsDeSaisieExistent
@@ -235,7 +330,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest lesDeuxChampsDeSaisieExistent
           timeout: 5
-          max-score: 1
+          max-score: 13
 
       - name: "exercice4 : leHBoxEstEnBas"
         id: exercice4_leHBoxEstEnBas
@@ -245,7 +340,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest leHBoxEstEnBas
           timeout: 5
-          max-score: 1
+          max-score: 13
 
       - name: "exercice4 : leBoutonValiderExiste"
         id: exercice4_leBoutonValiderExiste
@@ -255,7 +350,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest leBoutonValiderExiste
           timeout: 5
-          max-score: 1
+          max-score: 13
 
       - name: "exercice4 : leBoutonAnnulerExiste"
         id: exercice4_leBoutonAnnulerExiste
@@ -265,7 +360,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice4.MiseEnPageTest leBoutonAnnulerExiste
           timeout: 5
-          max-score: 5
+          max-score: 13
 
       - name: "exercice5 : handleIncrementeLeCompteur"
         id: exercice5_handleIncrementeLeCompteur
@@ -275,7 +370,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice5.EcouteurClasseNommeeTest handleIncrementeLeCompteur
           timeout: 5
-          max-score: 2
+          max-score: 17
 
       - name: "exercice5 : laFenetreEstVisible"
         id: exercice5_laFenetreEstVisible
@@ -285,7 +380,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice5.EvenementsBoutonTest laFenetreEstVisible
           timeout: 5
-          max-score: 2
+          max-score: 17
 
       - name: "exercice5 : laSceneExiste"
         id: exercice5_laSceneExiste
@@ -295,7 +390,17 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice5.EvenementsBoutonTest laSceneExiste
           timeout: 5
-          max-score: 2
+          max-score: 17
+
+      - name: "exercice5 : laRacineEstUnVBox"
+        id: exercice5_laRacineEstUnVBox
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice5 : laRacineEstUnVBox"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice5.EvenementsBoutonTest laRacineEstUnVBox
+          timeout: 5
+          max-score: 17
 
       - name: "exercice5 : leBoutonExiste"
         id: exercice5_leBoutonExiste
@@ -305,7 +410,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice5.EvenementsBoutonTest leBoutonExiste
           timeout: 5
-          max-score: 2
+          max-score: 17
 
       - name: "exercice5 : leBoutonAfficheLeBonTexte"
         id: exercice5_leBoutonAfficheLeBonTexte
@@ -315,7 +420,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice5.EvenementsBoutonTest leBoutonAfficheLeBonTexte
           timeout: 5
-          max-score: 2
+          max-score: 17
 
       - name: "exercice5 : leLabelCompteurExiste"
         id: exercice5_leLabelCompteurExiste
@@ -325,7 +430,17 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice5.EvenementsBoutonTest leLabelCompteurExiste
           timeout: 5
-          max-score: 2
+          max-score: 16
+
+      - name: "exercice5 : leLabelAfficheZeroClicsInitialement"
+        id: exercice5_leLabelAfficheZeroClicsInitialement
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice5 : leLabelAfficheZeroClicsInitialement"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice5.EvenementsBoutonTest leLabelAfficheZeroClicsInitialement
+          timeout: 5
+          max-score: 16
 
       - name: "exercice5 : troisClicsAffichent3Clics"
         id: exercice5_troisClicsAffichent3Clics
@@ -335,7 +450,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice5.EvenementsBoutonTest troisClicsAffichent3Clics
           timeout: 5
-          max-score: 3
+          max-score: 16
 
       - name: "exercice6 : laFenetreEstVisible"
         id: exercice6_laFenetreEstVisible
@@ -345,7 +460,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest laFenetreEstVisible
           timeout: 5
-          max-score: 1
+          max-score: 11
 
       - name: "exercice6 : laSceneExiste"
         id: exercice6_laSceneExiste
@@ -355,7 +470,17 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest laSceneExiste
           timeout: 5
-          max-score: 1
+          max-score: 11
+
+      - name: "exercice6 : laRacineEstUnBorderPane"
+        id: exercice6_laRacineEstUnBorderPane
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice6 : laRacineEstUnBorderPane"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest laRacineEstUnBorderPane
+          timeout: 5
+          max-score: 11
 
       - name: "exercice6 : lesTroisBoutonsExistent"
         id: exercice6_lesTroisBoutonsExistent
@@ -365,7 +490,17 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest lesTroisBoutonsExistent
           timeout: 5
-          max-score: 1
+          max-score: 11
+
+      - name: "exercice6 : leHBoxDesBoutonsEstEnHaut"
+        id: exercice6_leHBoxDesBoutonsEstEnHaut
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice6 : leHBoxDesBoutonsEstEnHaut"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest leHBoxDesBoutonsEstEnHaut
+          timeout: 5
+          max-score: 11
 
       - name: "exercice6 : laZoneDeCouleurExiste"
         id: exercice6_laZoneDeCouleurExiste
@@ -375,7 +510,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest laZoneDeCouleurExiste
           timeout: 5
-          max-score: 1
+          max-score: 11
 
       - name: "exercice6 : leLabelCompteursExiste"
         id: exercice6_leLabelCompteursExiste
@@ -385,7 +520,27 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest leLabelCompteursExiste
           timeout: 5
-          max-score: 1
+          max-score: 11
+
+      - name: "exercice6 : leLabelCompteursEstEnBas"
+        id: exercice6_leLabelCompteursEstEnBas
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice6 : leLabelCompteursEstEnBas"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest leLabelCompteursEstEnBas
+          timeout: 5
+          max-score: 11
+
+      - name: "exercice6 : leTexteInitialDesCompteurs"
+        id: exercice6_leTexteInitialDesCompteurs
+        uses: IUTInfoAix-R202/autograding-command-grader@main
+        with:
+          test-name: "exercice6 : leTexteInitialDesCompteurs"
+          setup-command: ""
+          command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest leTexteInitialDesCompteurs
+          timeout: 5
+          max-score: 11
 
       - name: "exercice6 : cliquerRougeMetLaZoneEnRouge"
         id: exercice6_cliquerRougeMetLaZoneEnRouge
@@ -395,7 +550,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest cliquerRougeMetLaZoneEnRouge
           timeout: 5
-          max-score: 1
+          max-score: 11
 
       - name: "exercice6 : cliquerVertMetLaZoneEnVert"
         id: exercice6_cliquerVertMetLaZoneEnVert
@@ -405,7 +560,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest cliquerVertMetLaZoneEnVert
           timeout: 5
-          max-score: 1
+          max-score: 10
 
       - name: "exercice6 : cliquerBleuMetLaZoneEnBleu"
         id: exercice6_cliquerBleuMetLaZoneEnBleu
@@ -415,7 +570,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest cliquerBleuMetLaZoneEnBleu
           timeout: 5
-          max-score: 1
+          max-score: 10
 
       - name: "exercice6 : cliquerIncrementeLeCompteurCorrespondant"
         id: exercice6_cliquerIncrementeLeCompteurCorrespondant
@@ -425,7 +580,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest cliquerIncrementeLeCompteurCorrespondant
           timeout: 5
-          max-score: 1
+          max-score: 10
 
       - name: "exercice6 : lesCompteursSontIndependants"
         id: exercice6_lesCompteursSontIndependants
@@ -435,7 +590,7 @@ jobs:
           setup-command: ""
           command: ./grade-test.sh fr.univ_amu.iut.exercice6.PaletteTest lesCompteursSontIndependants
           timeout: 5
-          max-score: 6
+          max-score: 10
 
       - name: Autograding Reporter
         uses: IUTInfoAix-R202/autograding-grading-reporter@main
@@ -444,10 +599,10 @@ jobs:
           COMPILATION_RESULTS: "${{ steps.compilation.outputs.result }}"
           EXERCICE1_LAFENETREESTVISIBLE_RESULTS: "${{ steps.exercice1_laFenetreEstVisible.outputs.result }}"
           EXERCICE2_LAFENETREESTVISIBLE_RESULTS: "${{ steps.exercice2_laFenetreEstVisible.outputs.result }}"
+          EXERCICE2_LESTYLEESTUNDECORATED_RESULTS: "${{ steps.exercice2_leStyleEstUndecorated.outputs.result }}"
           EXERCICE2_LETITREESTDEFINI_RESULTS: "${{ steps.exercice2_leTitreEstDefini.outputs.result }}"
           EXERCICE2_LESDIMENSIONSSONTDEFINIES_RESULTS: "${{ steps.exercice2_lesDimensionsSontDefinies.outputs.result }}"
           EXERCICE2_LAFENETRENESTPASREDIMENSIONNABLE_RESULTS: "${{ steps.exercice2_laFenetreNestPasRedimensionnable.outputs.result }}"
-          EXERCICE2_LESTYLEESTUNDECORATED_RESULTS: "${{ steps.exercice2_leStyleEstUndecorated.outputs.result }}"
           EXERCICE3_LAFENETREESTVISIBLE_RESULTS: "${{ steps.exercice3_laFenetreEstVisible.outputs.result }}"
           EXERCICE3_LASCENEEXISTE_RESULTS: "${{ steps.exercice3_laSceneExiste.outputs.result }}"
           EXERCICE3_LEROOTESTUNBORDERPANE_RESULTS: "${{ steps.exercice3_leRootEstUnBorderPane.outputs.result }}"
@@ -468,20 +623,33 @@ jobs:
           EXERCICE5_HANDLEINCREMENTELECOMPTEUR_RESULTS: "${{ steps.exercice5_handleIncrementeLeCompteur.outputs.result }}"
           EXERCICE5_LAFENETREESTVISIBLE_RESULTS: "${{ steps.exercice5_laFenetreEstVisible.outputs.result }}"
           EXERCICE5_LASCENEEXISTE_RESULTS: "${{ steps.exercice5_laSceneExiste.outputs.result }}"
+          EXERCICE5_LARACINEESTUNVBOX_RESULTS: "${{ steps.exercice5_laRacineEstUnVBox.outputs.result }}"
           EXERCICE5_LEBOUTONEXISTE_RESULTS: "${{ steps.exercice5_leBoutonExiste.outputs.result }}"
           EXERCICE5_LEBOUTONAFFICHELEBONTEXTE_RESULTS: "${{ steps.exercice5_leBoutonAfficheLeBonTexte.outputs.result }}"
           EXERCICE5_LELABELCOMPTEUREXISTE_RESULTS: "${{ steps.exercice5_leLabelCompteurExiste.outputs.result }}"
+          EXERCICE5_LELABELAFFICHEZEROCLICSINITIALEMENT_RESULTS: "${{ steps.exercice5_leLabelAfficheZeroClicsInitialement.outputs.result }}"
           EXERCICE5_TROISCLICSAFFICHENT3CLICS_RESULTS: "${{ steps.exercice5_troisClicsAffichent3Clics.outputs.result }}"
           EXERCICE6_LAFENETREESTVISIBLE_RESULTS: "${{ steps.exercice6_laFenetreEstVisible.outputs.result }}"
           EXERCICE6_LASCENEEXISTE_RESULTS: "${{ steps.exercice6_laSceneExiste.outputs.result }}"
+          EXERCICE6_LARACINEESTUNBORDERPANE_RESULTS: "${{ steps.exercice6_laRacineEstUnBorderPane.outputs.result }}"
           EXERCICE6_LESTROISBOUTONSEXISTENT_RESULTS: "${{ steps.exercice6_lesTroisBoutonsExistent.outputs.result }}"
+          EXERCICE6_LEHBOXDESBOUTONSESTENHAUT_RESULTS: "${{ steps.exercice6_leHBoxDesBoutonsEstEnHaut.outputs.result }}"
           EXERCICE6_LAZONEDECOULEUREXISTE_RESULTS: "${{ steps.exercice6_laZoneDeCouleurExiste.outputs.result }}"
           EXERCICE6_LELABELCOMPTEURSEXISTE_RESULTS: "${{ steps.exercice6_leLabelCompteursExiste.outputs.result }}"
+          EXERCICE6_LELABELCOMPTEURSESTENBAS_RESULTS: "${{ steps.exercice6_leLabelCompteursEstEnBas.outputs.result }}"
+          EXERCICE6_LETEXTEINITIALDESCOMPTEURS_RESULTS: "${{ steps.exercice6_leTexteInitialDesCompteurs.outputs.result }}"
           EXERCICE6_CLIQUERROUGEMETLAZONEENROUGE_RESULTS: "${{ steps.exercice6_cliquerRougeMetLaZoneEnRouge.outputs.result }}"
           EXERCICE6_CLIQUERVERTMETLAZONEENVERT_RESULTS: "${{ steps.exercice6_cliquerVertMetLaZoneEnVert.outputs.result }}"
           EXERCICE6_CLIQUERBLEUMETLAZONEENBLEU_RESULTS: "${{ steps.exercice6_cliquerBleuMetLaZoneEnBleu.outputs.result }}"
           EXERCICE6_CLIQUERINCREMENTELECOMPTEURCORRESPONDANT_RESULTS: "${{ steps.exercice6_cliquerIncrementeLeCompteurCorrespondant.outputs.result }}"
           EXERCICE6_LESCOMPTEURSSONTINDEPENDANTS_RESULTS: "${{ steps.exercice6_lesCompteursSontIndependants.outputs.result }}"
         with:
-          runners: compilation,exercice1_laFenetreEstVisible,exercice2_laFenetreEstVisible,exercice2_leTitreEstDefini,exercice2_lesDimensionsSontDefinies,exercice2_laFenetreNestPasRedimensionnable,exercice2_leStyleEstUndecorated,exercice3_laFenetreEstVisible,exercice3_laSceneExiste,exercice3_leRootEstUnBorderPane,exercice3_unLabelEstPresent,exercice3_leLabelAfficheLeBonTexte,exercice3_leLabelEstAuCentreDuBorderPane,exercice4_laFenetreEstVisible,exercice4_leRootEstUnBorderPane,exercice4_leMenuBarEstEnHaut,exercice4_leMenuBarContientDeuxMenus,exercice4_lesMenusOntLesBonsNoms,exercice4_leGridPaneEstAuCentre,exercice4_lesLabelsNomEtEmailExistent,exercice4_lesDeuxChampsDeSaisieExistent,exercice4_leHBoxEstEnBas,exercice4_leBoutonValiderExiste,exercice4_leBoutonAnnulerExiste,exercice5_handleIncrementeLeCompteur,exercice5_laFenetreEstVisible,exercice5_laSceneExiste,exercice5_leBoutonExiste,exercice5_leBoutonAfficheLeBonTexte,exercice5_leLabelCompteurExiste,exercice5_troisClicsAffichent3Clics,exercice6_laFenetreEstVisible,exercice6_laSceneExiste,exercice6_lesTroisBoutonsExistent,exercice6_laZoneDeCouleurExiste,exercice6_leLabelCompteursExiste,exercice6_cliquerRougeMetLaZoneEnRouge,exercice6_cliquerVertMetLaZoneEnVert,exercice6_cliquerBleuMetLaZoneEnBleu,exercice6_cliquerIncrementeLeCompteurCorrespondant,exercice6_lesCompteursSontIndependants
+          runners: compilation,exercice1_laFenetreEstVisible,exercice2_laFenetreEstVisible,exercice2_leStyleEstUndecorated,exercice2_leTitreEstDefini,exercice2_lesDimensionsSontDefinies,exercice2_laFenetreNestPasRedimensionnable,exercice3_laFenetreEstVisible,exercice3_laSceneExiste,exercice3_leRootEstUnBorderPane,exercice3_unLabelEstPresent,exercice3_leLabelAfficheLeBonTexte,exercice3_leLabelEstAuCentreDuBorderPane,exercice4_laFenetreEstVisible,exercice4_leRootEstUnBorderPane,exercice4_leMenuBarEstEnHaut,exercice4_leMenuBarContientDeuxMenus,exercice4_lesMenusOntLesBonsNoms,exercice4_leGridPaneEstAuCentre,exercice4_lesLabelsNomEtEmailExistent,exercice4_lesDeuxChampsDeSaisieExistent,exercice4_leHBoxEstEnBas,exercice4_leBoutonValiderExiste,exercice4_leBoutonAnnulerExiste,exercice5_handleIncrementeLeCompteur,exercice5_laFenetreEstVisible,exercice5_laSceneExiste,exercice5_laRacineEstUnVBox,exercice5_leBoutonExiste,exercice5_leBoutonAfficheLeBonTexte,exercice5_leLabelCompteurExiste,exercice5_leLabelAfficheZeroClicsInitialement,exercice5_troisClicsAffichent3Clics,exercice6_laFenetreEstVisible,exercice6_laSceneExiste,exercice6_laRacineEstUnBorderPane,exercice6_lesTroisBoutonsExistent,exercice6_leHBoxDesBoutonsEstEnHaut,exercice6_laZoneDeCouleurExiste,exercice6_leLabelCompteursExiste,exercice6_leLabelCompteursEstEnBas,exercice6_leTexteInitialDesCompteurs,exercice6_cliquerRougeMetLaZoneEnRouge,exercice6_cliquerVertMetLaZoneEnVert,exercice6_cliquerBleuMetLaZoneEnBleu,exercice6_cliquerIncrementeLeCompteurCorrespondant,exercice6_lesCompteursSontIndependants
+
+      - name: Sauvegarder le cache des rapports Surefire
+        if: always()
+        uses: actions/cache/save@v5
+        with:
+          path: target/surefire-reports
+          key: surefire-${{ github.ref_name }}-${{ github.sha }}
       #@@@AUTOGRADING-END@@@
